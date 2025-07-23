@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fakebook - Home</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="home-page">
+
   <div class="navbar">
     <div class="fb-logo">fakebook</div>
     <input type="text" placeholder="Search Fakebook" />
@@ -17,30 +18,56 @@
       <span>🔔</span>
     </div>
   </div>
-  <div class="feed">
-    <div class="post-box">
-      <input type="text" placeholder="What's on your mind?" />
-      <button>Post</button>
+
+  <div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <ul>
+        <li>👤 Your Profile</li>
+        <li>📁 Saved</li>
+        <li>👨‍👩‍👧‍👦 Friends</li>
+        <li>🎥 Watch</li>
+        <li>📅 Events</li>
+      </ul>
     </div>
-    <div class="post">
-      <h3>John Doe</h3>
-      <p>This is a fake post for learning purposes.</p>
-      <div class="actions">
-        <button>Like</button>
-        <button>Comment</button>
+
+    <!-- Main Feed -->
+    <div class="feed">
+      <div class="post-box">
+        <input type="text" placeholder="What's on your mind?" />
+        <button>Post</button>
+      </div>
+
+      <div class="post">
+        <h3>John Doe</h3>
+        <p>This is a fake post for learning purposes.</p>
+        <div class="actions">
+          <button>Like</button>
+          <button>Comment</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <h3>Jane Smith</h3>
+        <p>Welcome to Fakebook!</p>
+        <div class="actions">
+          <button>Like</button>
+          <button>Comment</button>
+        </div>
       </div>
     </div>
-    <div class="post">
-      <h3>Jane Smith</h3>
-      <p>Welcome to Fakebook!</p>
-      <div class="actions">
-        <button>Like</button>
-        <button>Comment</button>
-      </div>
+
+    <!-- Right Sidebar -->
+    <div class="rightbar">
+      <ul>
+        <li>🔥 Trending Topic</li>
+        <li>💬 Group Chat</li>
+        <li>🎮 Gaming</li>
+        <li>📰 Latest News</li>
+      </ul>
     </div>
   </div>
 
-<script src="main.js"></script>
-  
+  <script src="main.js"></script>
 </body>
 </html>
