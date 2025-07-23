@@ -1,18 +1,24 @@
+/* General */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f0f2f5;
 }
+
+/* Fakebook Logo */
 .fb-logo {
   font-size: 48px;
   color: #1877f2;
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+/* Login Page */
 .login-page .login-container {
   text-align: center;
   padding-top: 100px;
 }
+
 .login-box {
   background: white;
   width: 300px;
@@ -21,11 +27,13 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   border-radius: 8px;
 }
+
 .login-box input {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
 }
+
 .login-box button {
   width: 95%;
   padding: 10px;
@@ -34,11 +42,15 @@ body {
   border: none;
   border-radius: 4px;
   font-weight: bold;
+  cursor: pointer;
 }
+
 .login-box .create-btn {
   background: #42b72a;
   margin-top: 10px;
 }
+
+/* Navbar */
 .home-page .navbar {
   background: white;
   padding: 10px 20px;
@@ -46,37 +58,103 @@ body {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 .home-page .navbar input {
-  flex: 1;
-  margin: 0 20px;
+  width: 300px;
   padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
 }
+
 .home-page .nav-icons span {
   margin: 0 10px;
   font-size: 20px;
+  cursor: pointer;
 }
+
+/* Layout */
+.container {
+  display: flex;
+  margin-top: 20px;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+.sidebar, .rightbar {
+  width: 20%;
+  padding: 10px;
+}
+
 .feed {
-  max-width: 600px;
-  margin: 20px auto;
+  width: 60%;
+  padding: 10px;
 }
+
+/* Sidebar and Rightbar */
+.sidebar ul,
+.rightbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li,
+.rightbar li {
+  margin-bottom: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Post Box */
 .post-box {
   background: white;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.post-box input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.post-box button {
+  margin-top: 10px;
+  background: #1877f2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Posts */
 .post {
   background: white;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.post h3 {
+  margin: 0 0 10px 0;
+}
+
 .actions button {
-  margin-right: 10px;
   background: none;
   border: none;
   color: #1877f2;
-  font-weight: bold;
+  margin-right: 10px;
   cursor: pointer;
+  font-weight: bold;
 }
