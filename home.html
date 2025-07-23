@@ -1,190 +1,77 @@
-/* Reset some default styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5;
-  color: #1c1e21;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fakebook - Home</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="home-page">
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 10px 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <div class="fb-logo">facebook</div>
+    <div class="nav-icons">
+      <span>➕</span>
+      <span>🔍</span>
+      <span>☰</span>
+    </div>
+  </div>
 
-.fb-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1877f2;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-}
+  <!-- Shortcut Icon Row -->
+  <div class="shortcut-bar">
+    <span>🏠</span>
+    <span>👥</span>
+    <span>💬</span>
+    <span>📺 <span class="badge">15+</span></span>
+    <span>🔔</span>
+  </div>
 
-.nav-icons span {
-  font-size: 18px;
-  margin-left: 12px;
-  cursor: pointer;
-}
+  <!-- What's on your mind box -->
+  <div class="status-box">
+    <img src="assets/img/user.jpg" alt="Profile" class="avatar" />
+    <input type="text" placeholder="What's on your mind?" />
+    <button>📷 Photo</button>
+  </div>
 
-/* Shortcut Icons Row */
-.shortcut-bar {
-  display: flex;
-  justify-content: space-around;
-  background: white;
-  padding: 10px 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 50px;
-  z-index: 998;
-}
+  <!-- Stories Section -->
+  <div class="stories">
+    <div class="story">
+      <img src="assets/img/user.jpg" />
+      <p>Your Story</p>
+    </div>
+    <div class="story">
+      <img src="assets/img/story1.jpg" />
+      <p>Kpgt Ullah</p>
+    </div>
+    <div class="story">
+      <img src="assets/img/story2.jpg" />
+      <p>Pathan King</p>
+    </div>
+  </div>
 
-.shortcut-bar span {
-  font-size: 18px;
-  position: relative;
-}
+  <!-- Post Feed -->
+  <div class="feed">
+    <div class="post">
+      <div class="post-header">
+        <img src="assets/img/user2.jpg" class="avatar" />
+        <div>
+          <strong>Mujib Zadran</strong> is with <strong>Malik Habib</strong> and <strong>21 others</strong><br/>
+          <small>2h • 🌍</small>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>خوګ دوست 😢💔 Burhan Udeen ډیر سخت بیمار دی. دعا کی خصوصي یاد ساتئ 🙏🙏 الله تعالی دی صحت ورکړي برو 💔🙏🙏</p>
+        <img src="assets/img/post1.jpg" class="post-image" />
+      </div>
+      <div class="actions">
+        <button>👍 Like</button>
+        <button>💬 Comment</button>
+        <button>↪️ Share</button>
+      </div>
+    </div>
+  </div>
 
-.badge {
-  background: red;
-  color: white;
-  font-size: 10px;
-  border-radius: 50%;
-  padding: 2px 5px;
-  position: absolute;
-  top: -8px;
-  right: -10px;
-}
-
-/* Status Box */
-.status-box {
-  display: flex;
-  align-items: center;
-  background: white;
-  padding: 12px;
-  margin: 10px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.status-box input {
-  flex: 1;
-  margin: 0 10px;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #f0f2f5;
-}
-
-.status-box button {
-  background: #e7f3ff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  color: #1877f2;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Avatar */
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Stories */
-.stories {
-  display: flex;
-  overflow-x: auto;
-  background: white;
-  padding: 10px;
-  gap: 10px;
-  scroll-snap-type: x mandatory;
-}
-
-.story {
-  flex: none;
-  width: 100px;
-  text-align: center;
-  scroll-snap-align: start;
-}
-
-.story img {
-  width: 100%;
-  height: 130px;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.story p {
-  margin-top: 5px;
-  font-size: 13px;
-}
-
-/* Feed */
-.feed {
-  margin: 10px;
-}
-
-.post {
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.post-header small {
-  color: gray;
-  font-size: 12px;
-}
-
-.post-content p {
-  margin: 10px 0;
-  line-height: 1.4;
-  font-size: 15px;
-}
-
-.post-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-
-/* Post Actions */
-.actions {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-  border-top: 1px solid #eee;
-  padding-top: 8px;
-}
-
-.actions button {
-  background: none;
-  border: none;
-  font-size: 14px;
-  color: #65676b;
-  cursor: pointer;
-}
-
-.actions button:hover {
-  color: #1877f2;
-}
+  <script src="main.js"></script>
+</body>
+</html>
