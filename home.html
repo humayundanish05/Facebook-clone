@@ -4,67 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fakebook - Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="home-page">
 
+  <!-- Top Navbar -->
   <div class="navbar">
-    <div class="fb-logo">fakebook</div>
-    <input type="text" placeholder="Search Fakebook" />
+    <div class="fb-logo">facebook</div>
     <div class="nav-icons">
-      <span>🏠</span>
-      <span>👥</span>
-      <span>💬</span>
-      <span>🔔</span>
+      <span>➕</span>
+      <span>🔍</span>
+      <span>☰</span>
     </div>
   </div>
 
-  <div class="container">
-    <!-- Left Sidebar -->
-    <div class="sidebar">
-      <ul>
-        <li>👤 Your Profile</li>
-        <li>📁 Saved</li>
-        <li>👨‍👩‍👧‍👦 Friends</li>
-        <li>🎥 Watch</li>
-        <li>📅 Events</li>
-      </ul>
+  <!-- Shortcut Icon Row -->
+  <div class="shortcut-bar">
+    <span>🏠</span>
+    <span>👥</span>
+    <span>💬</span>
+    <span>📺 <span class="badge">15+</span></span>
+    <span>🔔</span>
+  </div>
+
+  <!-- What's on your mind box -->
+  <div class="status-box">
+    <img src="assets/img/user.jpg" alt="Profile" class="avatar" />
+    <input type="text" placeholder="What's on your mind?" />
+    <button>📷 Photo</button>
+  </div>
+
+  <!-- Stories Section -->
+  <div class="stories">
+    <div class="story">
+      <img src="assets/img/user.jpg" />
+      <p>Your Story</p>
     </div>
+    <div class="story">
+      <img src="assets/img/story1.jpg" />
+      <p>Kpgt Ullah</p>
+    </div>
+    <div class="story">
+      <img src="assets/img/story2.jpg" />
+      <p>Pathan King</p>
+    </div>
+  </div>
 
-    <!-- Main Feed -->
-    <div class="feed">
-      <div class="post-box">
-        <input type="text" placeholder="What's on your mind?" />
-        <button>Post</button>
-      </div>
-
-      <div class="post">
-        <h3>John Doe</h3>
-        <p>This is a fake post for learning purposes.</p>
-        <div class="actions">
-          <button>Like</button>
-          <button>Comment</button>
+  <!-- Post Feed -->
+  <div class="feed">
+    <div class="post">
+      <div class="post-header">
+        <img src="assets/img/user2.jpg" class="avatar" />
+        <div>
+          <strong>Mujib Zadran</strong> is with <strong>Malik Habib</strong> and <strong>21 others</strong><br/>
+          <small>2h • 🌍</small>
         </div>
       </div>
-
-      <div class="post">
-        <h3>Jane Smith</h3>
-        <p>Welcome to Fakebook!</p>
-        <div class="actions">
-          <button>Like</button>
-          <button>Comment</button>
-        </div>
+      <div class="post-content">
+        <p>خوګ دوست 😢💔 Burhan Udeen ډیر سخت بیمار دی. دعا کی خصوصي یاد ساتئ 🙏🙏 الله تعالی دی صحت ورکړي برو 💔🙏🙏</p>
+        <img src="assets/img/post1.jpg" class="post-image" />
       </div>
-    </div>
-
-    <!-- Right Sidebar -->
-    <div class="rightbar">
-      <ul>
-        <li>🔥 Trending Topic</li>
-        <li>💬 Group Chat</li>
-        <li>🎮 Gaming</li>
-        <li>📰 Latest News</li>
-      </ul>
+      <div class="actions">
+        <button>👍 Like</button>
+        <button>💬 Comment</button>
+        <button>↪️ Share</button>
+      </div>
     </div>
   </div>
 
