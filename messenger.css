@@ -1,10 +1,10 @@
-﻿body {
+body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #f0f2f5;
 }
 
-
+/* Top bar with navigation and icons */
 .top-bar {
   background: white;
   display: flex;
@@ -14,25 +14,22 @@
   border-bottom: 1px solid #ddd;
 }
 
-
 .icons span {
   margin-right: 15px;
   font-size: 22px;
   color: gray;
 }
 
-
 .icons span.active {
   color: #1877f2;
 }
-
 
 .settings span {
   margin-left: 10px;
   font-size: 20px;
 }
 
-
+/* Horizontal story scroll bar */
 .story-bar {
   display: flex;
   padding: 10px;
@@ -42,7 +39,6 @@
   border-bottom: 1px solid #ccc;
 }
 
-
 .story {
   background: #e4e6eb;
   padding: 10px 15px;
@@ -51,12 +47,12 @@
   white-space: nowrap;
 }
 
-
+/* Messages list container */
 .message-list {
   padding: 10px;
 }
 
-
+/* Single message item */
 .message {
   display: flex;
   align-items: center;
@@ -67,7 +63,6 @@
   position: relative;
 }
 
-
 .message img {
   width: 45px;
   height: 45px;
@@ -75,24 +70,21 @@
   margin-right: 10px;
 }
 
-
 .message span {
   color: gray;
   font-size: 14px;
 }
 
-
 .message strong {
   font-size: 16px;
 }
-
 
 .message.unread span {
   font-weight: bold;
   color: black;
 }
 
-
+/* Notification badge inside message */
 .message .badge {
   position: absolute;
   right: 15px;
@@ -103,7 +95,7 @@
   border-radius: 12px;
 }
 
-
+/* Time label inside message */
 .message .time {
   position: absolute;
   right: 15px;
@@ -113,7 +105,7 @@
   color: gray;
 }
 
-
+/* Floating action button (FAB) */
 .fab {
   position: fixed;
   bottom: 20px;
@@ -127,4 +119,50 @@
   height: 50px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Shortcut bar fixed at top (for Messenger UI) */
+.shortcut-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 50px;
+  z-index: 998;
+  font-size: 20px;
+}
+
+.shortcut-bar a {
+  color: #050505;
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: background 0.2s ease;
+  border-radius: 50%;
+}
+
+.shortcut-bar a:hover {
+  background: #f0f2f5;
+}
+
+/* Badge on shortcut icons (like 🔔 notifications) */
+.badge {
+  background: red;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 2px 5px;
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  line-height: 1;
+  min-width: 16px;
+  text-align: center;
 }
