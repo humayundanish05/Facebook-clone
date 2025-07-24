@@ -9,9 +9,8 @@
 </head>
 <body>
 
-  <!-- Top Shortcut Bar with Two Rows -->
+<!-- Top Shortcut Bar -->
 <header class="top-bar">
-  <!-- Upper Row: Navigation Icons -->
   <div class="nav-row">
     <a href="home.html" title="Home"><i class="fas fa-home"></i></a>
     <a href="friends.html" title="Friends"><i class="fas fa-user-friends"></i></a>
@@ -20,100 +19,98 @@
     <a href="notifications.html" title="Notifications"><i class="fas fa-bell"></i></a>
   </div>
 
-  <!-- Lower Row: Messenger Title + Search/Settings -->
   <div class="info-row">
-  <div class="info-title">Messenger</div>
-  <div class="info-icons">
-    <input type="text" id="searchInput" placeholder="Search..." />
-    <a href="#"><i class="fas fa-cog"></i></a>
+    <div class="info-title">Messenger</div>
+    <div class="info-icons">
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <a href="#"><i class="fas fa-cog"></i></a>
+    </div>
   </div>
-  </div>
- </div>
 </header>
 
-  <!-- Stories Row -->
-  <section class="story-bar">
-    <div class="story">Your note</div>
-    <div class="story">Merlyn</div>
-    <div class="story">Nyimjir</div>
-    <div class="story">Hamid</div>
-    <div class="story">Adamu</div>
-  </section>
+<!-- Stories Row -->
+<section class="story-bar">
+  <div class="story">Your note</div>
+  <div class="story">Merlyn</div>
+  <div class="story">Nyimjir</div>
+  <div class="story">Hamid</div>
+  <div class="story">Adamu</div>
+</section>
 
-  <!-- Message List -->
-  <main class="message-list">
-    <div class="message unread">
-      <img src="Post3.jpg" />
-      <div>
-        <strong>Hamid Ullah</strong><br/>
-        <span>Hamid sent an attachment.</span>
-      </div>
-      <span class="badge">9+</span>
+<!-- Message List -->
+<main class="message-list">
+  <div class="message unread">
+    <img src="Post3.jpg" />
+    <div>
+      <strong>Hamid Ullah</strong><br/>
+      <span>Hamid sent an attachment.</span>
     </div>
+    <span class="badge">9+</span>
+  </div>
 
-    <div class="message">
-      <img src="post2.jpg" />
-      <div>
-        <strong>ijaz khan</strong><br/>
-        <span> allah Hafiz</span>
-      </div>
+  <div class="message">
+    <img src="post2.jpg" />
+    <div>
+      <strong>ijaz khan</strong><br/>
+      <span>allah Hafiz</span>
     </div>
+  </div>
 
-    <div class="message">
-      <img src="story1.jpg" />
-      <div>
-        <strong>Wahab Khan</strong><br/>
-        <span>Ok</span>
-      </div>
+  <div class="message">
+    <img src="story1.jpg" />
+    <div>
+      <strong>Wahab Khan</strong><br/>
+      <span>Ok</span>
     </div>
+  </div>
 
-    <div class="message">
-      <img src="Story2.jpg" />
-      <div>
-        <strong>Inam Jan</strong><br/>
-        <span>okay, talk you later</span>
-      </div>
-      <span class="time">5h</span>
+  <div class="message">
+    <img src="Story2.jpg" />
+    <div>
+      <strong>Inam Jan</strong><br/>
+      <span>okay, talk you later</span>
     </div>
+    <span class="time">5h</span>
+  </div>
 
-    <div class="message">
-      <img src="story1.jpg" />
-      <div>
-        <strong>muhammad Zubair</strong><br/>
-        <span>You: hi, how are you? </span>
-      </div>
+  <div class="message">
+    <img src="story1.jpg" />
+    <div>
+      <strong>Muhammad Zubair</strong><br/>
+      <span>You: hi, how are you?</span>
     </div>
+  </div>
 
-    <div class="message">
-      <img src="post2.jpg" />
-      <div>
-        <strong>Main Najib Salaar Salarzai II</strong><br/>
-        <span>You: 😂</span>
-      </div>
+  <div class="message">
+    <img src="post2.jpg" />
+    <div>
+      <strong>Main Najib Salaar Salarzai II</strong><br/>
+      <span>You: 😂</span>
     </div>
+  </div>
 
-    <div class="message">
-      <img src="Post3.jpg" />
-      <div>
-        <strong>Imad Danish</strong><br/>
-        <span>Imad unsent a message</span>
-      </div>
+  <div class="message">
+    <img src="Post3.jpg" />
+    <div>
+      <strong>Imad Danish</strong><br/>
+      <span>Imad unsent a message</span>
     </div>
+  </div>
 
-    <div class="message">
-      <img src="Story2.jpg" />
-      <div>
-        <strong>Aziz Ullah</strong><br/>
-        <span>New message</span>
-      </div>
+  <div class="message">
+    <img src="Story2.jpg" />
+    <div>
+      <strong>Aziz Ullah</strong><br/>
+      <span>New message</span>
     </div>
-  </main>
+  </div>
+</main>
 
-  <!-- Chat Window -->
+<!-- Chat Window -->
 <div class="chat-window hidden">
   <div class="chat-header">
     <div class="chat-user-info">
-      <img src="Post3.jpg" alt="Hamid" class="chat-avatar" />
+      <img src="Post3.jpg" alt="User" class="chat-avatar" />
       <div class="chat-meta">
         <strong id="chat-name">Hamid Ullah</strong>
         <span class="last-active">Active 2h ago</span>
@@ -123,34 +120,37 @@
       <i class="fas fa-phone"></i>
       <i class="fas fa-video"></i>
       <i class="fas fa-ellipsis-v"></i>
+      <i class="fas fa-arrow-left back-btn"></i> <!-- Back Button -->
     </div>
   </div>
 
   <div class="chat-messages" id="chatMessages">
-  <div class="message incoming">Salam, how are you?</div>
-  <div class="message outgoing">I’m good, thanks!</div>
-</div>
-
-<div class="chat-input">
-  <i class="fas fa-camera"></i>
-  <label for="imageInput"><i class="fas fa-image"></i></label>
-  <input type="file" id="imageInput" accept="image/*" style="display:none" />
-  <i class="fas fa-microphone"></i>
-
-  <div class="input-wrapper">
-    <input type="text" id="messageInput" placeholder="Type a message..." />
-    <button class="send-btn" id="sendBtn">Send</button>
+    <div class="message incoming">Salam, how are you?</div>
+    <div class="message outgoing">I’m good, thanks!</div>
   </div>
 
-  <button class="like-btn"><i class="fas fa-thumbs-up"></i></button>
+  <div class="chat-input">
+    <i class="fas fa-camera"></i>
+
+    <label for="imageInput"><i class="fas fa-image"></i></label>
+    <input type="file" id="imageInput" accept="image/*" style="display: none;" />
+
+    <i class="fas fa-microphone"></i>
+
+    <div class="input-wrapper">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button class="send-btn" id="sendBtn">Send</button>
+    </div>
+
+    <button class="like-btn"><i class="fas fa-thumbs-up"></i></button>
+  </div>
 </div>
 
+<!-- Floating Add Button -->
+<button class="fab" title="Start new chat">+</button>
+
+<!-- JS Script -->
 <script src="messenger.js"></script>
 
-  <!-- Floating Add Button -->
-  <button class="fab">+</button>
-
-  <script src="messenger.js"></script>
 </body>
 </html>
-
