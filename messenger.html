@@ -110,44 +110,64 @@
   </main>
 
 
-  <div class="messenger">
+<div class="messenger">
 
-    <!-- Left: Chat List -->
-    <div class="chat-list">
-      <div class="chat-header">Chats</div>
-      <div class="chat-preview active">
-        <img src="assets/hamid.jpg" alt="Hamid" />
-        <div class="chat-info">
+  <!-- Left: Chat List -->
+  <div class="chat-preview" data-name="Hamid Ullah" data-messages='["Salam bro", "How are you?"]'>
+  <img src="Post3.jpg.jpg" />
+  <div class="chat-info">
+    <strong>Hamid Ullah</strong>
+    <span>Hamid sent an attachment</span>
+  </div>
+</div>
+
+<div class="chat-preview" data-name="Zainab" data-messages='["Hi!", "What's up?"]'>
+  <img src="assets/zainab.jpg" />
+  <div class="chat-info">
+    <strong>Zainab</strong>
+    <span>Online now</span>
+  </div>
+</div>
+    <!-- Add more previews -->
+</div>
+
+  <!-- Right: Chat Window -->
+  <div class="chat-window">
+    <div class="chat-header">
+      <!-- Left Side: Profile, Name, Active -->
+      <div class="chat-user-info">
+        <img src="assets/hamid.jpg" alt="Hamid" class="chat-avatar" />
+        <div class="chat-meta">
           <strong>Hamid Ullah</strong>
-          <span>Sent an attachment</span>
+          <span class="last-active">Active 2h ago</span>
         </div>
       </div>
-      <!-- Add more previews -->
+
+      <!-- Right Side: Call & Menu Icons -->
+      <div class="chat-tools">
+        <i class="fas fa-phone"></i>
+        <i class="fas fa-video"></i>
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
     </div>
 
-    <!-- Right: Chat Window -->
-<div class="chat-window">
-  <div class="chat-header">
-    <button class="back-btn">←</button>
-    <strong>Hamid Ullah</strong>
-  </div>
+    <div class="chat-messages">
+      <div class="message incoming">Salam, how are you?</div>
+      <div class="message outgoing">I’m good, thanks!</div>
+    </div>
 
-  <div class="chat-messages">
-    <div class="message incoming">Salam, how are you?</div>
-    <div class="message outgoing">I’m good, thanks!</div>
-  </div>
+    <div class="chat-input">
+      <!-- Left icons -->
+      <i class="fas fa-camera"></i>
+      <i class="fas fa-image"></i>
+      <i class="fas fa-microphone"></i>
 
-  <div class="chat-input">
-    <!-- Left icons -->
-    <i class="fas fa-camera"></i>
-    <i class="fas fa-image"></i>
-    <i class="fas fa-microphone"></i>
+      <!-- Center input -->
+      <input type="text" placeholder="Type a message..." />
 
-    <!-- Center input -->
-    <input type="text" placeholder="Type a message..." />
-
-    <!-- Right like button -->
-    <button class="send-btn"><i class="fas fa-thumbs-up"></i></button>
+      <!-- Right like button -->
+      <button class="send-btn"><i class="fas fa-thumbs-up"></i></button>
+    </div>
   </div>
 </div>
 <script src="messenger.js"></script>
