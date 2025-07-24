@@ -1,329 +1,96 @@
-/* Reset some default styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5;
-  color: #1c1e21;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Lite UI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 10px 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+<!-- Top Navigation Bar -->
+<div class="top-nav">
+  <span class="logo">facebook</span>
+  <div class="top-icons">
+    <button class="top-btn">➕</button>
+    <button class="top-btn">🔍</button>
+    <button class="top-btn">☰</button>
+  </div>
+</div>
 
-.fb-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1877f2;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-}
 
-.nav-icons span {
-  font-size: 18px;
-  margin-left: 12px;
-  cursor: pointer;
-}
 
-/* Shortcut Icons Row */
-.shortcut-bar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #ffffff;
-  padding: 10px 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 50px;
-  z-index: 998;
-  font-size: 20px;
-}
+  <!-- Shortcut Icon Row -->
+  <div class="shortcut-bar">
+    <a href="index.html" title="Home">🏠<span class="badge">15+</span></a>
+    <a href="#" title="Friends">👥</a>
+    <a href="messenger.html" title="Messenger">💬</a>
+    <a href="#" title="Watch">📺<span class="badge">15+</span></a>
+    <a href="#" title="Notifications">🔔<span class="badge">15+</span></a>
+  </div>
 
-.shortcut-bar a {
-  color: #050505;
-  text-decoration: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  transition: background 0.2s ease;
-  border-radius: 50%;
-}
+  <!-- Status Box (Post Creator) -->
+  <div class="status-box">
+    <img src="user.jpg" alt="Profile" class="avatar" />
+    <div class="input-wrapper">
+      <input type="text" placeholder="What's on your mind?" id="postText" />
+      <label for="postImage" class="custom-upload">📷</label>
+      <input type="file" id="postImage" accept="image/*" style="display: none;">
+      <button id="submitPost">Post</button>
+    </div>
+  </div>
 
-.shortcut-bar a:hover {
-  background: #f0f2f5;
-}
+  <!-- Stories Section -->
+  <div class="stories">
+    <div class="story create-story">
+      <div class="create-icon">+</div>
+      <p>Create</p>
+    </div>
+    <div class="story">
+      <img src="user.jpg" alt="Danish">
+      <p>Danish</p>
+    </div>
+    <div class="story">
+      <img src="story1.jpg" alt="Waqas Ahmad">
+      <p>Waqas Ahmad</p>
+    </div>
+    <div class="story">
+      <img src="story2.jpg" alt="M. Cas">
+      <p>M. Cas</p>
+    </div>
+    <div class="story">
+      <img src="post3.jpg" alt="Najeeb Khan">
+      <p>Najeeb</p>
+    </div>
+  </div>
 
-.badge {
-  background: red;
-  color: white;
-  font-size: 10px;
-  border-radius: 50%;
-  padding: 1px 5px;
-  position: absolute;
-  top: -4px;
-  right: -6px;
-  line-height: 1;
-  min-width: 16px;
-  text-align: center;
-  font-weight: bold;
-}
+  <!-- Post Feed -->
+  <div id="postFeed">
+    <div class="post">
+      <div class="post-header">
+        <img src="user.jpg" alt="Profile">
+        <div class="name">Humayun Danish</div>
+      </div>
+      <div class="post-content">
+        <p>Profile updated 🙈!</p>
+        <img src="user.jpg" alt="Sample Photo">
+      </div>
+      <div class="like-count">0 likes</div>
+      <div class="post-actions">
+        <span class="like-btn">👍 Like</span>
+        <span class="comment-toggle">💬 Comment</span>
+        <span>↪️ Share</span>
+      </div>
+      <div class="comment-section hidden">
+        <div class="comment-input">
+          <input type="text" placeholder="Write a comment...">
+          <button class="add-comment">Post</button>
+        </div>
+        <div class="comments"></div>
+      </div>
+    </div>
+  </div>
 
-/* Status Box */
-.create-post-top {
-  display: flex;
-  align-items: center;
-  background: white;
-  padding: 12px;
-  margin: 10px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.input-wrapper {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin-left: 10px;
-  background: #f0f2f5;
-  border-radius: 20px;
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-}
-
-.input-wrapper input {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-size: 15px;
-}
-
-.input-wrapper button {
-  background: #1877f2;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-}
-
-.input-wrapper button:hover {
-  background: #145dbf;
-}
-
-/* Avatar */
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Stories Section */
-.stories {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  background: white;
-  padding: 10px;
-  gap: 10px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-.story {
-  flex: 0 0 auto;
-  width: 100px;
-  text-align: center;
-  scroll-snap-align: start;
-}
-
-.story img {
-  width: 100%;
-  height: 130px;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.story p {
-  margin-top: 5px;
-  font-size: 13px;
-}
-
-.stories::-webkit-scrollbar {
-  display: none;
-}
-.stories {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Create Story Box */
-.create-story {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #e4e6eb;
-  border-radius: 10px;
-  width: 100px;
-  height: 130px;
-  color: #1877f2;
-  font-weight: bold;
-  font-size: 30px;
-  position: relative;
-}
-
-.create-icon {
-  background: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 10px;
-}
-
-/* Feed Posts */
-.post {
-  background: white;
-  margin: 10px;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.post-header img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.post-header .name {
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.post-content p {
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.post-content img {
-  width: 100%;
-  border-radius: 10px;
-  object-fit: cover;
-  max-height: 400px;
-}
-
-/* Post Actions */
-.post-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  border-top: 1px solid #eee;
-  padding-top: 6px;
-  font-size: 14px;
-  color: #65676b;
-}
-
-.post-actions span {
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-
-.post-actions span:hover {
-  background: #f0f2f5;
-}
-
-/* Like Button Styling */
-.like-btn.liked {
-  color: #1877f2;
-  font-weight: bold;
-}
-
-/* Like Count */
-.like-count {
-  margin-top: 4px;
-  font-size: 13px;
-  color: #65676b;
-}
-
-/* Comment Section */
-.comment-section {
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-}
-
-.comment-section.hidden {
-  display: none;
-}
-
-.comment-input {
-  display: flex;
-  margin-bottom: 8px;
-}
-
-.comment-input input {
-  flex: 1;
-  padding: 8px 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  margin-right: 6px;
-}
-
-.comment-input .add-comment {
-  background: #1877f2;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 14px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.comment-input .add-comment:hover {
-  background: #145dbf;
-}
-
-.comments .comment {
-  background: #f0f2f5;
-  padding: 6px 10px;
-  border-radius: 18px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  width: fit-content;
-  max-width: 90%;
-}
+  <script src="main.js"></script>
+</body>
+</html>
