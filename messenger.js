@@ -259,4 +259,5 @@ function addFakeMessage(text, isIncoming = true) {
   msg.textContent = text;
   document.getElementById("chatMessages").appendChild(msg);
   addReactionsToMessages(); // <== make sure reactions get added
-}
+
+
