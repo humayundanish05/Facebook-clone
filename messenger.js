@@ -197,38 +197,46 @@ document.getElementById("messageInput").addEventListener("keydown", (e) => {
 });
 
 
-// Dynamically add reaction bar to each message
-document.querySelectorAll(".message").forEach(msg => {
-  // Skip if already added
-  if (msg.querySelector(".reaction-bar")) return;
+// Dynamically add reaction bar to each messages 
 
-  const bar = document.createElement("div");
-  bar.className = "reaction-bar hidden";
-  bar.innerHTML = `
-    <span class="reaction">👍</span>
-    <span class="reaction">❤️</span>
-    <span class="reaction">😂</span>
-    <span class="reaction">😮</span>
-    <span class="reaction">😢</span>
-    <span class="reaction">😡</span>
-  `;
-  msg.appendChild(bar);
+function addReactionsToMessages() {
+  document.querySelectorAll(".message").forEach(msg => {
+    // Prevent long-press copy menu
+    msg.addEventListener("contextmenu", e => e.preventDefault());
+    msg.addEventListener("touchstart", e => e.preventDefault());
 
-  // Add listener for right-click or long-tap
-  msg.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    document.querySelectorAll(".reaction-bar").forEach(b => b.classList.add("hidden"));
-    bar.classList.toggle("hidden");
+    // Skip if already added
+    if (msg.querySelector(".reaction-bar")) return;
+
+    const bar = document.createElement("div");
+    bar.className = "reaction-bar hidden";
+    bar.innerHTML = `
+      <span class="reaction">👍</span>
+      <span class="reaction">❤️</span>
+      <span class="reaction">😂</span>
+      <span class="reaction">😮</span>
+      <span class="reaction">😢</span>
+      <span class="reaction">😡</span>
+    `;
+    msg.appendChild(bar);
+
+    msg.addEventListener("click", (e) => {
+      // Toggle emoji bar when message is tapped
+      if (!e.target.classList.contains("reaction")) {
+        document.querySelectorAll(".reaction-bar").forEach(b => b.classList.add("hidden"));
+        bar.classList.toggle("hidden");
+      }
+    });
   });
-});
+}
 
-// React on click
+// React when user clicks an emoji
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("reaction")) {
     const emoji = e.target.textContent;
     const msg = e.target.closest(".message");
 
-    // Remove old if exists
+    // Add or update reaction display
     let existing = msg.querySelector(".message-reaction");
     if (!existing) {
       existing = document.createElement("div");
@@ -237,7 +245,18 @@ document.addEventListener("click", (e) => {
     }
     existing.textContent = emoji;
 
-    // Hide after reacting
     msg.querySelector(".reaction-bar").classList.add("hidden");
   }
 });
+
+// 🟡 Call this after page loads
+addReactionsToMessages();
+
+// 🟡 Call this again after fake reply or new message
+function addFakeMessage(text, isIncoming = true) {
+  const msg = document.createElement("div");
+  msg.className = `message ${isIncoming ? 'incoming' : 'outgoing'}`;
+  msg.textContent = text;
+  document.getElementById("chatMessages").appendChild(msg);
+  addReactionsToMessages(); // <== make sure reactions get added
+}
