@@ -164,26 +164,3 @@ messages.appendChild(replyDiv);
 messages.scrollTop = messages.scrollHeight; 
 }
 
-function addLikeButtons() {
-  document.querySelectorAll('.message').forEach(msg => {
-    // Prevent multiple like buttons
-    if (msg.querySelector('.like-msg-btn')) return;
-
-    const btn = document.createElement('button');
-    btn.textContent = '❤️ Like';
-    btn.className = 'like-msg-btn';
-
-    btn.addEventListener('click', () => {
-      if (!msg.querySelector('.liked')) {
-        const liked = document.createElement('div');
-        liked.textContent = '❤️';
-        liked.className = 'liked';
-        msg.appendChild(liked);
-        btn.disabled = true;
-        btn.textContent = 'Liked ❤️';
-      }
-    });
-
-    msg.appendChild(btn);
-  });
-}
