@@ -114,3 +114,84 @@ inputField.addEventListener("focus", () => {
     messages.scrollTop = messages.scrollHeight;
   }, 300);
 });
+
+
+// Fake reply messages
+const fakeReplies = [
+[
+  "Haha okay 😄",
+  "I'll check it and let you know.",
+  "Busy right now, talk later!",
+  "Sounds good to me!",
+  "Can you send that again?",
+  "😂😂😂",
+  "Hmm, interesting...",
+  "I agree!",
+  "No way, really?",
+  "Just saw it!",
+  "That’s crazy!",
+  "What do you mean?",
+  "Let me think about it.",
+  "Haha good one!",
+  "I was just about to say that!",
+  "Where are you now?",
+  "I’m on my way.",
+  "Let’s catch up later!",
+  "Exactly!",
+  "You're right!",
+  "Wait what? 😳",
+  "I didn’t expect that!",
+  "Let me get back to you.",
+  "Cool cool 😎",
+  "Just woke up 💤",
+  "I’m tired today 😩",
+  "Same here!",
+  "Oh really? Tell me more.",
+  "Lol that’s wild 😂",
+  "I knew it!",
+  "This is getting interesting 🤔",
+  "Brb",
+  "I’m in a meeting right now.",
+  "I’ll call you in a bit.",
+  "Tell me everything!",
+  "Okay let’s do it!",
+  "What happened next?",
+  "Omg 😱",
+  "That made me laugh hard 😂",
+  "Good luck!",
+  "Hope you’re doing okay.",
+  "Let’s plan something soon!",
+  "Why not?",
+  "Haha stop it 🤭",
+  "You always say that 😂",
+  "Nah, I don’t believe it!",
+  "Send pic!",
+  "Wait, you’re serious?",
+  "Love it ❤️",
+  "Don’t be shy lol"
+]
+];
+
+// Fake user reply
+function sendFakeReply() {
+  const reply = fakeReplies[Math.floor(Math.random() * fakeReplies.length)];
+  
+  const replyDiv = document.createElement("div");
+  replyDiv.className = "message incoming";
+  replyDiv.textContent = reply;
+
+  messages.appendChild(replyDiv);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Hook into the send button
+document.getElementById("sendBtn").addEventListener("click", () => {
+  setTimeout(sendFakeReply, 1500); // Delay 1.5 seconds for realism
+});
+
+// Also hook into "Enter" key if used
+document.getElementById("messageInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    setTimeout(sendFakeReply, 1500);
+  }
+});
