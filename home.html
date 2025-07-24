@@ -32,10 +32,18 @@
       📺 <span class="badge">15+</span>
     </a>
     <a href="#" title="Notifications">🔔</a>
-  </div>  <!-- What's on your mind box -->  <div class="status-box">
-    <img src="profile.jpg" alt="Profile" class="avatar" />
-    <input type="text" placeholder="What's on your mind?" />
-    <button>📷 Photo</button>
+
+ <!-- Status Box -->
+ <div class="status-box">
+  <img src="user.jpg" alt="Profile" class="avatar" />
+  <input id="status-text" type="text" placeholder="What's on your mind?" />
+  <input id="status-image" type="file" accept="image/*" hidden />
+  <button id="photo-btn">📷 Photo</button>
+  <button id="post-btn">Post</button>
+</div>
+
+
+
   </div>  <!-- Stories Section -->  <div class="stories">
     <div class="story create-story">
       <div class="create-icon">+</div>
