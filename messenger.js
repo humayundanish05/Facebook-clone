@@ -142,3 +142,25 @@ function sendFakeReply() {
   messages.appendChild(replyDiv); 
   messages.scrollTop = messages.scrollHeight; 
 }
+
+function sendFakeReply() {
+  // Create the typing indicator
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "typing-indicator";
+  typingDiv.textContent = "Hamid is typing...";
+  messages.appendChild(typingDiv);
+  messages.scrollTop = messages.scrollHeight;
+
+  // After 1.5 seconds, remove typing and show reply
+  setTimeout(() => {
+    typingDiv.remove();
+
+    const reply = fakeReplies[Math.floor(Math.random() * fakeReplies.length)];
+    const replyDiv = document.createElement("div");
+    replyDiv.className = "message incoming";
+    replyDiv.textContent = reply;
+
+    messages.appendChild(replyDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }, 1500);
+}
