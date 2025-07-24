@@ -195,3 +195,49 @@ document.getElementById("messageInput").addEventListener("keydown", (e) => {
     setTimeout(sendFakeReply, 1500);
   }
 });
+
+
+// Dynamically add reaction bar to each message
+document.querySelectorAll(".message").forEach(msg => {
+  // Skip if already added
+  if (msg.querySelector(".reaction-bar")) return;
+
+  const bar = document.createElement("div");
+  bar.className = "reaction-bar hidden";
+  bar.innerHTML = `
+    <span class="reaction">👍</span>
+    <span class="reaction">❤️</span>
+    <span class="reaction">😂</span>
+    <span class="reaction">😮</span>
+    <span class="reaction">😢</span>
+    <span class="reaction">😡</span>
+  `;
+  msg.appendChild(bar);
+
+  // Add listener for right-click or long-tap
+  msg.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    document.querySelectorAll(".reaction-bar").forEach(b => b.classList.add("hidden"));
+    bar.classList.toggle("hidden");
+  });
+});
+
+// React on click
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("reaction")) {
+    const emoji = e.target.textContent;
+    const msg = e.target.closest(".message");
+
+    // Remove old if exists
+    let existing = msg.querySelector(".message-reaction");
+    if (!existing) {
+      existing = document.createElement("div");
+      existing.className = "message-reaction";
+      msg.appendChild(existing);
+    }
+    existing.textContent = emoji;
+
+    // Hide after reacting
+    msg.querySelector(".reaction-bar").classList.add("hidden");
+  }
+});
