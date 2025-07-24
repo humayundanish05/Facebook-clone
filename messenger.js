@@ -19,3 +19,14 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 
+document.querySelectorAll(".message").forEach((msg, index) => {
+  msg.addEventListener("click", () => {
+    const chatWindow = document.querySelector(".chat-window");
+    const name = msg.querySelector("strong").textContent;
+    const img = msg.querySelector("img").getAttribute("src");
+
+    document.getElementById("chat-name").textContent = name;
+    chatWindow.querySelector(".chat-avatar").src = img;
+    chatWindow.classList.remove("hidden");
+  });
+});
