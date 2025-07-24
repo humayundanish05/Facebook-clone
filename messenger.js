@@ -83,6 +83,8 @@ imageInput.addEventListener("change", function () {
 
       messages.appendChild(msgDiv);
       messages.scrollTop = messages.scrollHeight;
+
+      imageInput.value = ""; // ✅ allow same image again
     };
     reader.readAsDataURL(file);
   }
