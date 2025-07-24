@@ -30,3 +30,16 @@ document.querySelectorAll(".message").forEach((msg, index) => {
     chatWindow.classList.remove("hidden");
   });
 });
+// Show chat window when clicking a chat
+document.querySelectorAll('.message').forEach(msg => {
+  msg.addEventListener('click', () => {
+    document.querySelector('.chat-window').classList.remove('hidden');
+    document.querySelector('.message-list').style.display = 'none';
+  });
+});
+
+// Back button to go back to chat list
+document.querySelector('.back-btn').addEventListener('click', () => {
+  document.querySelector('.chat-window').classList.add('hidden');
+  document.querySelector('.message-list').style.display = 'block';
+});
