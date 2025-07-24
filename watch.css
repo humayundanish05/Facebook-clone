@@ -1,0 +1,60 @@
+﻿.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.top-bar .logo {
+  font-size: 24px;
+  color: #1877f2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+.top-icons a {
+  margin: 0 10px;
+  font-size: 20px;
+  color: #555;
+  text-decoration: none;
+}
+
+
+.top-icons a.active {
+  color: #1877f2;
+}
+
+
+.watch-feed {
+  padding: 15px;
+}
+
+
+.video-card {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+
+.video-card video {
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.video-card h3 {
+  margin: 10px 0 5px;
+}
+
+
+.video-card p {
+  font-size: 14px;
+  color: #666;
+}
