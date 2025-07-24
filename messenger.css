@@ -191,3 +191,134 @@ body {
 .chat-window.hidden {
   display: none;
 }
+
+/* Chat Window Styles */
+.chat-window {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Hide by default */
+.chat-window.hidden {
+  display: none;
+}
+
+/* Chat Header */
+.chat-header {
+  background-color: #ffffff;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-meta {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.chat-meta strong {
+  font-weight: 600;
+}
+
+.last-active {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Header Tools */
+.chat-tools i {
+  font-size: 18px;
+  margin-left: 15px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Messages Area */
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Message Bubbles */
+.message {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 70%;
+  line-height: 1.4;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.incoming {
+  align-self: flex-start;
+  background-color: #e4e6eb;
+  color: #050505;
+}
+
+.outgoing {
+  align-self: flex-end;
+  background-color: #0084ff;
+  color: white;
+}
+
+/* Input Section */
+.chat-input {
+  background-color: #ffffff;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input i {
+  font-size: 18px;
+  color: #65676b;
+  cursor: pointer;
+}
+
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  background-color: #f0f2f5;
+}
+
+.send-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #0084ff;
+  cursor: pointer;
+}
