@@ -1,6 +1,6 @@
 // === FAB click ===
 document.querySelector('.fab').addEventListener('click', () => {
-  alert('Create a new chat (functionality coming soon)');
+  alert('Start new chat — functionality coming soon.');
 });
 
 // === Search filter ===
@@ -20,52 +20,53 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 
-// === Open chat when clicking on a message ===
-document.querySelectorAll(".message").forEach((msg) => {
+// === Open chat on message click ===
+document.querySelectorAll(".message").forEach(msg => {
   msg.addEventListener("click", () => {
     const chatWindow = document.querySelector(".chat-window");
     const name = msg.querySelector("strong").textContent;
-    const img = msg.querySelector("img").getAttribute("src");
+    const imgSrc = msg.querySelector("img").getAttribute("src");
 
     document.getElementById("chat-name").textContent = name;
-    chatWindow.querySelector(".chat-avatar").src = img;
+    chatWindow.querySelector(".chat-avatar").src = imgSrc;
 
-    // Show chat and hide list/FAB
     chatWindow.classList.remove("hidden");
     document.querySelector(".message-list").style.display = "none";
     document.querySelector(".fab").style.display = "none";
   });
 });
 
-// === Back button functionality ===
-document.querySelector('.back-btn').addEventListener('click', () => {
-  document.querySelector('.chat-window').classList.add('hidden');
-  document.querySelector('.message-list').style.display = 'block';
-  document.querySelector('.fab').style.display = 'block';
+// === Back button ===
+document.querySelector(".back-btn").addEventListener("click", () => {
+  document.querySelector(".chat-window").classList.add("hidden");
+  document.querySelector(".message-list").style.display = "block";
+  document.querySelector(".fab").style.display = "block";
 });
 
-  const sendBtn = document.getElementById("sendBtn");
-  const input = document.getElementById("messageInput");
-  const messages = document.getElementById("chatMessages");
+// === Sending messages ===
+const sendBtn = document.getElementById("sendBtn");
+const input = document.getElementById("messageInput");
+const messages = document.getElementById("chatMessages");
 
-  function sendMessage() {
-    const text = input.value.trim();
-    if (text === "") return;
+function sendMessage() {
+  const text = input.value.trim();
+  if (text === "") return;
 
-    const message = document.createElement("div");
-    message.className = "message outgoing";
-    message.textContent = text;
-    messages.appendChild(message);
+  const message = document.createElement("div");
+  message.className = "message outgoing";
+  message.textContent = text;
+  messages.appendChild(message);
 
-    input.value = "";
-    messages.scrollTop = messages.scrollHeight; // auto scroll to bottom
-  }
+  input.value = "";
+  messages.scrollTop = messages.scrollHeight;
+}
 
-  sendBtn.addEventListener("click", sendMessage);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
 
+// === Sending image from gallery ===
 const imageInput = document.getElementById("imageInput");
 
 imageInput.addEventListener("change", function () {
@@ -83,9 +84,16 @@ imageInput.addEventListener("change", function () {
 
       messages.appendChild(msgDiv);
       messages.scrollTop = messages.scrollHeight;
-
-      imageInput.value = ""; // ✅ allow same image again
     };
     reader.readAsDataURL(file);
   }
+});
+
+// === Like Button ===
+document.querySelector(".like-btn").addEventListener("click", () => {
+  const like = document.createElement("div");
+  like.className = "message outgoing";
+  like.innerHTML = "👍";
+  messages.appendChild(like);
+  messages.scrollTop = messages.scrollHeight;
 });
