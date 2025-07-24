@@ -224,12 +224,40 @@ body, html {
   margin-top: 10px;
 }
 
-/* Post Actions */
+/* post. actions*/
 .actions {
   display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-  border-top: 1px solid #eee;
-  padding-top: 8px;
+  justify-content: space-between;
+  padding: 4px 12px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 14px;
+  color: #65676b;
+}
+
+.actions button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: inherit;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.actions button:hover {
+  background-color: #f0f2f5;
+}
+
+.actions i {
+  font-size: 18px;
+  color: #65676b;
 }
 
