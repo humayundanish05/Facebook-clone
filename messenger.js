@@ -151,10 +151,16 @@ function sendFakeReply() {
 // === Add emoji reaction bar to all messages ===
 function addReactionsToMessages() {
   document.querySelectorAll(".message").forEach(msg => {
-    msg.addEventListener("contextmenu", e => e.preventDefault()); // disable long press menu
-    msg.addEventListener("touchstart", e => e.preventDefault());
+    // Disable long press and selection
+    msg.oncontextmenu = e => e.preventDefault();
+    msg.style.userSelect = "none";
 
-    // Only add bar if not already present
+    msg.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+    msg.addEventListener("mousedown", e => {
+      if (e.detail > 1) e.preventDefault(); // prevent double click/select
+    });
+
+    // Avoid adding again
     if (msg.querySelector(".reaction-bar")) return;
 
     const bar = document.createElement("div");
@@ -169,6 +175,7 @@ function addReactionsToMessages() {
     `;
     msg.appendChild(bar);
 
+    // Toggle the bar on message click (except if clicking a reaction)
     msg.addEventListener("click", (e) => {
       if (!e.target.classList.contains("reaction")) {
         document.querySelectorAll(".reaction-bar").forEach(b => b.classList.add("hidden"));
@@ -178,7 +185,7 @@ function addReactionsToMessages() {
   });
 }
 
-// === When user clicks a reaction emoji ===
+// Apply reaction when emoji clicked
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("reaction")) {
     const emoji = e.target.textContent;
@@ -192,15 +199,7 @@ document.addEventListener("click", (e) => {
     }
     existing.textContent = emoji;
 
-    msg.querySelector(".reaction-bar").classList.add("hidden");
+    // Hide all bars
+    document.querySelectorAll(".reaction-bar").forEach(b => b.classList.add("hidden"));
   }
 });
-
-// === Optional: Add a message manually (with reaction support) ===
-function addFakeMessage(text, isIncoming = true) {
-  const msg = document.createElement("div");
-  msg.className = `message ${isIncoming ? 'incoming' : 'outgoing'}`;
-  msg.textContent = text;
-  document.getElementById("chatMessages").appendChild(msg);
-  addReactionsToMessages();
-}
