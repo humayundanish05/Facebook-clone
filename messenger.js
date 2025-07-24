@@ -43,3 +43,25 @@ document.querySelector('.back-btn').addEventListener('click', () => {
   document.querySelector('.message-list').style.display = 'block';
   document.querySelector('.fab').style.display = 'block';
 });
+
+  const sendBtn = document.getElementById("sendBtn");
+  const input = document.getElementById("messageInput");
+  const messages = document.getElementById("chatMessages");
+
+  function sendMessage() {
+    const text = input.value.trim();
+    if (text === "") return;
+
+    const message = document.createElement("div");
+    message.className = "message outgoing";
+    message.textContent = text;
+    messages.appendChild(message);
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight; // auto scroll to bottom
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
