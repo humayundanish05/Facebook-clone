@@ -130,3 +130,13 @@ function attachPostEvents(post) {
     }
   });
 }
+
+<script>
+  document.querySelector('.top-btn.search').addEventListener('click', function () {
+    const query = prompt("Search Google:");
+    if (query) {
+      const url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+      window.open(url, '_blank');
+    }
+  });
+</script>
