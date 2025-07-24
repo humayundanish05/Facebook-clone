@@ -20,7 +20,7 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 
-// === Open chat on message click ===
+// === Open chat on message click (single clean version) ===
 document.querySelectorAll(".message").forEach(msg => {
   msg.addEventListener("click", () => {
     const chatWindow = document.querySelector(".chat-window");
@@ -30,50 +30,24 @@ document.querySelectorAll(".message").forEach(msg => {
     document.getElementById("chat-name").textContent = name;
     chatWindow.querySelector(".chat-avatar").src = imgSrc;
 
+    // Show chat window and hide other UI
     chatWindow.classList.remove("hidden");
     document.querySelector(".message-list").style.display = "none";
     document.querySelector(".fab").style.display = "none";
+    document.querySelector(".nav-row")?.classList.add("hidden");
+    document.querySelector(".info-row")?.classList.add("hidden");
+    document.querySelector(".bottom-bar")?.classList.add("hidden");
   });
 });
 
-// === Open chat when clicking on a message ===
-document.querySelectorAll(".message").forEach((msg) => {
-  msg.addEventListener("click", () => {
-    const chatWindow = document.querySelector(".chat-window");
-    const name = msg.querySelector("strong").textContent;
-    const img = msg.querySelector("img").getAttribute("src");
-
-    document.getElementById("chat-name").textContent = name;
-    chatWindow.querySelector(".chat-avatar").src = img;
-
-    // Show chat window
-    chatWindow.classList.remove("hidden");
-
-    // Hide message list, fab, nav, info-row, and bottom bar
-    document.querySelector(".message-list").style.display = "none";
-    document.querySelector(".fab").style.display = "none";
-    document.querySelector(".nav-row").classList.add("hidden");
-    document.querySelector(".info-row").classList.add("hidden");
-    document.querySelector(".bottom-bar").classList.add("hidden");
-  });
-});
-
-// === Back button functionality ===
+// === Back button (single complete version) ===
 document.querySelector(".back-btn").addEventListener("click", () => {
   document.querySelector(".chat-window").classList.add("hidden");
   document.querySelector(".message-list").style.display = "block";
   document.querySelector(".fab").style.display = "block";
-  document.querySelector(".nav-row").classList.remove("hidden");
-  document.querySelector(".info-row").classList.remove("hidden");
-  document.querySelector(".bottom-bar").classList.remove("hidden");
-});
-
-
-// === Back button ===
-document.querySelector(".back-btn").addEventListener("click", () => {
-  document.querySelector(".chat-window").classList.add("hidden");
-  document.querySelector(".message-list").style.display = "block";
-  document.querySelector(".fab").style.display = "block";
+  document.querySelector(".nav-row")?.classList.remove("hidden");
+  document.querySelector(".info-row")?.classList.remove("hidden");
+  document.querySelector(".bottom-bar")?.classList.remove("hidden");
 });
 
 // === Sending messages ===
