@@ -118,7 +118,7 @@ inputField.addEventListener("focus", () => {
 
 // Fake reply messages
 const fakeReplies = [
-[
+
   "Haha okay 😄",
   "I'll check it and let you know.",
   "Busy right now, talk later!",
@@ -169,7 +169,7 @@ const fakeReplies = [
   "Wait, you’re serious?",
   "Love it ❤️",
   "Don’t be shy lol"
-]
+
 ];
 
 // Fake user reply
