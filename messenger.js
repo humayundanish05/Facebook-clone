@@ -19,40 +19,48 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 
-const previews = document.querySelectorAll('.chat-preview');
-const chatWindow = document.querySelector('.chat-window');
-const chatHeader = chatWindow.querySelector('.chat-header strong');
-const messageContainer = chatWindow.querySelector('.chat-messages');
+// Wait for DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+  const messages = document.querySelectorAll(".message-list .message");
+  const chatWindow = document.querySelector(".chat-window");
+  const chatUserInfo = chatWindow.querySelector(".chat-user-info");
+  const chatMeta = chatUserInfo.querySelector(".chat-meta");
+  const chatAvatar = chatUserInfo.querySelector("img");
+  const chatMessages = chatWindow.querySelector(".chat-messages");
 
-previews.forEach(preview => {
-  preview.addEventListener('click', () => {
-    // Remove old active
-    previews.forEach(p => p.classList.remove('active'));
-    preview.classList.add('active');
+  messages.forEach(msg => {
+    msg.addEventListener("click", () => {
+      const name = msg.querySelector("strong").textContent;
+      const text = msg.querySelector("span").textContent;
+      const imgSrc = msg.querySelector("img").getAttribute("src");
 
-    // Get data
-    const name = preview.dataset.name;
-    const messages = JSON.parse(preview.dataset.messages);
+      // Update header info
+      chatAvatar.setAttribute("src", imgSrc);
+      chatMeta.querySelector("strong").textContent = name;
+      chatMeta.querySelector(".last-active").textContent = "Active recently";
 
-    // Update header
-    chatHeader.textContent = name;
+      // Clear previous messages
+      chatMessages.innerHTML = "";
 
-    // Update messages
-    messageContainer.innerHTML = '';
-    messages.forEach((msg, index) => {
-      const div = document.createElement('div');
-      div.classList.add('message');
-      div.classList.add(index % 2 === 0 ? 'incoming' : 'outgoing');
-      div.textContent = msg;
-      messageContainer.appendChild(div);
+      // Add demo messages
+      chatMessages.innerHTML = `
+        <div class="message incoming">${text}</div>
+        <div class="message outgoing">Hi ${name.split(" ")[0]}, how are you?</div>
+      `;
+
+      // Show chat window (especially for mobile)
+      chatWindow.classList.add("active");
+
+      // Scroll to bottom
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     });
-
-    // Show chat window on mobile
-    chatWindow.classList.add('active');
   });
-});
 
-// Back button for mobile
-document.querySelector('.back-btn').addEventListener('click', () => {
-  chatWindow.classList.remove('active');
+  // Back button (for mobile)
+  const backBtn = document.querySelector(".back-btn");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      chatWindow.classList.remove("active");
+    });
+  }
 });
