@@ -1,3 +1,4 @@
+let currentChatName = "User";
 // === FAB click === 
 document.querySelector('.fab').addEventListener('click', () => { 
   alert('Start new chat — functionality coming soon.'); 
@@ -21,22 +22,25 @@ document.getElementById('searchInput').addEventListener('input', function () {
 });
 
 // === Open chat window on message click === 
-document.querySelectorAll(".message").forEach(msg => { 
-  msg.addEventListener("click", () => { 
-    const chatWindow = document.querySelector(".chat-window"); 
-    const name = msg.querySelector("strong").textContent; 
-    const imgSrc = msg.querySelector("img").getAttribute("src"); 
 
-    document.getElementById("chat-name").textContent = name; 
-    chatWindow.querySelector(".chat-avatar").src = imgSrc; 
+document.querySelectorAll(".message").forEach(msg => {
+  msg.addEventListener("click", () => {
+    const chatWindow = document.querySelector(".chat-window");
+    const name = msg.querySelector("strong").textContent;
+    const imgSrc = msg.querySelector("img").getAttribute("src");
 
-    chatWindow.classList.remove("hidden"); 
-    document.querySelector(".message-list").style.display = "none"; 
-    document.querySelector(".fab").style.display = "none"; 
-    document.querySelector(".nav-row")?.classList.add("hidden"); 
-    document.querySelector(".info-row")?.classList.add("hidden"); 
-    document.querySelector(".bottom-bar")?.classList.add("hidden"); 
-  }); 
+    currentChatName = name; // ← Save current chat's name globally ✅
+
+    document.getElementById("chat-name").textContent = name;
+    chatWindow.querySelector(".chat-avatar").src = imgSrc;
+
+    chatWindow.classList.remove("hidden");
+    document.querySelector(".message-list").style.display = "none";
+    document.querySelector(".fab").style.display = "none";
+    document.querySelector(".nav-row")?.classList.add("hidden");
+    document.querySelector(".info-row")?.classList.add("hidden");
+    document.querySelector(".bottom-bar")?.classList.add("hidden");
+  });
 });
 
 // === Back button === 
@@ -133,25 +137,13 @@ const fakeReplies = [
 ];
 
 // === Generate a fake incoming reply === 
-function sendFakeReply() { 
-  const reply = fakeReplies[Math.floor(Math.random() * fakeReplies.length)]; 
-  const replyDiv = document.createElement("div"); 
-  replyDiv.className = "message incoming"; 
-  replyDiv.textContent = reply;
-
-  messages.appendChild(replyDiv); 
-  messages.scrollTop = messages.scrollHeight; 
-}
-
 function sendFakeReply() {
-  // Create the typing indicator
   const typingDiv = document.createElement("div");
   typingDiv.className = "typing-indicator";
-  typingDiv.textContent = " typing...";
+  typingDiv.textContent = `${currentChatName} is typing...`;  // 🔥 Dynamic name
   messages.appendChild(typingDiv);
   messages.scrollTop = messages.scrollHeight;
 
-  // After 1.5 seconds, remove typing and show reply
   setTimeout(() => {
     typingDiv.remove();
 
