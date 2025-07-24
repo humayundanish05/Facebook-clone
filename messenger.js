@@ -1,8 +1,9 @@
-﻿// Optional: Add interactivity later
+// === FAB click ===
 document.querySelector('.fab').addEventListener('click', () => {
   alert('Create a new chat (functionality coming soon)');
 });
 
+// === Search filter ===
 document.getElementById('searchInput').addEventListener('input', function () {
   const query = this.value.toLowerCase();
   const messages = document.querySelectorAll('.message');
@@ -10,7 +11,7 @@ document.getElementById('searchInput').addEventListener('input', function () {
   messages.forEach(msg => {
     const name = msg.querySelector('strong')?.innerText.toLowerCase() || '';
     const preview = msg.querySelector('span')?.innerText.toLowerCase() || '';
-    
+
     if (name.includes(query) || preview.includes(query)) {
       msg.style.display = 'flex';
     } else {
@@ -19,7 +20,8 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 
-document.querySelectorAll(".message").forEach((msg, index) => {
+// === Open chat when clicking on a message ===
+document.querySelectorAll(".message").forEach((msg) => {
   msg.addEventListener("click", () => {
     const chatWindow = document.querySelector(".chat-window");
     const name = msg.querySelector("strong").textContent;
@@ -27,32 +29,17 @@ document.querySelectorAll(".message").forEach((msg, index) => {
 
     document.getElementById("chat-name").textContent = name;
     chatWindow.querySelector(".chat-avatar").src = img;
+
+    // Show chat and hide list/FAB
     chatWindow.classList.remove("hidden");
-  });
-});
-// Show chat window when clicking a chat
-document.querySelectorAll('.message').forEach(msg => {
-  msg.addEventListener('click', () => {
-    document.querySelector('.chat-window').classList.remove('hidden');
-    document.querySelector('.message-list').style.display = 'none';
+    document.querySelector(".message-list").style.display = "none";
+    document.querySelector(".fab").style.display = "none";
   });
 });
 
-// Back button to go back to chat list
+// === Back button functionality ===
 document.querySelector('.back-btn').addEventListener('click', () => {
   document.querySelector('.chat-window').classList.add('hidden');
   document.querySelector('.message-list').style.display = 'block';
+  document.querySelector('.fab').style.display = 'block';
 });
-
-const fab = document.querySelector('.fab');
-const chatWindow = document.querySelector('.chat-window');
-
-function openChat() {
-  chatWindow.classList.remove('hidden');
-  fab.style.display = 'none';
-}
-
-function closeChat() {
-  chatWindow.classList.add('hidden');
-  fab.style.display = 'block';
-}
