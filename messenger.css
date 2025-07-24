@@ -358,3 +358,9 @@ body {
 .like-btn:hover {
   background: #d8dadf;
 }
+
+.sent-image {
+  max-width: 150px;
+  border-radius: 10px;
+  margin: 5px 0;
+}
