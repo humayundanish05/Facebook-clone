@@ -291,6 +291,7 @@ body {
 }
 
 /* Input Section */
+/* Input Section */
 .chat-input {
   background-color: #ffffff;
   padding: 8px 10px;
@@ -298,6 +299,7 @@ body {
   align-items: center;
   gap: 10px;
   border-top: 1px solid #ddd;
+  flex-wrap: nowrap;
 }
 
 .chat-input i {
@@ -313,7 +315,7 @@ body {
 
 .input-wrapper input[type="text"] {
   width: 100%;
-  padding: 10px 80px 10px 14px; /* right padding makes space for button */
+  padding: 10px 80px 10px 14px; /* right padding makes space for send button */
   border: 1px solid #ccd0d5;
   border-radius: 20px;
   font-size: 14px;
@@ -321,7 +323,7 @@ body {
   background-color: #f0f2f5;
 }
 
-.input-wrapper .send-btn {
+.send-btn {
   position: absolute;
   right: 8px;
   top: 50%;
@@ -333,9 +335,10 @@ body {
   padding: 5px 10px;
   font-size: 13px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.input-wrapper .send-btn:hover {
+.send-btn:hover {
   background: #165fbd;
 }
 
