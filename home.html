@@ -1,77 +1,55 @@
-,<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fakebook - Home</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    .like-btn.liked svg {
+      fill: #1877f2;
+      transition: transform 0.2s ease;
+    }
+    .comment-section {
+      padding: 10px;
+    }
+    .comment-section.hidden {
+      display: none;
+    }
+  </style>
 </head>
-<body class="home-page">
-
-  <!-- Top Navbar -->
-  <div class="navbar">
+<body class="home-page">  <!-- Top Navbar -->  <div class="navbar">
     <div class="fb-logo">facebook</div>
     <div class="nav-icons">
       <span>➕</span>
       <span>🔍</span>
       <span>☰</span>
     </div>
-  </div>
-
-
-  <!-- Shortcut Icon Row -->
-  <div class="shortcut-bar">
-  <a href="index.html" title="Home">🏠</a>
-  <a href="#" title="Friends">👥</a>
-  <a href="messenger.html" title="Messenger">💬</a>
-  <a href="#" title="Watch">
-    📺 <span class="badge">15+</span>
-  </a>
-  <a href="#" title="Notifications">🔔</a>
-  </div>
-
-  <!-- What's on your mind box -->
-  <div class="status-box">
+  </div>  <!-- Shortcut Icon Row -->  <div class="shortcut-bar">
+    <a href="index.html" title="Home">🏠</a>
+    <a href="#" title="Friends">👥</a>
+    <a href="messenger.html" title="Messenger">💬</a>
+    <a href="#" title="Watch">
+      📺 <span class="badge">15+</span>
+    </a>
+    <a href="#" title="Notifications">🔔</a>
+  </div>  <!-- What's on your mind box -->  <div class="status-box">
     <img src="profile.jpg" alt="Profile" class="avatar" />
     <input type="text" placeholder="What's on your mind?" />
     <button>📷 Photo</button>
-  </div>
-
-  <!-- Stories Section -->
-<div class="stories">
-  <div class="story create-story">
-    <div class="create-icon">+</div>
-    <p>Create Story</p>
-  </div>
-
-  <div class="story">
-    <img src="user.jpg" />
-    <p>Your Story</p>
-  </div>
-  <div class="story">
-    <img src="story1.jpg" />
-    <p>Saeed Ullah</p>
-  </div>
-  <div class="story">
-    <img src="Story2.jpg" />
-    <p>Ali</p>
-  </div>
-  <div class="story">
-    <img src="post2.jpg" />
-    <p>Waheed</p>
-  </div>
-  <div class="story">
-    <img src="Post3.jpg" />
-    <p>Imran</p>
-  </div>
-  <div class="story">
-    <img src="Story2.jpg" />
-    <p>Pathan King</p>
-  </div>
-</div>
-  <!-- Post Feed -->
-  <div class="feed">
-    <div class="post">
+  </div>  <!-- Stories Section -->  <div class="stories">
+    <div class="story create-story">
+      <div class="create-icon">+</div>
+      <p>Create Story</p>
+    </div>
+    <div class="story"><img src="user.jpg" /><p>Your Story</p></div>
+    <div class="story"><img src="story1.jpg" /><p>Saeed Ullah</p></div>
+    <div class="story"><img src="Story2.jpg" /><p>Ali</p></div>
+    <div class="story"><img src="post2.jpg" /><p>Waheed</p></div>
+    <div class="story"><img src="Post3.jpg" /><p>Imran</p></div>
+    <div class="story"><img src="Story2.jpg" /><p>Pathan King</p></div>
+  </div>  <!-- Feed Section -->  <div class="feed">
+    <!-- Post 1 -->
+    <div class="post" data-id="1">
       <div class="post-header">
         <img src="user2.jpg" class="avatar" />
         <div>
@@ -80,62 +58,45 @@
         </div>
       </div>
       <div class="post-content">
-        <p>profile updated 🤭🙈 </p>
+        <p>profile updated 🤭🙈</p>
         <img src="post1.jpg" class="post-image" />
       </div>
-      <div class="actions">
-        <button>👍 Like</button>
-        <button>💬 Comment</button>
-        <button>↪️ Share</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="feed">
-    <div class="post">
-      <div class="post-header">
-        <img src="user2.jpg" class="avatar" />
-        <div>
-          <strong>humayun danish</strong> is with <strong>random user</strong> and <strong>21 others</strong><br/>
-          <small>2h • 🌍</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p> Play the music. Feel the beat. Enjoy the mome </p>
-        <img src="post2.jpg" class="post-image" />
+      <div class="post-counts">
+        <span class="like-count">👍 0</span>
       </div>
       <div class="actions">
-        <button>👍 Like</button>
-        <button>💬 Comment</button>
+        <button class="like-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#65676b" viewBox="0 0 24 24">
+            <path d="M9 22H5a2 2 0 01-2-2v-7a2 2 0 012-2h4v11zm2-11V5.41c0-.9.73-1.63 1.63-1.63.43 0 .85.17 1.16.48l.99.99c.36.36.83.59 1.34.63l2.61.21c1.05.08 1.87.97 1.87 2.02v.46a2.02 2.02 0 01-.56 1.4l-4.73 5.09A2 2 0 0114.1 16H11v-5z"/>
+          </svg>
+          <span>Like</span>
+        </button>
+        <button class="comment-toggle">💬 Comment</button>
         <button>↪️ Share</button>
       </div>
-    </div>
-  </div>
-
-  <div class="feed">
-    <div class="post">
-      <div class="post-header">
-        <img src="user2.jpg" class="avatar" />
-        <div>
-          <strong>humayun danish</strong> is with <strong>random user</strong> and <strong>21 others</strong><br/>
-          <small>2h • 🌍</small>
+      <div class="comment-section hidden">
+        <div class="comments"></div>
+        <div class="comment-input">
+          <input type="text" placeholder="Write a comment..." />
+          <button class="add-comment">Post</button>
         </div>
       </div>
-      <div class="post-content">
-        <p> Under the silent moon, a soul gave up where no one could hear </p>
-        <img src="Post3.jpg" class="post-image" />
-      </div>
-
-      <!-- Post actions -->
-      <div class="post" data-id="1">
+    </div><!-- Post 2 -->
+<div class="post" data-id="2">
+  <div class="post-header">
+    <img src="user2.jpg" class="avatar" />
+    <div>
+      <strong>humayun danish</strong> shared a memory<br/>
+      <small>3h • 🌍</small>
+    </div>
+  </div>
   <div class="post-content">
-    <p>This is a Facebook-style post.</p>
+    <p>Play the music. Feel the beat. Enjoy the moment.</p>
+    <img src="post2.jpg" class="post-image" />
   </div>
-
   <div class="post-counts">
-    <span class="like-count">👍 123</span>
+    <span class="like-count">👍 0</span>
   </div>
-
   <div class="actions">
     <button class="like-btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#65676b" viewBox="0 0 24 24">
@@ -146,8 +107,6 @@
     <button class="comment-toggle">💬 Comment</button>
     <button>↪️ Share</button>
   </div>
-
-  <!-- Comment Section -->
   <div class="comment-section hidden">
     <div class="comments"></div>
     <div class="comment-input">
@@ -155,11 +114,42 @@
       <button class="add-comment">Post</button>
     </div>
   </div>
-      </div>
-    
-    </div>
-  </div>
-  
-  <script src="main.js"></script>
-</body>
+</div>
+
+  </div>  <script>
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const countSpan = btn.closest('.post').querySelector('.like-count');
+        let count = parseInt(countSpan.textContent.replace(/\D/g, '')) || 0;
+        count++;
+        countSpan.textContent = `👍 ${count}`;
+        btn.classList.add("liked");
+        btn.querySelector("svg").style.transform = "scale(1.3)";
+        setTimeout(() => {
+          btn.querySelector("svg").style.transform = "scale(1)";
+        }, 200);
+      });
+    });
+
+    document.querySelectorAll('.comment-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const commentSection = btn.closest('.post').querySelector('.comment-section');
+        commentSection.classList.toggle('hidden');
+      });
+    });
+
+    document.querySelectorAll('.add-comment').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const input = btn.previousElementSibling;
+        const commentText = input.value.trim();
+        if (commentText) {
+          const commentsDiv = btn.closest('.comment-section').querySelector('.comments');
+          const comment = document.createElement('div');
+          comment.textContent = commentText;
+          commentsDiv.appendChild(comment);
+          input.value = '';
+        }
+      });
+    });
+  </script></body>
 </html>
