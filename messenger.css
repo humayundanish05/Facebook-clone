@@ -215,44 +215,84 @@ html, body {
 .chat-input {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  background: #f0f2f5;
-  padding: 10px;
+  padding: 8px 10px;
   border-top: 1px solid #ccc;
+  background-color: #f0f2f5;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .chat-input i,
-.chat-input label {
+.chat-input label,
+.chat-input button {
   font-size: 18px;
   color: #555;
+  background: none;
+  border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.chat-input label {
+  margin: 0;
 }
 
 .input-wrapper {
   flex: 1;
   display: flex;
-  gap: 5px;
+  align-items: center;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 4px 10px;
 }
 
 #messageInput {
   flex: 1;
-  padding: 8px 14px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 14px;
-  outline: none;
-}
-
-.send-btn,
-.like-btn {
-  background: transparent;
   border: none;
-  cursor: pointer;
-  color: #1877f2;
-  font-size: 18px;
+  outline: none;
+  font-size: 14px;
+  padding: 6px 0;
+  background: transparent;
 }
 
+.send-btn {
+  color: #1877f2;
+  font-weight: bold;
+  padding: 4px 10px;
+  margin-left: 6px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.like-btn {
+  font-size: 20px;
+  color: #1877f2;
+  margin-left: 4px;
+  background: none;
+  border: none;
+}
+
+@media (max-width: 500px) {
+  .chat-input {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .input-wrapper {
+    padding: 4px 8px;
+  }
+
+  .chat-input i,
+  .chat-input label {
+    font-size: 16px;
+  }
+
+  .send-btn {
+    padding: 4px 8px;
+  }
+}
 /* Floating Action Button */
 .fab {
   position: fixed;
