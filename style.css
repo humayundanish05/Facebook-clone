@@ -327,3 +327,35 @@ body, html {
   width: fit-content;
   max-width: 90%;
                              }
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Segoe UI', sans-serif;
+  color: #1877f2;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.top-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.top-btn {
+  background-color: #e4e6eb;
+  border: none;
+  border-radius: 50%;
+  padding: 8px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
