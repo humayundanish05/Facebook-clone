@@ -104,3 +104,13 @@ document.querySelector(".like-btn").addEventListener("click", () => {
   messages.appendChild(like);
   messages.scrollTop = messages.scrollHeight;
 });
+
+
+// Ensure messages scroll when keyboard opens on mobile
+const inputField = document.getElementById("messageInput");
+
+inputField.addEventListener("focus", () => {
+  setTimeout(() => {
+    messages.scrollTop = messages.scrollHeight;
+  }, 300);
+});
