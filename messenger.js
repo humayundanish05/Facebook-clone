@@ -29,10 +29,13 @@ document.querySelectorAll(".message").forEach(msg => {
     const name = msg.querySelector("strong").textContent;
     const imgSrc = msg.querySelector("img").getAttribute("src");
 
-    currentChatName = name; // ← Save current chat's name globally ✅
+    currentChatName = name;
 
     document.getElementById("chat-name").textContent = name;
     chatWindow.querySelector(".chat-avatar").src = imgSrc;
+
+
+    messages.innerHTML = "";
 
     chatWindow.classList.remove("hidden");
     document.querySelector(".message-list").style.display = "none";
