@@ -43,3 +43,16 @@ document.querySelector('.back-btn').addEventListener('click', () => {
   document.querySelector('.chat-window').classList.add('hidden');
   document.querySelector('.message-list').style.display = 'block';
 });
+
+const fab = document.querySelector('.fab');
+const chatWindow = document.querySelector('.chat-window');
+
+function openChat() {
+  chatWindow.classList.remove('hidden');
+  fab.style.display = 'none';
+}
+
+function closeChat() {
+  chatWindow.classList.add('hidden');
+  fab.style.display = 'block';
+}
