@@ -69,17 +69,18 @@ body, html {
   color: white;
   font-size: 10px;
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 1px 5px;
   position: absolute;
   top: -4px;
   right: -6px;
   line-height: 1;
   min-width: 16px;
   text-align: center;
+  font-weight: bold;
 }
 
 /* Status Box */
-.status-box {
+.create-post-top {
   display: flex;
   align-items: center;
   background: white;
@@ -89,23 +90,40 @@ body, html {
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.status-box input {
+.input-wrapper {
+  display: flex;
+  align-items: center;
   flex: 1;
-  margin: 0 10px;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
+  margin-left: 10px;
   background: #f0f2f5;
+  border-radius: 20px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
 }
 
-.status-box button {
-  background: #e7f3ff;
+.input-wrapper input {
+  flex: 1;
+  padding: 8px;
   border: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  color: #1877f2;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+}
+
+.input-wrapper button {
+  background: #1877f2;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 18px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.input-wrapper button:hover {
+  background: #145dbf;
 }
 
 /* Avatar */
@@ -116,8 +134,7 @@ body, html {
   object-fit: cover;
 }
 
-/* Stories */
-
+/* Stories Section */
 .stories {
   display: flex;
   flex-wrap: nowrap;
@@ -157,6 +174,7 @@ body, html {
   scrollbar-width: none;
 }
 
+/* Create Story Box */
 .create-story {
   display: flex;
   flex-direction: column;
@@ -185,190 +203,127 @@ body, html {
   margin-bottom: 10px;
 }
 
-/* Feed */
-.feed {
-  margin: 10px;
-}
-
+/* Feed Posts */
 .post {
   background: white;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 12px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.post-header small {
-  color: gray;
-  font-size: 12px;
+.post-header img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
-.post-content p {
-  margin: 10px 0;
-  line-height: 1.4;
+.post-header .name {
+  font-weight: bold;
   font-size: 15px;
 }
 
-.post-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: 10px;
+.post-content p {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
-/* post. actions*/
-.actions {
+.post-content img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+/* Post Actions */
+.post-actions {
   display: flex;
   justify-content: space-between;
-  padding: 4px 12px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
+  margin-top: 8px;
+  border-top: 1px solid #eee;
+  padding-top: 6px;
   font-size: 14px;
   color: #65676b;
 }
 
-.actions button {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 0;
-  background: none;
-  border: none;
+.post-actions span {
   cursor: pointer;
-  font-weight: 500;
-  color: inherit;
-  border-radius: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
   transition: background 0.2s ease;
 }
 
-.actions button:hover {
-  background-color: #f0f2f5;
+.post-actions span:hover {
+  background: #f0f2f5;
 }
 
-.actions svg {
-  transition: transform 0.2s ease, fill 0.2s ease;
-}
-
-.like-btn.liked svg {
-  fill: #1877f2;
-  transform: scale(1.2);
-}
-
-.like-btn.liked span {
+/* Like Button Styling */
+.like-btn.liked {
   color: #1877f2;
   font-weight: bold;
 }
 
-.post-counts {
-  font-size: 14px;
+/* Like Count */
+.like-count {
+  margin-top: 4px;
+  font-size: 13px;
   color: #65676b;
-  padding: 4px 12px 0;
 }
 
+/* Comment Section */
 .comment-section {
-  padding: 8px 12px;
-  border-top: 1px solid #eee;
-  background: #f9f9f9;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.comment-section.hidden {
+  display: none;
 }
 
 .comment-input {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .comment-input input {
   flex: 1;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  padding: 8px 10px;
   border-radius: 20px;
-  outline: none;
+  border: 1px solid #ccc;
   font-size: 14px;
+  margin-right: 6px;
 }
 
-.comment-input button {
-  padding: 6px 14px;
-  border: none;
-  border-radius: 20px;
+.comment-input .add-comment {
   background: #1877f2;
   color: white;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.comments {
-  font-size: 14px;
-  color: #222;
-}
-
-.comment {
-  background: #fff;
-  padding: 6px 10px;
-  margin-bottom: 6px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-.hidden {
-  display: none;
-}
-
-
-/* Create Post Section */
-.create-post {
-  background: white;
-  padding: 12px;
-  margin: 10px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.create-post-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.create-post-top input[type="text"] {
-  flex: 1;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #f0f2f5;
-}
-
-.create-post-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.create-post-actions input[type="file"] {
-  display: none;
-}
-
-.create-post-actions label,
-.create-post-actions button {
-  background: #e7f3ff;
   border: none;
-  padding: 8px 12px;
   border-radius: 20px;
-  color: #1877f2;
-  font-weight: bold;
+  padding: 8px 14px;
+  font-size: 13px;
   cursor: pointer;
-  font-size: 14px;
+  transition: background 0.2s ease;
 }
+
+.comment-input .add-comment:hover {
+  background: #145dbf;
+}
+
+.comments .comment {
+  background: #f0f2f5;
+  padding: 6px 10px;
+  border-radius: 18px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  width: fit-content;
+  max-width: 90%;
+                             }
