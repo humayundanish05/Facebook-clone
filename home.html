@@ -125,11 +125,38 @@
         <p> Under the silent moon, a soul gave up where no one could hear </p>
         <img src="Post3.jpg" class="post-image" />
       </div>
-      <div class="actions">
-        <button>👍 Like</button>
-        <button>💬 Comment</button>
-        <button>↪️ Share</button>
+
+      <!-- Post actions -->
+      <div class="post" data-id="1">
+  <div class="post-content">
+    <p>This is a Facebook-style post.</p>
+  </div>
+
+  <div class="post-counts">
+    <span class="like-count">👍 123</span>
+  </div>
+
+  <div class="actions">
+    <button class="like-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#65676b" viewBox="0 0 24 24">
+        <path d="M9 22H5a2 2 0 01-2-2v-7a2 2 0 012-2h4v11zm2-11V5.41c0-.9.73-1.63 1.63-1.63.43 0 .85.17 1.16.48l.99.99c.36.36.83.59 1.34.63l2.61.21c1.05.08 1.87.97 1.87 2.02v.46a2.02 2.02 0 01-.56 1.4l-4.73 5.09A2 2 0 0114.1 16H11v-5z"/>
+      </svg>
+      <span>Like</span>
+    </button>
+    <button class="comment-toggle">💬 Comment</button>
+    <button>↪️ Share</button>
+  </div>
+
+  <!-- Comment Section -->
+  <div class="comment-section hidden">
+    <div class="comments"></div>
+    <div class="comment-input">
+      <input type="text" placeholder="Write a comment..." />
+      <button class="add-comment">Post</button>
+    </div>
+  </div>
       </div>
+    
     </div>
   </div>
   
