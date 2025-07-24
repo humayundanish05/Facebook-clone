@@ -147,7 +147,7 @@ function sendFakeReply() {
   // Create the typing indicator
   const typingDiv = document.createElement("div");
   typingDiv.className = "typing-indicator";
-  typingDiv.textContent = "Hamid is typing...";
+  typingDiv.textContent = " typing...";
   messages.appendChild(typingDiv);
   messages.scrollTop = messages.scrollHeight;
 
