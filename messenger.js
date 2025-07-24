@@ -65,3 +65,25 @@ document.querySelector('.back-btn').addEventListener('click', () => {
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
   });
+
+const imageInput = document.getElementById("imageInput");
+
+imageInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.className = "sent-image";
+
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "message outgoing";
+      msgDiv.appendChild(img);
+
+      messages.appendChild(msgDiv);
+      messages.scrollTop = messages.scrollHeight;
+    };
+    reader.readAsDataURL(file);
+  }
+});
