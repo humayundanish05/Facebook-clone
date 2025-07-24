@@ -340,3 +340,14 @@ html, body {
 }
 
 
+.typing-indicator {
+  font-size: 14px;
+  font-style: italic;
+  color: #1877f2;
+  padding: 6px 12px;
+  margin: 4px;
+  background: #e7f3ff;
+  border-radius: 12px;
+  max-width: fit-content;
+}
+
