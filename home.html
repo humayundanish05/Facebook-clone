@@ -1,175 +1,329 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fakebook - Home</title>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    .like-btn.liked svg {
-      fill: #1877f2;
-      transition: transform 0.2s ease;
-    }
-    .comment-section {
-      padding: 10px;
-    }
-    .comment-section.hidden {
-      display: none;
-    }
-  </style>
-</head>
-<body class="home-page">  <!-- Top Navbar -->  <div class="navbar">
-    <div class="fb-logo">facebook</div>
-    <div class="nav-icons">
-      <span>➕</span>
-      <span>🔍</span>
-      <span>☰</span>
-    </div>
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #1c1e21;
+}
 
-<!-- Shortcut Icon Row -->
-<div class="shortcut-bar">
-  <a href="index.html" title="Home">🏠<span class="badge">15+</span></a>
-  <a href="#" title="Friends">👥</a>
-  <a href="messenger.html" title="Messenger">💬</a>
-  <a href="#" title="Watch">📺<span class="badge">15+</span></a>
-  <a href="#" title="Notifications">🔔<span class="badge">15+</span></a>
-</div>
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 
-<!-- Status Box -->
-<div class="status-box">
-  <img src="profile.jpg" alt="Profile" class="avatar" />
-  <input type="text" placeholder="What's on your mind?" id="postText" />
-  <button id="submitPost">Post</button>
-</div>
+.fb-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1877f2;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
 
-<!-- Stories Section -->
-<div class="stories">
-  <div class="story create-story">
-    <div class="create-icon">+</div>
-    <p>Create</p>
-  </div>
-  <div class="story">
-    <img src="danish.jpg" alt="Danish">
-    <p>Danish</p>
-  </div>
-  <div class="story">
-    <img src="waqas.jpg" alt="Waqas Ahmad">
-    <p>Waqas Ahmad</p>
-  </div>
-  <div class="story">
-    <img src="mcas.jpg" alt="M. Cas">
-    <p>M. Cas</p>
-  </div>
-  <div class="story">
-    <img src="najeeb.jpg" alt="Najeeb Khan">
-    <p>Najeeb</p>
-  </div>
-</div>
+.nav-icons span {
+  font-size: 18px;
+  margin-left: 12px;
+  cursor: pointer;
+}
 
-  
-  </div>  <!-- Feed Section -->  
-  <div class="feed">
-    <!-- Post 1 -->
-    <div class="post" data-id="1">
-      <div class="post-header">
-        <img src="user2.jpg" class="avatar" />
-        <div>
-          <strong>humayun danish</strong> is with <strong>random user</strong> and <strong>21 others</strong><br/>
-          <small>2h • 🌍</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p>profile updated 🤭🙈</p>
-        <img src="post1.jpg" class="post-image" />
-      </div>
-      <div class="post-counts">
-        <span class="like-count">👍 0</span>
-      </div>
-      <div class="actions">
-        <button class="like-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#65676b" viewBox="0 0 24 24">
-            <path d="M9 22H5a2 2 0 01-2-2v-7a2 2 0 012-2h4v11zm2-11V5.41c0-.9.73-1.63 1.63-1.63.43 0 .85.17 1.16.48l.99.99c.36.36.83.59 1.34.63l2.61.21c1.05.08 1.87.97 1.87 2.02v.46a2.02 2.02 0 01-.56 1.4l-4.73 5.09A2 2 0 0114.1 16H11v-5z"/>
-          </svg>
-          <span>Like</span>
-        </button>
-        <button class="comment-toggle">💬 Comment</button>
-        <button>↪️ Share</button>
-      </div>
-      <div class="comment-section hidden">
-        <div class="comments"></div>
-        <div class="comment-input">
-          <input type="text" placeholder="Write a comment..." />
-          <button class="add-comment">Post</button>
-        </div>
-      </div>
-    </div><!-- Post 2 -->
-<div class="post" data-id="2">
-  <div class="post-header">
-    <img src="user2.jpg" class="avatar" />
-    <div>
-      <strong>humayun danish</strong> shared a memory<br/>
-      <small>3h • 🌍</small>
-    </div>
-  </div>
-  <div class="post-content">
-    <p>Play the music. Feel the beat. Enjoy the moment.</p>
-    <img src="post2.jpg" class="post-image" />
-  </div>
-  <div class="post-counts">
-    <span class="like-count">👍 0</span>
-  </div>
-  <div class="actions">
-    <button class="like-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#65676b" viewBox="0 0 24 24">
-        <path d="M9 22H5a2 2 0 01-2-2v-7a2 2 0 012-2h4v11zm2-11V5.41c0-.9.73-1.63 1.63-1.63.43 0 .85.17 1.16.48l.99.99c.36.36.83.59 1.34.63l2.61.21c1.05.08 1.87.97 1.87 2.02v.46a2.02 2.02 0 01-.56 1.4l-4.73 5.09A2 2 0 0114.1 16H11v-5z"/>
-      </svg>
-      <span>Like</span>
-    </button>
-    <button class="comment-toggle">💬 Comment</button>
-    <button>↪️ Share</button>
-  </div>
-  <div class="comment-section hidden">
-    <div class="comments"></div>
-    <div class="comment-input">
-      <input type="text" placeholder="Write a comment..." />
-      <button class="add-comment">Post</button>
-    </div>
-  </div>
-</div>
+/* Shortcut Icons Row */
+.shortcut-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 50px;
+  z-index: 998;
+  font-size: 20px;
+}
 
-  </div>  <script>
-    document.querySelectorAll('.like-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const countSpan = btn.closest('.post').querySelector('.like-count');
-        let count = parseInt(countSpan.textContent.replace(/\D/g, '')) || 0;
-        count++;
-        countSpan.textContent = `👍 ${count}`;
-        btn.classList.add("liked");
-        btn.querySelector("svg").style.transform = "scale(1.3)";
-        setTimeout(() => {
-          btn.querySelector("svg").style.transform = "scale(1)";
-        }, 200);
-      });
-    });
+.shortcut-bar a {
+  color: #050505;
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: background 0.2s ease;
+  border-radius: 50%;
+}
 
-    document.querySelectorAll('.comment-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const commentSection = btn.closest('.post').querySelector('.comment-section');
-        commentSection.classList.toggle('hidden');
-      });
-    });
+.shortcut-bar a:hover {
+  background: #f0f2f5;
+}
 
-    document.querySelectorAll('.add-comment').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const input = btn.previousElementSibling;
-        const commentText = input.value.trim();
-        if (commentText) {
-          const commentsDiv = btn.closest('.comment-section').querySelector('.comments');
-          const comment = document.createElement('div');
-          comment.textContent = commentText;
-          commentsDiv.appendChild(comment);
-          input.value = '';
-        }
-      });
-    });
-  </script></body>
-</html>
+.badge {
+  background: red;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 1px 5px;
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  line-height: 1;
+  min-width: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Status Box */
+.create-post-top {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-left: 10px;
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+}
+
+.input-wrapper button {
+  background: #1877f2;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.input-wrapper button:hover {
+  background: #145dbf;
+}
+
+/* Avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Stories Section */
+.stories {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background: white;
+  padding: 10px;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 100px;
+  text-align: center;
+  scroll-snap-align: start;
+}
+
+.story img {
+  width: 100%;
+  height: 130px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.story p {
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.stories::-webkit-scrollbar {
+  display: none;
+}
+.stories {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Create Story Box */
+.create-story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #e4e6eb;
+  border-radius: 10px;
+  width: 100px;
+  height: 130px;
+  color: #1877f2;
+  font-weight: bold;
+  font-size: 30px;
+  position: relative;
+}
+
+.create-icon {
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+
+/* Feed Posts */
+.post {
+  background: white;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-header img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.post-header .name {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.post-content p {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.post-content img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+/* Post Actions */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  border-top: 1px solid #eee;
+  padding-top: 6px;
+  font-size: 14px;
+  color: #65676b;
+}
+
+.post-actions span {
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.post-actions span:hover {
+  background: #f0f2f5;
+}
+
+/* Like Button Styling */
+.like-btn.liked {
+  color: #1877f2;
+  font-weight: bold;
+}
+
+/* Like Count */
+.like-count {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #65676b;
+}
+
+/* Comment Section */
+.comment-section {
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.comment-section.hidden {
+  display: none;
+}
+
+.comment-input {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.comment-input .add-comment {
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.comment-input .add-comment:hover {
+  background: #145dbf;
+}
+
+.comments .comment {
+  background: #f0f2f5;
+  padding: 6px 10px;
+  border-radius: 18px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  width: fit-content;
+  max-width: 90%;
+}
