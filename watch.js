@@ -14,7 +14,7 @@
     }
 
 
-    reelInfo.watch.bottom = bottomOffset + 'px';
+    reelInfo.style.bottom = bottomOffset + 'px';
   }
 
 
