@@ -17,7 +17,8 @@ function createReelElement({ video, avatar, username, description }) {
   const reel = document.createElement("div");
   reel.className = "reel-container";
   reel.innerHTML = `
-    <video src="${video}" autoplay loop  playsinline></video>
+
+    <video autoplay loop muted playsinline></video>
 
     <div class="center-controls">
       <button><i class="fas fa-undo"></i></button>
