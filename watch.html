@@ -1,47 +1,62 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Facebook Watch</title>
-  <link rel="stylesheet" href="watch.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>Reels</title>
+  <link rel="stylesheet" href="reels.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-
-<!-- Top Navigation Bar -->
-<div class="top-bar">
-  <a href="index.html" class="logo">facebook</a>
-  <div class="top-icons">
-    <a href="home.html"><i class="fas fa-home"></i></a>
-    <a href="friends.html"><i class="fas fa-user-friends"></i></a>
-    <a href="messenger.html"><i class="fas fa-comment"></i></a>
-    <a href="watch.html" class="active"><i class="fas fa-tv"></i></a>
-    <a href="notifications.html"><i class="fas fa-bell"></i></a>
-  </div>
-</div>
-
-
-<!-- Watch Feed -->
-<div class="watch-feed">
-  <div class="video-card">
-    <video src="video1.mp4" controls poster="thumb1.jpg"></video>
-    <h3>Gulali mashooman 😀🥰</h3>
-    <p>By Danish Studio · 1.2M Views · 2 days ago</p>
+  <!-- Shortcut Icons Row -->
+  <div class="shortcut-bar">
+    <a href="home.html" title="Home"><i class="fas fa-home"></i></a>
+    <a href="#" title="Friends"><i class="fas fa-user-friends"></i></a>
+    <a href="messenger.html" title="Messenger"><i class="fas fa-comment-dots"></i></a>
+    <a href="watch.html" title="Watch" class="active"><i class="fas fa-tv"></i></a>
+    <a href="#" title="Notifications"><i class="fas fa-bell"></i></a>
   </div>
 
-
-  <div class="video-card">
-    <video src="video2.mp4" controls poster="thumb2.jpg"></video>
-    <h3>Vlog from Swat Valley 🏞️</h3>
-    <p>By Cas Vlogs · 520K Views · 1 week ago</p>
+  <!-- Watch Top Bar -->
+  <div class="watch-header">
+    <h2>Watch</h2>
+    <div class="watch-icons">
+      <i class="fas fa-search"></i>
+      <i class="fas fa-video"></i>
+      <i class="fas fa-user-circle"></i>
+    </div>
   </div>
 
+  <!-- Reel Container -->
+  <div class="reel-container">
+    <video src="video.mp4" autoplay muted loop></video>
 
-  <!-- Add more video cards as needed -->
-</div>
+    <!-- Center Controls -->
+    <div class="center-controls">
+      <button><i class="fas fa-undo"></i></button>
+      <button><i class="fas fa-play"></i></button>
+      <button><i class="fas fa-redo"></i></button>
+    </div>
 
+    <!-- Right Buttons -->
+    <div class="reel-actions">
+      <button><i class="fas fa-heart"></i></button>
+      <button><i class="fas fa-comment"></i></button>
+      <button><i class="fas fa-share"></i></button>
+      <button><i class="fas fa-bookmark"></i></button>
+      <button><i class="fas fa-ellipsis-v"></i></button>
+    </div>
+
+    <!-- Bottom Info -->
+    <div class="reel-info">
+      <img src="user.jpg" alt="Uploader" class="avatar" />
+      <div>
+        <p class="username">@HumayunDanish</p>
+        <p class="description">A day at the beach 🌊☀️ #fun #reels</p>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
