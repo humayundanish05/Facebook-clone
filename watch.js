@@ -9,7 +9,7 @@ const reelData = [
     video: "video1.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
-    description: "Second reel video ✌️🔥"
+    description: "Ya allah mujhe maaf kar de😭"
   }
 ];
 
@@ -17,7 +17,7 @@ function createReelElement({ video, avatar, username, description }) {
   const reel = document.createElement("div");
   reel.className = "reel-container";
   reel.innerHTML = `
-    <video src="${video}" autoplay loop muted playsinline></video>
+    <video src="${video}" autoplay loop  playsinline></video>
 
     <div class="center-controls">
       <button><i class="fas fa-undo"></i></button>
