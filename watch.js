@@ -105,3 +105,12 @@ window.addEventListener('load', () => {
   setupVideoAutoPlay();
 });
 window.addEventListener('resize', adjustReelInfoPosition);
+
+// Wait for user interaction (like click anywhere)
+document.addEventListener("click", () => {
+  const videos = document.querySelectorAll("video");
+  videos.forEach(video => {
+    video.muted = false;
+    video.play().catch(err => console.log("Play error:", err));
+  });
+});
