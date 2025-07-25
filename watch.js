@@ -13,20 +13,19 @@ const reelsData = [
   }
 ];
 
-// Dynamically build reels
-const wrapper = document.getElementById('reels-wrapper');
+const reelsWrapper = document.querySelector('.reels-wrapper');
 
-reelsData.forEach(data => {
-  const reel = document.createElement('div');
-  reel.className = 'reel-container';
+function createReel(reel) {
+  const container = document.createElement('div');
+  container.className = 'reel-container';
 
-  reel.innerHTML = `
-    <video src="${data.video}" autoplay loop muted playsinline></video>
+  container.innerHTML = `
+    <video src="${reel.video}" autoplay loop playsinline></video>
 
-    <div class="center-controls">
-      <button><i class="fas fa-undo"></i></button>
-      <button><i class="fas fa-play"></i></button>
-      <button><i class="fas fa-redo"></i></button>
+    <div class="center-controls hidden">
+      <button class="rewind"><i class="fas fa-undo"></i></button>
+      <button class="toggle-play"><i class="fas fa-pause"></i></button>
+      <button class="forward"><i class="fas fa-redo"></i></button>
     </div>
 
     <div class="reel-actions">
@@ -39,80 +38,73 @@ reelsData.forEach(data => {
 
     <div class="reel-info">
       <div class="user-row">
-        <img src="${data.avatar}" alt="Uploader" class="avatar" />
-        <p class="username"><i class="fas fa-user-circle"></i> ${data.username}</p>
+        <img src="${reel.avatar}" alt="Uploader" class="avatar" />
+        <p class="username"><i class="fas fa-user-circle"></i> ${reel.username}</p>
       </div>
-      <p class="description">${data.description}</p>
+      <p class="description">${reel.description}</p>
     </div>
   `;
 
-  wrapper.appendChild(reel);
-});
+  // Attach button functionality after appending
+  setTimeout(() => {
+    const video = container.querySelector('video');
+    const controls = container.querySelector('.center-controls');
+    const rewind = container.querySelector('.rewind');
+    const forward = container.querySelector('.forward');
+    const togglePlay = container.querySelector('.toggle-play');
+    let hideTimeout;
 
-// Adjust Info Position (bottom safe zone)
-function adjustReelInfoPosition() {
-  document.querySelectorAll('.reel-info').forEach(info => {
-    const screenHeight = window.innerHeight;
-    let bottomOffset = screenHeight < 600 ? 120 : 100;
-    info.style.bottom = bottomOffset + 'px';
-  });
-}
-
-// Auto-hide center controls
-function setupAutoHideControls() {
-  document.querySelectorAll('.center-controls').forEach(controls => {
-    let timeout;
-    function show() {
-      controls.style.opacity = '1';
-      controls.style.pointerEvents = 'auto';
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        controls.style.opacity = '0';
-        controls.style.pointerEvents = 'none';
-      }, 2000);
-    }
-    show();
-    document.addEventListener('click', e => {
-      if (!e.target.closest('button')) show();
+    video.addEventListener('click', () => {
+      controls.classList.remove('hidden');
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        controls.classList.add('hidden');
+      }, 1500);
     });
-  });
-}
 
-// Only play visible video
-function setupVideoScrollPlay() {
-  const videos = document.querySelectorAll('video');
+    rewind.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.max(video.currentTime - 5, 0);
+    });
 
-  function checkVisible() {
-    videos.forEach(video => {
-      const rect = video.getBoundingClientRect();
-      const fullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-      if (fullyVisible) {
-        video.play().catch(e => console.log("Playback error:", e));
+    forward.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.min(video.currentTime + 5, video.duration);
+    });
+
+    togglePlay.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+        togglePlay.innerHTML = '<i class="fas fa-pause"></i>';
       } else {
         video.pause();
+        togglePlay.innerHTML = '<i class="fas fa-play"></i>';
       }
     });
-  }
+  }, 10);
 
-  document.querySelector('.reels-wrapper').addEventListener('scroll', () => {
-    setTimeout(checkVisible, 100);
-  });
-
-  checkVisible();
+  reelsWrapper.appendChild(container);
 }
 
-window.addEventListener('load', () => {
-  adjustReelInfoPosition();
-  setupAutoHideControls();
-  setupVideoScrollPlay();
-});
-window.addEventListener('resize', adjustReelInfoPosition);
+reelsData.forEach(createReel);
 
-// Wait for user interaction (like click anywhere)
-document.addEventListener("click", () => {
-  const videos = document.querySelectorAll("video");
+// Auto play only visible video
+function handleVisibleVideoPlayback() {
+  const videos = document.querySelectorAll('.reel-container video');
   videos.forEach(video => {
-    video.muted = false;
-    video.play().catch(err => console.log("Play error:", err));
+    const rect = video.getBoundingClientRect();
+    const fullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+    if (fullyVisible) {
+      video.play();
+    } else {
+      video.pause();
+    }
   });
+}
+
+window.addEventListener('load', handleVisibleVideoPlayback);
+window.addEventListener('resize', handleVisibleVideoPlayback);
+document.querySelector('.reels-wrapper').addEventListener('scroll', () => {
+  setTimeout(handleVisibleVideoPlayback, 150);
 });
