@@ -1,5 +1,4 @@
-﻿<script>
-  function adjustReelInfoPosition() {
+function adjustReelInfoPosition() {
     const reelInfo = document.querySelector('.reel-info');
     const screenHeight = window.innerHeight;
 
@@ -21,4 +20,4 @@
   // Call on page load and when screen resizes
   window.addEventListener('load', adjustReelInfoPosition);
   window.addEventListener('resize', adjustReelInfoPosition);
-</script>
+
