@@ -129,10 +129,10 @@ body {
   background: rgba(255,255,255,0.2);
 }
 
-/* Bottom User Info */
+/* user info */
 .reel-info {
   position: absolute;
-  bottom: 20px;
+
   left: 15px;
   z-index: 1001;
   display: flex;
@@ -141,43 +141,5 @@ body {
   background: rgba(0,0,0,0.5);
   padding: 8px 12px;
   border-radius: 8px;
-}
-
-.reel-info .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-.reel-info .username {
-  font-weight: bold;
-  font-size: 15px;
-  margin-top: 5px;
-}
-
-.reel-info .description {
-  font-size: 13px;
-  color: #ddd;
-}
-
-/* Responsive Fix for Small Screens */
-@media (max-width: 600px) {
-  .watch-header h2 {
-    font-size: 16px;
-  }
-  .watch-icons i {
-    font-size: 16px;
-  }
-  .reel-info {
-    padding: 6px 10px;
-  }
-  .center-controls button {
-    padding: 10px;
-    font-size: 16px;
-  }
-  .reel-actions button {
-    padding: 8px;
-    font-size: 16px;
-  }
+  max-width: 80%;
 }
