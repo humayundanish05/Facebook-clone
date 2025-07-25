@@ -1,12 +1,12 @@
 const reelsData = [
   {
-    video: "video1.mp4",
+    video: "video2.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
     description: "First reel, enjoy! 😄"
   },
   {
-    video: "video2.mp4",
+    video: "video1.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
     description: "Gulali mashooman 🥰😀 #fun #reels"
