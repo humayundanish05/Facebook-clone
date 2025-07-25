@@ -21,3 +21,21 @@ function adjustReelInfoPosition() {
   window.addEventListener('load', adjustReelInfoPosition);
   window.addEventListener('resize', adjustReelInfoPosition);
 
+window.addEventListener('load', () => {
+  const centerControls = document.querySelector('.center-controls');
+  let hideTimeout;
+
+  function showControls() {
+    centerControls.style.opacity = '1';
+    centerControls.style.pointerEvents = 'auto';
+
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      centerControls.style.opacity = '0';
+      centerControls.style.pointerEvents = 'none';
+    }, 2000);
+  }
+
+  showControls(); // Initial show + auto-hide
+  document.addEventListener('click', showControls); // Show on tap
+});
