@@ -5,21 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reels</title>
   <link rel="stylesheet" href="watch.css" />
-  <!-- Font Awesome Free CDN (v6.4.0) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Shortcut Icons Row -->
+  <!-- Shortcut Bar -->
   <div class="shortcut-bar">
-    <a href="home.html" title="Home"><i class="fas fa-home"></i></a>
-    <a href="#" title="Friends"><i class="fas fa-user-friends"></i></a>
-    <a href="messenger.html" title="Messenger"><i class="fas fa-comment-dots"></i></a>
-    <a href="watch.html" title="Watch" class="active"><i class="fas fa-tv"></i></a>
-    <a href="#" title="Notifications"><i class="fas fa-bell"></i></a>
+    <a href="home.html"><i class="fas fa-home"></i></a>
+    <a href="#"><i class="fas fa-user-friends"></i></a>
+    <a href="messenger.html"><i class="fas fa-comment-dots"></i></a>
+    <a href="watch.html" class="active"><i class="fas fa-tv"></i></a>
+    <a href="#"><i class="fas fa-bell"></i></a>
   </div>
 
-  <!-- Watch Top Bar -->
+  <!-- Top Bar -->
   <div class="watch-header">
     <h2>Watch</h2>
     <div class="watch-icons">
@@ -29,8 +28,10 @@
     </div>
   </div>
 
-  <!-- Dynamic Reels -->
-  <div class="reels-wrapper" id="reelsWrapper"></div>
+  <!-- Reels Wrapper -->
+  <div class="reels-wrapper" id="reels-wrapper">
+    <!-- Reels will be injected here dynamically -->
+  </div>
 
   <script src="watch.js"></script>
 </body>
