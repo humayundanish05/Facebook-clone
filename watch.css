@@ -20,7 +20,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
   border-bottom: 1px solid #333;
 }
 
@@ -41,13 +41,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 12px 16px;
   background: #18191a;
-  margin-top: 50px; /* to push below shortcut bar */
+  margin-top: 50px;
+  z-index: 900;
 }
 
 .watch-header h2 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .watch-icons i {
@@ -68,6 +69,7 @@ body {
   height: calc(100vh - 100px);
   margin-top: 0;
   overflow: hidden;
+  z-index: 1;
 }
 
 .reel-container video {
@@ -84,7 +86,7 @@ body {
   transform: translate(-50%, -50%);
   display: flex;
   gap: 25px;
-  z-index: 2;
+  z-index: 1001;
 }
 
 .center-controls button {
@@ -110,7 +112,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  z-index: 2;
+  z-index: 1001;
 }
 
 .reel-actions button {
@@ -132,10 +134,13 @@ body {
   position: absolute;
   bottom: 20px;
   left: 15px;
+  z-index: 1001;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 2;
+  flex-direction: column;
+  gap: 5px;
+  background: rgba(0,0,0,0.5);
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .reel-info .avatar {
@@ -148,9 +153,31 @@ body {
 .reel-info .username {
   font-weight: bold;
   font-size: 15px;
+  margin-top: 5px;
 }
 
 .reel-info .description {
   font-size: 13px;
   color: #ddd;
+}
+
+/* Responsive Fix for Small Screens */
+@media (max-width: 600px) {
+  .watch-header h2 {
+    font-size: 16px;
+  }
+  .watch-icons i {
+    font-size: 16px;
+  }
+  .reel-info {
+    padding: 6px 10px;
+  }
+  .center-controls button {
+    padding: 10px;
+    font-size: 16px;
+  }
+  .reel-actions button {
+    padding: 8px;
+    font-size: 16px;
+  }
 }
