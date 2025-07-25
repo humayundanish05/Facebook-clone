@@ -104,31 +104,32 @@ body {
 }
 
 /* Right Side Buttons */
-.reel-actions {
+.center-controls {
   position: absolute;
-  right: 10px;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   z-index: 1001;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: auto;
 }
 
-.reel-actions button {
-  background: rgba(0,0,0,0.4);
+.center-controls button {
+  background: rgba(0, 0, 0, 0.5);
   border: none;
-  padding: 10px;
+  padding: 12px;
   border-radius: 50%;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
 }
 
-.reel-actions button:hover {
-  background: rgba(255,255,255,0.2);
+.center-controls button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
-
 /* Bottom User Info */
 .reel-info {
   position: absolute;
