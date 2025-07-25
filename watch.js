@@ -6,7 +6,7 @@ const reelsData = [
     description: "First reel, enjoy! 😄"
   },
   {
-    video: "video1.mp4",
+    video: "video.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
     description: "Gulali mashooman 🥰😀 #fun #reels"
