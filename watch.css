@@ -129,10 +129,10 @@ body {
   background: rgba(255,255,255,0.2);
 }
 
-/* user info */
+/* Bottom User Info */
 .reel-info {
   position: absolute;
-
+  bottom: 100px; /* Default, JS will adjust */
   left: 15px;
   z-index: 1001;
   display: flex;
@@ -142,4 +142,28 @@ body {
   padding: 8px 12px;
   border-radius: 8px;
   max-width: 80%;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reel-info .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.reel-info .username {
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0;
+}
+
+.reel-info .description {
+  font-size: 13px;
+  color: #ddd;
 }
