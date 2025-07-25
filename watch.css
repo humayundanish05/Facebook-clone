@@ -94,14 +94,19 @@ body {
   transform: translate(-50%, -50%);
   display: flex;
   gap: 25px;
-  z-index: 10;
-  opacity: 1;
+  z-index: 15;
+  opacity: 0;
   transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.center-controls.visible {
+  opacity: 1;
   pointer-events: auto;
 }
 
 .center-controls button {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border: none;
   padding: 12px;
   border-radius: 50%;
@@ -143,7 +148,7 @@ body {
 .reel-info {
   position: absolute;
   left: 15px;
-  bottom: 100px; /* will be adjusted by JS */
+  bottom: 100px; /* dynamically updated via JS */
   z-index: 10;
   display: flex;
   flex-direction: column;
