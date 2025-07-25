@@ -1,28 +1,19 @@
+// Adjust the position of reel info box (e.g., above mobile nav)
 function adjustReelInfoPosition() {
-    const reelInfo = document.querySelector('.reel-info');
-    const screenHeight = window.innerHeight;
+  const reelInfo = document.querySelector('.reel-info');
+  if (!reelInfo) return;
 
+  const screenHeight = window.innerHeight;
+  let bottomOffset = screenHeight < 600 ? 120 : 100;
 
-    // Safe zone above mobile nav buttons (like 80-120px)
-    let bottomOffset = 100;
+  reelInfo.style.bottom = bottomOffset + 'px';
+}
 
-
-    // If screen height is very small (e.g. 500px phones), reduce bottom offset
-    if (screenHeight < 600) {
-      bottomOffset = 120;
-    }
-
-
-    reelInfo.style.bottom = bottomOffset + 'px';
-  }
-
-
-  // Call on page load and when screen resizes
-  window.addEventListener('load', adjustReelInfoPosition);
-  window.addEventListener('resize', adjustReelInfoPosition);
-
-window.addEventListener('load', () => {
+// Auto-hide center video controls
+function setupCenterControlsAutoHide() {
   const centerControls = document.querySelector('.center-controls');
+  if (!centerControls) return;
+
   let hideTimeout;
 
   function showControls() {
@@ -36,6 +27,21 @@ window.addEventListener('load', () => {
     }, 2000);
   }
 
-  showControls(); // Initial show + auto-hide
-  document.addEventListener('click', showControls); // Show on tap
+  showControls();
+
+  // Show again when user taps/clicks anywhere
+  document.addEventListener('click', (e) => {
+    // Optional: Only trigger if user didn't click a button
+    if (!e.target.closest('button')) {
+      showControls();
+    }
+  });
+}
+
+// Initialize both on load and resize
+window.addEventListener('load', () => {
+  adjustReelInfoPosition();
+  setupCenterControlsAutoHide();
 });
+
+window.addEventListener('resize', adjustReelInfoPosition);
