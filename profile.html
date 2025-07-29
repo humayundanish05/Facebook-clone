@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,14 +9,24 @@
   <script src="https://kit.fontawesome.com/a2d9d5ea9c.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  <!-- Top Bar with Back Arrow -->
+  <div class="top-bar">
+    <button class="back-button" onclick="window.location.href='home.html'">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2>Profile</h2>
+  </div>
+
+  <!-- Profile Header -->
   <div class="profile-header">
     <div class="cover-photo">
-      <img src="https://via.placeholder.com/800x300/888/fff?text=Cover+Photo" alt="Cover" />
+      <img src="Story2.jpg" alt="Cover" />
       <button class="edit-cover"><i class="fas fa-camera"></i></button>
     </div>
     <div class="profile-info">
       <div class="profile-pic-container">
-        <img class="profile-pic" src="https://via.placeholder.com/150x150.png?text=Humayun" alt="Profile Picture" />
+        <img class="profile-pic" src="user.jpg" alt="Profile Picture" />
         <button class="edit-pic"><i class="fas fa-camera"></i></button>
       </div>
       <div class="profile-text">
@@ -34,15 +44,74 @@
     </div>
   </div>
 
-
+  <!-- Bio -->
   <div class="bio">
     <p>at your lowest, <br> you see the real faces of people</p>
   </div>
 
-
+  <!-- Buttons -->
   <div class="profile-buttons">
     <button class="dashboard"><i class="fas fa-briefcase"></i> Professional dashboard</button>
     <button class="story"><i class="fas fa-plus"></i> Add to story</button>
   </div>
+
+  <!-- Tabs -->
+  <div class="profile-tabs">
+    <button class="tab active" onclick="switchTab('posts')">Posts</button>
+    <button class="tab" onclick="switchTab('about')">About</button>
+    <button class="tab" onclick="switchTab('photos')">Photos</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+
+    <div class="tab-section" id="posts">
+      <div class="post">
+        <div class="post-header">
+          <img src="https://via.placeholder.com/40" />
+          <div>
+            <h4>Humayun Danish</h4>
+            <span>1h ago</span>
+          </div>
+        </div>
+        <p>Feeling blessed today 🌟</p>
+        <img src="https://via.placeholder.com/400x200" alt="Post Image">
+        <div class="post-actions">
+          <button><i class="fas fa-thumbs-up"></i> Like</button>
+          <button><i class="fas fa-comment"></i> Comment</button>
+          <button><i class="fas fa-share"></i> Share</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-section" id="about" style="display: none;">
+      <p><strong>Location:</strong> Peshawar, Pakistan</p>
+      <p><strong>Education:</strong> BS Computer Science</p>
+      <p><strong>Languages:</strong> Pashto, Urdu, English</p>
+    </div>
+
+    <div class="tab-section" id="photos" style="display: none;">
+      <div class="photo-grid">
+        <img src="https://via.placeholder.com/100x100" />
+        <img src="https://via.placeholder.com/100x100" />
+        <img src="https://via.placeholder.com/100x100" />
+        <img src="https://via.placeholder.com/100x100" />
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.querySelectorAll('.tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).style.display = 'block';
+      event.target.classList.add('active');
+    }
+  </script>
 </body>
 </html>
