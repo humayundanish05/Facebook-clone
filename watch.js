@@ -5,12 +5,7 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "First reel, enjoy! 😄"
   },
-  {
-    video: "video.mp4",
-    avatar: "user.jpg",
-    username: "@HumayunDanish",
-    description: "Gulali mashooman 🥰😀 #fun #reels"
-  }
+  
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
