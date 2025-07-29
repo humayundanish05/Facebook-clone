@@ -3,9 +3,8 @@ const reelsData = [
     video: "video2.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
-    description: "First reel, enjoy! 😄"
+    description: "Ya Allah tu mujhe maaf krde😭"
   },
-  
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
@@ -15,7 +14,7 @@ function createReel(reel) {
   container.className = "reel-container";
 
   container.innerHTML = `
-    <video src="${reel.video}" autoplay loop playsinline></video>
+    <video src="${reel.video}" autoplay loop muted playsinline></video>
 
     <div class="center-controls hidden">
       <button class="rewind"><i class="fas fa-undo"></i></button>
@@ -42,7 +41,7 @@ function createReel(reel) {
 
   reelsWrapper.appendChild(container);
 
-  // Setup event listeners after DOM is ready
+  // Setup event listeners
   setTimeout(() => {
     const video = container.querySelector("video");
     const controls = container.querySelector(".center-controls");
@@ -51,8 +50,23 @@ function createReel(reel) {
     const toggleBtn = controls.querySelector(".toggle-play");
     let hideTimeout;
 
-    // Show controls on single click
+    // Toggle control display on click
     video.addEventListener("click", () => {
+      // Pause others and unmute this one
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.muted = true;
+        }
+      });
+
+      // Unmute and play current video
+      video.muted = false;
+      if (video.paused) {
+        video.play().catch(err => console.warn("Play error:", err));
+      }
+
+      // Show controls briefly
       controls.classList.remove("hidden");
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
@@ -60,7 +74,7 @@ function createReel(reel) {
       }, 1500);
     });
 
-    // Control buttons functionality
+    // Button functions
     rewindBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       video.currentTime = Math.max(video.currentTime - 5, 0);
@@ -84,19 +98,17 @@ function createReel(reel) {
   }, 0);
 }
 
-// Create reels
+// Create all reels
 reelsData.forEach(createReel);
 
-// Pause all except visible
+// Playback handling based on visibility
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
   videos.forEach((video) => {
-    
     const rect = video.getBoundingClientRect();
-    const visible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+    const visible = rect.top < window.innerHeight && rect.bottom > 0;
     if (visible) {
-      video.muted = false;
-      video.play();
+      video.play().catch(() => {});
     } else {
       video.pause();
       video.muted = true;
@@ -104,28 +116,9 @@ function handlePlayback() {
   });
 }
 
+// Event listeners
 window.addEventListener("load", handlePlayback);
 window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
-});
-
-
-
-/* video unmuted on click anywhere */
-document.querySelectorAll('video').forEach(video => {
-  video.muted = true; // Start muted so autoplay works
-
-  video.addEventListener('click', () => {
-
-    document.querySelectorAll('video').forEach(v => {
-      if (v !== video) {
-        v.pause();
-        v.muted = true;
-      }
-    });
-
-    video.muted = false;
-    video.play();
-  });
 });
