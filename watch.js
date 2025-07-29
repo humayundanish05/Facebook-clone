@@ -5,7 +5,6 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "Ya Allah tu mujhe maaf krde😭"
   },
-
   {
     video: "video1.mp4",
     avatar: "user.jpg",
@@ -48,7 +47,6 @@ function createReel(reel) {
 
   reelsWrapper.appendChild(container);
 
-  // Setup event listeners
   setTimeout(() => {
     const video = container.querySelector("video");
     const controls = container.querySelector(".center-controls");
@@ -57,7 +55,13 @@ function createReel(reel) {
     const toggleBtn = controls.querySelector(".toggle-play");
     let hideTimeout;
 
-    // Toggle control display on click
+    // Show controls on load for 1.5s
+    controls.classList.remove("hidden");
+    hideTimeout = setTimeout(() => {
+      controls.classList.add("hidden");
+    }, 1500);
+
+    // Show controls on video click
     video.addEventListener("click", () => {
       // Pause others and unmute this one
       document.querySelectorAll("video").forEach(v => {
@@ -67,13 +71,11 @@ function createReel(reel) {
         }
       });
 
-      // Unmute and play current video
       video.muted = false;
       if (video.paused) {
         video.play().catch(err => console.warn("Play error:", err));
       }
 
-      // Show controls briefly
       controls.classList.remove("hidden");
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
@@ -81,7 +83,7 @@ function createReel(reel) {
       }, 1500);
     });
 
-    // Button functions
+    // Button actions
     rewindBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       video.currentTime = Math.max(video.currentTime - 5, 0);
@@ -108,7 +110,7 @@ function createReel(reel) {
 // Create all reels
 reelsData.forEach(createReel);
 
-// Playback handling based on visibility
+// Playback based on scroll visibility
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
   videos.forEach((video) => {
@@ -123,14 +125,14 @@ function handlePlayback() {
   });
 }
 
-// Event listeners
+// Scroll and resize events
 window.addEventListener("load", handlePlayback);
 window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
 });
 
-/* fit video on screen */
+// Adjust video size to full screen
 function adjustVideoSize() {
   const reels = document.querySelectorAll('.reel-container video');
   const height = window.innerHeight;
@@ -142,9 +144,6 @@ function adjustVideoSize() {
   });
 }
 
-// Run once on load
 adjustVideoSize();
-
-// Re-run on resize or orientation change
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
