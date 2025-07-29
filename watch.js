@@ -5,6 +5,13 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "Ya Allah tu mujhe maaf krde😭"
   },
+
+  {
+    video: "video1.mp4",
+    avatar: "user.jpg",
+    username: "@HumayunDanish",
+    description: "Ya Allah tu mujhe maaf krde😭"
+  },
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
