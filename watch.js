@@ -91,6 +91,7 @@ reelsData.forEach(createReel);
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
   videos.forEach((video) => {
+    
     const rect = video.getBoundingClientRect();
     const visible = rect.top >= 0 && rect.bottom <= window.innerHeight;
     if (visible) {
@@ -107,4 +108,24 @@ window.addEventListener("load", handlePlayback);
 window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
+});
+
+
+
+/* video unmuted on click anywhere */
+document.querySelectorAll('video').forEach(video => {
+  video.muted = true; // Start muted so autoplay works
+
+  video.addEventListener('click', () => {
+
+    document.querySelectorAll('video').forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.muted = true;
+      }
+    });
+
+    video.muted = false;
+    video.play();
+  });
 });
