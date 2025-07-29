@@ -122,3 +122,22 @@ window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
 });
+
+/* fit video on screen */
+function adjustVideoSize() {
+  const reels = document.querySelectorAll('.reel-container video');
+  const height = window.innerHeight;
+  const width = window.innerWidth;
+
+  reels.forEach(video => {
+    video.style.height = height + 'px';
+    video.style.width = width + 'px';
+  });
+}
+
+// Run once on load
+adjustVideoSize();
+
+// Re-run on resize or orientation change
+window.addEventListener('resize', adjustVideoSize);
+window.addEventListener('orientationchange', adjustVideoSize);
