@@ -184,19 +184,20 @@
   </div>
 </div>
     
-  <script>
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-section').forEach(section => {
-        section.style.display = 'none';
-      });
-      document.querySelectorAll('.tab').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById(tabId).style.display = 'block';
-      event.target.classList.add('active');
-    }
+<script>
+  function switchTab(tabId, event) {
+    document.querySelectorAll('.tab-section').forEach(section => {
+      section.style.display = 'none';
+    });
 
-  </script>
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    document.getElementById(tabId).style.display = 'block';
+    event.target.classList.add('active');
+  }
+</script>
 
   </body>
 </html>
