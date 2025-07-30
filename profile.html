@@ -69,43 +69,32 @@
     <button class="story"><i class="fas fa-plus"></i> Add to story</button>
   </div>
 
-  <!-- Tabs -->
-  <div class="profile-tabs">
-    <button class="tab active" onclick="switchTab('posts')">Posts</button>
-    <button class="tab" onclick="switchTab('about')">About</button>
-    <button class="tab" onclick="switchTab('photos')">Photos</button>
-  </div>
+<!-- Tabs (buttons) -->
+<div class="tabs">
+  <button class="tab" onclick="switchTab('postFeed', event)">Posts</button>
+  <button class="tab" onclick="switchTab('about', event)">About</button>
+  <button class="tab" onclick="switchTab('photoGallery', event)">Photos</button>
+</div>
 
-  <!-- Tab Content -->
-<!-- Post Feed -->
-  <div class="tab-section" id="photos" style="display: none;">
-<div id="post">
-
-  <!-- Post 1 -->
+<!-- Posts Tab -->
+<div class="tab-section" id="postFeed" style="display: none;">
   <div class="post">
     <div class="post-header">
-      <a href="profile.html">
-        <img src="user.jpg" alt="Sample Photo">
-      </a>
+      <a href="profile.html"><img src="user.jpg" alt="Sample Photo"></a>
       <div>
         <div class="name">Humayun Danish</div>
         <div class="time">1h ago</div>
       </div>
     </div>
-
     <div class="post-content">
-
-      <img src="https://picsum.photos/id/1011/100/100" alt="Forest" />
+      <img src="https://picsum.photos/id/1011/800/400" alt="Forest" />
     </div>
-
     <div class="like-count">0 likes</div>
-
     <div class="post-actions">
       <span class="like-btn">👍 Like</span>
       <span class="comment-toggle">💬 Comment</span>
       <span>↪️ Share</span>
     </div>
-
     <div class="comment-section hidden">
       <div class="comment-input">
         <input type="text" placeholder="Write a comment...">
@@ -115,32 +104,23 @@
     </div>
   </div>
 
-  <!-- Post 2 -->
   <div class="post">
     <div class="post-header">
-      <a href="profile.html">
-        <img src="user.jpg" alt="Profile">
-      </a>
+      <a href="profile.html"><img src="user.jpg" alt="Profile"></a>
       <div>
         <div class="name">Humayun Danish</div>
         <div class="time">2h ago</div>
       </div>
     </div>
-
     <div class="post-content">
-      
-<img src="https://picsum.photos/id/1035/100/100" alt="Beach" />
-
-</div>
-
+      <img src="https://picsum.photos/id/1035/800/400" alt="Beach" />
+    </div>
     <div class="like-count">0 likes</div>
-
     <div class="post-actions">
       <span class="like-btn">👍 Like</span>
       <span class="comment-toggle">💬 Comment</span>
       <span>↪️ Share</span>
     </div>
-
     <div class="comment-section hidden">
       <div class="comment-input">
         <input type="text" placeholder="Write a comment...">
@@ -149,43 +129,48 @@
       <div class="comments"></div>
     </div>
   </div>
-
 </div>
+
+<!-- About Tab -->
+<div class="tab-section" id="about" style="display: none;">
+  <div class="simple-about">
+  <h2>About Humayun Danish</h2>
+
+  <p><strong>📍 Location:</strong> Peshawar, Pakistan</p>
+  <p><strong>🎓 Education:</strong> BS Computer Science</p>
+  <p><strong>💼 Profession:</strong> Frontend Developer & Visual Artist</p>
+  <p><strong>🛸 Interests:</strong> Coding, Drawing, Ethical Hacking, Astronomy</p>
+  <p><strong>🗣️ Languages:</strong> Pashto, Urdu, English</p>
+  <p><strong>🌐 Website:</strong> <a href="https://yourportfolio.com" target="_blank">yourportfolio.com</a></p>
   </div>
+</div>
 
-    <div class="tab-section" id="about" style="display: none;">
-      <p><strong>Location:</strong> Peshawar, Pakistan</p>
-      <p><strong>Education:</strong> BS Computer Science</p>
-      <p><strong>Languages:</strong> Pashto, Urdu, English</p>
-    </div>
-
-<div class="tab-section" id="photos" style="display: none;">
+<!-- Photos Tab -->
+<div class="tab-section" id="photoGallery" style="display: none;">
   <div class="photo-grid">
     <img src="post1.jpg" alt="Post 1">
     <img src="post2.jpg" alt="Post 2">
     <img src="Post3.jpg" alt="Post 3">
     <img src="Story2.jpg" alt="Story 2">
     <img src="story1.jpg" alt="Story 1">
-    <img src="https://picsum.photos/id/1015/100/100" alt="Photo 1" />
-    <img src="https://picsum.photos/id/1025/100/100" alt="Photo 2" />
-    <img src="https://picsum.photos/id/1035/100/100" alt="Photo 3" />
-    <img src="https://picsum.photos/id/1045/100/100" alt="Photo 4" />
-    <img src="https://picsum.photos/id/1055/100/100" alt="Photo 5" />
-    <img src="https://picsum.photos/id/1065/100/100" alt="Photo 6" />
-    <img src="https://picsum.photos/id/1075/100/100" alt="Photo 7" />
-    <img src="https://picsum.photos/id/237/100/100" alt="Dog" />
-<img src="https://picsum.photos/id/1025/100/100" alt="Horse" />
-<img src="https://picsum.photos/id/1005/100/100" alt="Bridge" />
-<img src="https://picsum.photos/id/1011/100/100" alt="Forest" />
-<img src="https://picsum.photos/id/1035/100/100" alt="Beach" />
-<img src="https://picsum.photos/id/1043/100/100" alt="Mountains" />
-<img src="https://picsum.photos/id/1056/100/100" alt="Lake" />
-<img src="https://picsum.photos/id/1069/100/100" alt="City" />
-<img src="https://picsum.photos/id/1074/100/100" alt="Sunset" />
-<img src="https://picsum.photos/id/1084/100/100" alt="Ocean" />
+    <img src="https://picsum.photos/id/1015/200/200" alt="Photo 1" />
+    <img src="https://picsum.photos/id/1025/200/200" alt="Photo 2" />
+    <img src="https://picsum.photos/id/1035/200/200" alt="Photo 3" />
+    <img src="https://picsum.photos/id/1045/200/200" alt="Photo 4" />
+    <img src="https://picsum.photos/id/1055/200/200" alt="Photo 5" />
+    <img src="https://picsum.photos/id/1065/200/200" alt="Photo 6" />
+    <img src="https://picsum.photos/id/1075/200/200" alt="Photo 7" />
+    <img src="https://picsum.photos/id/237/200/200" alt="Dog" />
+    <img src="https://picsum.photos/id/1005/200/200" alt="Bridge" />
+    <img src="https://picsum.photos/id/1011/200/200" alt="Forest" />
+    <img src="https://picsum.photos/id/1035/200/200" alt="Beach" />
+    <img src="https://picsum.photos/id/1043/200/200" alt="Mountains" />
+    <img src="https://picsum.photos/id/1056/200/200" alt="Lake" />
+    <img src="https://picsum.photos/id/1069/200/200" alt="City" />
+    <img src="https://picsum.photos/id/1074/200/200" alt="Sunset" />
+    <img src="https://picsum.photos/id/1084/200/200" alt="Ocean" />
   </div>
 </div>
-    
 
   <script>  
     function switchTab(tabId) {  
