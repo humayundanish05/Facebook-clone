@@ -171,8 +171,7 @@
     <img src="https://picsum.photos/id/1084/200/200" alt="Ocean" />
   </div>
 </div>
-
-  <script>  
+<script>
   function switchTab(tabId) {  
     document.querySelectorAll('.tab-section').forEach(section => {  
       section.style.display = 'none';  
@@ -185,6 +184,65 @@
   }  
 
   window.onload = () => switchTab('postFeed');
+
+
+
+
+
+
+
+  
+  const tabs = ['postFeed', 'about', 'photos'];
+  let currentTabIndex = 0;
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-section').forEach(section => {
+      section.style.display = 'none';
+    });
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.getElementById(tabId).style.display = 'block';
+    
+    // Auto add active class to correct tab button
+    const tabButtons = document.querySelectorAll('.tab');
+    tabButtons[tabs.indexOf(tabId)]?.classList.add('active');
+
+    currentTabIndex = tabs.indexOf(tabId);
+  }
+
+  // Default open on load
+  window.onload = () => switchTab('postFeed');
+
+  // Swipe logic
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) < 50) return; // Ignore tiny swipes
+
+    if (diff > 0) {
+      // Swiped Left → Next tab
+      if (currentTabIndex < tabs.length - 1) {
+        switchTab(tabs[currentTabIndex + 1]);
+      }
+    } else {
+      // Swiped Right → Previous tab
+      if (currentTabIndex > 0) {
+        switchTab(tabs[currentTabIndex - 1]);
+      }
+    }
+  </
   </script>
 
   </body>
