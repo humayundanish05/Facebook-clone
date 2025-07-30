@@ -206,16 +206,18 @@ body, html {
 /* Feed Posts */
 .post {
   background: white;
-  margin: 10px;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  margin: 10px 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
 }
 
+/* Post Header */
 .post-header {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 10px 12px;
 }
 
 .post-header img {
@@ -236,14 +238,18 @@ body, html {
   color: #888;
 }
 
+/* Post Content */
 .post-content p {
   font-size: 15px;
-  margin-bottom: 10px;
+  margin: 0;
+  padding: 0 12px 10px;
 }
 
 .post-content img {
-  width: 100%;
-  border-radius: 10px;
+  width: 100vw;
+  max-width: 100%;
+  display: block;
+  border-radius: 0;
   object-fit: cover;
   max-height: 400px;
 }
@@ -252,11 +258,10 @@ body, html {
 .post-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
-  border-top: 1px solid #eee;
-  padding-top: 6px;
+  padding: 10px 12px;
   font-size: 14px;
   color: #65676b;
+  border-top: 1px solid #eee;
 }
 
 .post-actions span {
@@ -287,7 +292,7 @@ body, html {
 .comment-section {
   margin-top: 10px;
   border-top: 1px solid #ddd;
-  padding-top: 10px;
+  padding: 10px 12px 0;
 }
 
 .comment-section.hidden {
@@ -331,7 +336,9 @@ body, html {
   font-size: 14px;
   width: fit-content;
   max-width: 90%;
-                             }
+}
+
+/* Top Navigation */
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -363,4 +370,4 @@ body, html {
   padding: 8px 10px;
   font-size: 16px;
   cursor: pointer;
-}
+}}
