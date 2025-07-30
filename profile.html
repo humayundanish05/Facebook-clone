@@ -196,7 +196,11 @@
       event.target.classList.add('active');
     }
 
-    // Like and Comment Handler
+
+
+
+
+    
 function attachPostEvents(post) {
   const likeBtn = post.querySelector(".like-btn");
   const likeCountEl = post.querySelector(".like-count");
@@ -231,6 +235,11 @@ function attachPostEvents(post) {
     }
   });
 }
-  </script>
-</body>
-</html>
+
+ document.querySelector('.top-btn.search').addEventListener('click', function () {
+    const query = prompt("Search Google:");
+    if (query) {
+      const url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+      window.open(url, '_blank');
+    }
+  });
