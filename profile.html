@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+u<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -77,26 +77,79 @@
   </div>
 
   <!-- Tab Content -->
-  <div class="tab-content">
+<!-- Post Feed -->
+<div id="postFeed">
 
-    <div class="tab-section" id="posts">
-      <div class="post">
-        <div class="post-header">
-          <img src="user.jpg" />
-          <div>
-            <h4>Humayun Danish</h4>
-            <span>1h ago</span>
-          </div>
-        </div>
-        <p>Feeling blessed today 🌟</p>
-        <img src="post2.jpg" alt="Post Image">
-        <div class="post-actions">
-          <button><i class="fas fa-thumbs-up"></i> Like</button>
-          <button><i class="fas fa-comment"></i> Comment</button>
-          <button><i class="fas fa-share"></i> Share</button>
-        </div>
+  <!-- Post 1 -->
+  <div class="post">
+    <div class="post-header">
+      <a href="profile.html">
+        <img src="https://picsum.photos/id/1011/100/100" alt="Forest" />
+      </a>
+      <div>
+        <div class="name">Humayun Danish</div>
+        <div class="time">1h ago</div>
       </div>
     </div>
+
+    <div class="post-content">
+      <p>Profile updated 🙈!</p>
+      <img src="user.jpg" alt="Sample Photo">
+    </div>
+
+    <div class="like-count">0 likes</div>
+
+    <div class="post-actions">
+      <span class="like-btn">👍 Like</span>
+      <span class="comment-toggle">💬 Comment</span>
+      <span>↪️ Share</span>
+    </div>
+
+    <div class="comment-section hidden">
+      <div class="comment-input">
+        <input type="text" placeholder="Write a comment...">
+        <button class="add-comment">Post</button>
+      </div>
+      <div class="comments"></div>
+    </div>
+  </div>
+
+  <!-- Post 2 -->
+  <div class="post">
+    <div class="post-header">
+      <a href="profile.html">
+        <img src="user.jpg" alt="Profile">
+      </a>
+      <div>
+        <div class="name">Humayun Danish</div>
+        <div class="time">2h ago</div>
+      </div>
+    </div>
+
+    <div class="post-content">
+      
+<img src="https://picsum.photos/id/1035/100/100" alt="Beach" />
+
+</div>
+
+    <div class="like-count">0 likes</div>
+
+    <div class="post-actions">
+      <span class="like-btn">👍 Like</span>
+      <span class="comment-toggle">💬 Comment</span>
+      <span>↪️ Share</span>
+    </div>
+
+    <div class="comment-section hidden">
+      <div class="comment-input">
+        <input type="text" placeholder="Write a comment...">
+        <button class="add-comment">Post</button>
+      </div>
+      <div class="comments"></div>
+    </div>
+  </div>
+
+</div>
 
     <div class="tab-section" id="about" style="display: none;">
       <p><strong>Location:</strong> Peshawar, Pakistan</p>
