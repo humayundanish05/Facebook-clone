@@ -4,19 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Humayun Danish - Profile</title>
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="profijle.css">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2d9d5ea9c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- Top Bar with Back Arrow -->
-  <div class="top-bar">
-    <button class="back-button" onclick="window.location.href='home.html'">
-      <i class="fas fa-arrow-left"></i>
-    </button>
-    <h2>Profile</h2>
+<!-- Top Bar with SVG Icons -->
+<div class="top-bar">
+  <div class="nav-left">
+    <a href="home.html" class="back-arrow">
+      <!-- Back arrow SVG -->
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 6L9 12L15 18" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="profile-title">Humayun Danish</div>
   </div>
+  <div class="search-icon">
+    <!-- Search icon SVG -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <circle cx="11" cy="11" r="7" stroke="#333" stroke-width="2"/>
+      <line x1="16" y1="16" x2="21" y2="21" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
 
   <!-- Profile Header -->
   <div class="profile-header">
