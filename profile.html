@@ -173,17 +173,18 @@
 </div>
 
   <script>  
-    function switchTab(tabId) {  
-      document.querySelectorAll('.tab-section').forEach(section => {  
-        section.style.display = 'none';  
-      });  
-      document.querySelectorAll('.tab').forEach(btn => {  
-        btn.classList.remove('active');  
-      });  
-      document.getElementById(tabId).style.display = 'block';  
-      event.target.classList.add('active');  
-    }  
-  
+  function switchTab(tabId) {  
+    document.querySelectorAll('.tab-section').forEach(section => {  
+      section.style.display = 'none';  
+    });  
+    document.querySelectorAll('.tab').forEach(btn => {  
+      btn.classList.remove('active');  
+    });  
+    document.getElementById(tabId).style.display = 'block';  
+    event.target?.classList?.add('active'); // Optional chaining to avoid errors on load
+  }  
+
+  window.onload = () => switchTab('postFeed');
   </script>
 
   </body>
