@@ -78,7 +78,8 @@
 
   <!-- Tab Content -->
 <!-- Post Feed -->
-<div id="postFeed">
+  <div class="tab-section" id="photos" style="display: none;">
+<div id="post">
 
   <!-- Post 1 -->
   <div class="post">
@@ -150,6 +151,7 @@
   </div>
 
 </div>
+  </div>
 
     <div class="tab-section" id="about" style="display: none;">
       <p><strong>Location:</strong> Peshawar, Pakistan</p>
@@ -184,20 +186,20 @@
   </div>
 </div>
     
-<script>
-  function switchTab(tabId, event) {
-    document.querySelectorAll('.tab-section').forEach(section => {
-      section.style.display = 'none';
-    });
 
-    document.querySelectorAll('.tab').forEach(btn => {
-      btn.classList.remove('active');
-    });
-
-    document.getElementById(tabId).style.display = 'block';
-    event.target.classList.add('active');
-  }
-</script>
+  <script>  
+    function switchTab(tabId) {  
+      document.querySelectorAll('.tab-section').forEach(section => {  
+        section.style.display = 'none';  
+      });  
+      document.querySelectorAll('.tab').forEach(btn => {  
+        btn.classList.remove('active');  
+      });  
+      document.getElementById(tabId).style.display = 'block';  
+      event.target.classList.add('active');  
+    }  
+  
+  </script>
 
   </body>
 </html>
