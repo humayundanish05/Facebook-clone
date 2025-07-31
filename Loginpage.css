@@ -135,46 +135,25 @@ body.login-page {
   text-decoration: underline;
 }
 
-/* === Creative Dot Loader === */
-.loader-dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 15px;
-  height: 20px;
-  align-items: center;
-}
-
-.loader-dots::before,
-.loader-dots::after,
-.loader-dots {
-  content: '';
-  width: 10px;
-  height: 10px;
-  background-color: #1877f2;
+/* 🔥 Stylish 3D Ring Loader 🔥 */
+.loader-3d {
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
   border-radius: 50%;
-  animation: bounce 0.6s infinite alternate;
+  border: 6px solid transparent;
+  border-top: 6px solid #1877f2;
+  border-right: 6px solid #42b72a;
+  border-bottom: 6px solid #f02849;
+  animation: rotate3D 1s linear infinite;
+  box-shadow: 0 0 10px #1877f2, 0 0 20px #42b72a, 0 0 30px #f02849;
 }
 
-.loader-dots::before {
-  animation-delay: 0s;
+.hidden {
+  display: none;
 }
 
-.loader-dots {
-  animation-delay: 0.2s;
-}
-
-.loader-dots::after {
-  animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-  from {
-    transform: translateY(0);
-    opacity: 0.3;
-  }
-  to {
-    transform: translateY(-8px);
-    opacity: 1;
-  }
+@keyframes rotate3D {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
