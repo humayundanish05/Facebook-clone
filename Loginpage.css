@@ -43,109 +43,127 @@ body.login-page {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   margin-bottom: 15px;
 }
-
-
-/* Inputs */
-.login-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #dddfe2;
-  font-size: 16px;
+/* === General Page Styling === */
+body.login-page {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e7f0fd, #f1f5fb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* === Fakebook Logo === */
+.fb-logo {
+  font-size: 48px;
+  color: #1877f2;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: -1px;
+}
 
-/* Login button */
+/* === Login Container === */
+.login-container {
+  margin-top: 30px;
+  background-color: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+/* === Input Fields === */
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #1877f2;
+  box-shadow: 0 0 4px rgba(24, 119, 242, 0.3);
+}
+
+/* === Buttons === */
 .login-box button {
   width: 100%;
-  background-color: #1877f2;
-  color: white;
   padding: 12px;
   font-size: 16px;
+  background-color: #1877f2;
+  color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  margin: 10px 0;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
   transition: background 0.3s ease;
 }
 
-
 .login-box button:hover {
-  background-color: #145dbf;
+  background-color: #166fe5;
 }
 
-
-/* Forgot password */
-.login-box a {
-  display: block;
-  margin: 12px 0;
-  font-size: 14px;
-  color: #1877f2;
-  text-decoration: none;
-}
-
-
-.login-box a:hover {
-  text-decoration: underline;
-}
-
-
-/* Horizontal line */
-.login-box hr {
-  margin: 20px 0;
-  border: none;
-  border-top: 1px solid #ccc;
-}
-
-
-/* Create new account button */
+/* === Create Account Button === */
 .create-btn {
   background-color: #42b72a;
-  margin-top: 0;
 }
-
 
 .create-btn:hover {
   background-color: #36a420;
 }
 
-
-/* Footer text */
-.login-container p {
-  font-size: 14px;
-  color: #1c1e21;
+/* === Links === */
+.login-box a {
+  display: block;
+  color: #1877f2;
   margin-top: 10px;
-}
-
-
-.login-container p a {
-  font-weight: bold;
   text-decoration: none;
-  color: #1c1e21;
+  font-size: 14px;
 }
 
-
-.login-container p a:hover {
+.login-box a:hover {
   text-decoration: underline;
 }
 
+/* === Loader Animation === */
 .loader {
-  border: 4px solid #ccc;
+  border: 4px solid #f3f3f3;
   border-top: 4px solid #1877f2;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
+  width: 32px;
+  height: 32px;
   margin: 15px auto;
+  animation: spin 1s linear infinite;
 }
 
 .hidden {
   display: none;
 }
 
+/* === Create Page Text === */
+.login-container > p {
+  font-size: 13px;
+  margin-top: 16px;
+  color: #555;
+}
+
+/* === Animations === */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
