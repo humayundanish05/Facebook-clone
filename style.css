@@ -374,20 +374,21 @@ body, html {
 
 
 /* dynamic post css*/
+/* === Post Container === */
 .post {
-  background: #fff;
+  background-color: #fff;
   border-radius: 10px;
-  padding: 12px 16px;
+  padding: 12px 15px;
   margin: 15px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  font-family: sans-serif;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
+/* === Post Header === */
 .post-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
 }
 
 .post-header img.avatar {
@@ -397,122 +398,95 @@ body, html {
   object-fit: cover;
 }
 
-.post {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  padding: 15px;
-  margin-bottom: 15px;
-  font-family: sans-serif;
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.post-header img.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-.post-header div {
-  font-size: 14px;
-}
-
+/* === Post Content === */
 .post-content {
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .post-content p {
-  margin: 10px 0;
+  margin: 8px 0;
   font-size: 15px;
   line-height: 1.4;
 }
 
-.post-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
+.post-content img.post-image {
+  max-width: 100%;
   border-radius: 8px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
+/* === Post Counts (Likes) === */
 .post-counts {
   font-size: 14px;
   color: #65676b;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
+/* === Action Buttons (Like, Comment, Share) === */
 .actions {
   display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  padding: 5px 0;
-  margin: 5px 0;
+  gap: 15px;
+  margin-top: 8px;
 }
 
 .actions button {
-  flex: 1;
   background: none;
   border: none;
-  padding: 8px;
-  font-size: 14px;
-  cursor: pointer;
   color: #65676b;
+  cursor: pointer;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 5px;
 }
 
-.actions button.liked {
-  color: #1877f2;
-  font-weight: bold;
+.actions button.liked svg {
+  fill: #1877f2;
 }
 
+.actions button.liked span {
+  color: #1877f2;
+}
+
+/* === Comment Section === */
 .comment-section {
   margin-top: 10px;
-  padding-top: 10px;
   border-top: 1px solid #eee;
+  padding-top: 10px;
 }
 
 .comment-section.hidden {
   display: none;
 }
 
-.comment {
-  padding: 5px 0;
+.comments .comment {
+  background-color: #f0f2f5;
+  padding: 6px 10px;
+  border-radius: 20px;
+  margin: 5px 0;
   font-size: 14px;
-  color: #333;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 .comment-input {
   display: flex;
+  gap: 8px;
   margin-top: 10px;
-  gap: 10px;
 }
 
 .comment-input input {
   flex: 1;
-  padding: 8px;
+  padding: 6px 10px;
   border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 14px;
 }
 
 .comment-input button {
-  padding: 6px 14px;
-  border: none;
   background-color: #1877f2;
   color: white;
+  border: none;
   border-radius: 20px;
+  padding: 6px 12px;
   cursor: pointer;
   font-size: 14px;
 }
