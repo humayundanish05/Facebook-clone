@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         image: imageSrc,
         likes: 0,
         comments: []
+       timestamp: Date.now() 
       };
       savePostToLocal(postData);
 
@@ -91,7 +92,7 @@ function createPostElement(postData) {
       <a href="profile.html"><img src="user.jpg" class="avatar" /></a>
       <div>
         <strong>Humayun Danish</strong><br/>
-        <small>Just now • 🌍</small>
+       <small>${getTimeAgo(postData.timestamp)} • 🌍</small>
       </div>
     </div>
     <div class="post-content">
@@ -150,4 +151,17 @@ function attachPostEvents(postElement, postData) {
       updateLocalStoragePost(postData);
     }
   });
+
+  
+// show post real time //
+function getTimeAgo(timestamp) {
+  const now = Date.now();
+  const seconds = Math.floor((now - timestamp) / 1000);
+  if (seconds < 60) return "Just now";
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+  const days = Math.floor(hours / 24);
+  return `${days} day${days !== 1 ? "s" : ""} ago`;
 }
