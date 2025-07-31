@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     statusInput.value = "";
-    imageInput.value = "";
+    imageInput.type = "";
+    imageInput.type = "file";
   });
 
   function createAndSavePost(text, image) {
