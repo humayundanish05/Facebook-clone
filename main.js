@@ -59,23 +59,131 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadSavedPosts() {
-  const feed = document.getElementById("postFeed");
-  const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
-  savedPosts.reverse().forEach(postData => {
-    const postElement = createPostElement(postData);
-    feed.prepend(postElement);
-    attachPostEvents(postElement, postData);
-  });
-}
+const postBtn = document.getElementById("submitPost");
+const photoBtn = document.querySelector(".custom-upload");
+const statusInput = document.getElementById("postText");
+const imageInput = document.getElementById("postImage");
+const feed = document.getElementById("postFeed");
 
-function savePostToLocal(postData) {
+// Load posts on page load
+window.addEventListener("load", () => {
   const posts = JSON.parse(localStorage.getItem("posts")) || [];
-  posts.push(postData);
+  posts.forEach(post => renderPost(post));
+});
+
+// Create new post
+postBtn.addEventListener("click", () => {
+  const text = statusInput.value.trim();
+  const image = imageInput.files[0];
+
+  if (!text && !image) return;
+
+  if (image) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl = reader.result;
+      saveAndRenderPost(text, imageUrl);
+    };
+    reader.readAsDataURL(image);
+  } else {
+    saveAndRenderPost(text, null);
+  }
+
+  statusInput.value = "";
+  imageInput.value = "";
+});
+
+function saveAndRenderPost(text, imageUrl) {
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+  const newPost = {
+    id: Date.now(),
+    text,
+    image: imageUrl,
+    time: new Date().toISOString(),
+    likes: 0,
+    comments: []
+  };
+  posts.unshift(newPost);
   localStorage.setItem("posts", JSON.stringify(posts));
+  renderPost(newPost, true);
 }
 
-function updateLocalStoragePost(updatedPost) {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+function renderPost(postData, prepend = false) {
+  const post = document.createElement("div");
+  post.className = "post";
+  post.setAttribute("data-id", postData.id);
+
+  post.innerHTML = `
+    <div class="post-header">
+      <a href="profile.html">
+        <img src="user.jpg" alt="Profile">
+      </a>
+      <div>
+        <div class="name">Humayun Danish</div>
+        <div class="time">${formatTime(postData.time)}</div>
+      </div>
+    </div>
+
+    <div class="post-content">
+      ${postData.text ? `<p>${postData.text}</p>` : ""}
+      ${postData.image ? `<img src="${postData.image}" alt="Uploaded Image">` : ""}
+    </div>
+
+    <div class="like-count">${postData.likes} likes</div>
+
+    <div class="post-actions">
+      <span class="like-btn">👍 Like</span>
+      <span class="comment-toggle">💬 Comment</span>
+      <span>↪️ Share</span>
+    </div>
+
+    <div class="comment-section hidden">
+      <div class="comment-input">
+        <input type="text" placeholder="Write a comment...">
+        <button class="add-comment">Post</button>
+      </div>
+      <div class="comments">
+        ${postData.comments.map(c => `<p>${c}</p>`).join("")}
+      </div>
+    </div>
+  `;
+
+  // Like button
+  const likeBtn = post.querySelector(".like-btn");
+  likeBtn.addEventListener("click", () => {
+    postData.likes++;
+    updatePost(postData);
+    post.querySelector(".like-count").textContent = `${postData.likes} likes`;
+  });
+
+  // Comment toggle
+  post.querySelector(".comment-toggle").addEventListener("click", () => {
+    post.querySelector(".comment-section").classList.toggle("hidden");
+  });
+
+  // Add comment
+  post.querySelector(".add-comment").addEventListener("click", () => {
+    const input = post.querySelector(".comment-input input");
+    const comment = input.value.trim();
+    if (comment) {
+      postData.comments.push(comment);
+      updatePost(postData);
+      const commentBox = post.querySelector(".comments");
+      commentBox.innerHTML += `<p>${comment}</p>`;
+      input.value = "";
+    }
+  });
+
+  if (prepend) {
+    feed.prepend(post);
+  } else {
+    feed.appendChild(post);
+  }
+}
+
+// Update post in localStorage
+function updatePost(updatedPost) {
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
   const index = posts.findIndex(p => p.id === updatedPost.id);
   if (index !== -1) {
     posts[index] = updatedPost;
@@ -83,85 +191,11 @@ function updateLocalStoragePost(updatedPost) {
   }
 }
 
-function createPostElement(postData) {
-  const newPost = document.createElement("div");
-  newPost.classList.add("post");
-  newPost.dataset.postId = postData.id;
-  newPost.innerHTML = `
-    <div class="post-header">
-      <a href="profile.html"><img src="user.jpg" class="avatar" /></a>
-      <div>
-        <strong>Humayun Danish</strong><br/>
-       <small>${getTimeAgo(postData.timestamp)} • 🌍</small>
-      </div>
-    </div>
-    <div class="post-content">
-      <p>${postData.text}</p>
-      ${postData.image ? `<img src="${postData.image}" class="post-image" />` : ""}
-    </div>
-    <div class="post-counts">
-      <span class="like-count">👍 ${postData.likes}</span>
-    </div>
-    <div class="actions">
-      <button class="like-btn">👍 Like</button>
-      <button class="comment-toggle">💬 Comment</button>
-      <button>↪️ Share</button>
-    </div>
-    <div class="comment-section hidden">
-      <div class="comments">
-        ${postData.comments.map(comment => `<div class="comment">${comment}</div>`).join("")}
-      </div>
-      <div class="comment-input">
-        <input type="text" placeholder="Write a comment..." />
-        <button class="add-comment">Post</button>
-      </div>
-    </div>
-  `;
-  return newPost;
-}
-
-function attachPostEvents(postElement, postData) {
-  const likeBtn = postElement.querySelector(".like-btn");
-  const likeCountEl = postElement.querySelector(".like-count");
-  const commentToggle = postElement.querySelector(".comment-toggle");
-  const commentSection = postElement.querySelector(".comment-section");
-  const commentInput = postElement.querySelector(".comment-input input");
-  const commentAddBtn = postElement.querySelector(".add-comment");
-  const commentsDiv = postElement.querySelector(".comments");
-
-  likeBtn?.addEventListener("click", () => {
-    postData.likes += 1;
-    likeCountEl.textContent = `👍 ${postData.likes}`;
-    updateLocalStoragePost(postData);
-  });
-
-  commentToggle?.addEventListener("click", () => {
-    commentSection.classList.toggle("hidden");
-  });
-
-  commentAddBtn?.addEventListener("click", () => {
-    const text = commentInput.value.trim();
-    if (text) {
-      postData.comments.push(text);
-      const div = document.createElement("div");
-      div.className = "comment";
-      div.textContent = text;
-      commentsDiv.appendChild(div);
-      commentInput.value = "";
-      updateLocalStoragePost(postData);
-    }
-  });
-
-  
-// show post real time //
-function getTimeAgo(timestamp) {
-  const now = Date.now();
-  const seconds = Math.floor((now - timestamp) / 1000);
-  if (seconds < 60) return "Just now";
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
-  const days = Math.floor(hours / 24);
-  return `${days} day${days !== 1 ? "s" : ""} ago`;
+// Format time to "Just now", "2m ago", etc.
+function formatTime(isoString) {
+  const diff = Math.floor((Date.now() - new Date(isoString)) / 1000);
+  if (diff < 60) return "Just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return new Date(isoString).toLocaleDateString();
 }
