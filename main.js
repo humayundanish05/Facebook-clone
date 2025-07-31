@@ -16,57 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
   savedPosts.forEach(post => renderPost(post));
 
   postBtn.addEventListener("click", () => {
+    const text = statusInput.value.trim();
+    const imageFile = imageInput.files[0];
 
+    if (!text && !imageFile) return;
 
-const text = statusInput.value.trim();
-const imageFile = imageInput.files[0];
-
-if (!text && !imageFile) return;
-
-// 👇 NEW validation logic added here
-const allowedTypes = [
-  "image/jpeg", "image/jpg", "image/png",
-  "image/webp", "image/gif", "image/bmp",
-  "image/svg+xml"
-];
-const maxSizeMB = 10;
-
-const createPost = (imageData = "") => {
-  const newPost = {
-    id: Date.now(),
-    text,
-    image: imageData,
-    time: new Date().toISOString(),
-    likes: 0,
-    comments: []
-  };
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
-  posts.unshift(newPost);
-  localStorage.setItem("posts", JSON.stringify(posts));
-  renderPost(newPost, true);
-};
-
-if (imageFile) {
-  if (!allowedTypes.includes(imageFile.type)) {
-    alert("Only JPG, PNG, WebP, SVG, or GIF images are allowed.");
-    return;
-  }
-  if (imageFile.size > maxSizeMB * 1024 * 1024) {
-    alert("Image too large. Max allowed size is 10MB.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => createPost(reader.result);
-  reader.readAsDataURL(imageFile);
-} else {
-  createPost();
-}
-
-statusInput.value = "";
-imageInput.value = "";
-
-    
+    const allowedTypes = [
+      "image/jpeg", "image/jpg", "image/png",
+      "image/webp", "image/gif", "image/bmp",
+      "image/svg+xml"
+    ];
+    const maxSizeMB = 10;
 
     const createPost = (imageData = "") => {
       const newPost = {
@@ -84,6 +44,15 @@ imageInput.value = "";
     };
 
     if (imageFile) {
+      if (!allowedTypes.includes(imageFile.type)) {
+        alert("Only JPG, PNG, WebP, SVG, or GIF images are allowed.");
+        return;
+      }
+      if (imageFile.size > maxSizeMB * 1024 * 1024) {
+        alert("Image too large. Max allowed size is 10MB.");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = () => createPost(reader.result);
       reader.readAsDataURL(imageFile);
@@ -95,7 +64,6 @@ imageInput.value = "";
     imageInput.value = "";
   });
 
-  // Render a post
   function renderPost(postData, prepend = false) {
     const post = document.createElement("div");
     post.className = "post";
@@ -136,19 +104,16 @@ imageInput.value = "";
       </div>
     `;
 
-    // Like button
     post.querySelector(".like-btn").addEventListener("click", () => {
       postData.likes++;
       updatePost(postData);
       post.querySelector(".like-count").textContent = `${postData.likes} likes`;
     });
 
-    // Toggle comment section
     post.querySelector(".comment-toggle").addEventListener("click", () => {
       post.querySelector(".comment-section").classList.toggle("hidden");
     });
 
-    // Add comment
     post.querySelector(".add-comment").addEventListener("click", () => {
       const input = post.querySelector(".comment-input input");
       const comment = input.value.trim();
@@ -167,7 +132,6 @@ imageInput.value = "";
     }
   }
 
-  // Update post in localStorage
   function updatePost(updatedPost) {
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
     const index = posts.findIndex(p => p.id === updatedPost.id);
@@ -177,7 +141,6 @@ imageInput.value = "";
     }
   }
 
-  // Format time
   function formatTime(isoString) {
     const seconds = Math.floor((Date.now() - new Date(isoString)) / 1000);
     if (seconds < 60) return "Just now";
