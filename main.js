@@ -52,12 +52,18 @@ function loadSavedPosts() {
 }
 
 // Save post to localStorage
-function savePost(post) {
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
-  posts.unshift(post);
-  localStorage.setItem("posts", JSON.stringify(posts));
+function createAndSavePost(text, imageSrc) {
+  const newPost = {
+    id: Date.now(),
+    text,
+    image: imageSrc,
+    time: new Date().toISOString(),
+    likes: 0,
+    comments: []
+  };
+  savePost(newPost);
+  renderPost(newPost, true);
 }
-
 // Update existing post (likes/comments)
 function updatePost(updatedPost) {
   const posts = JSON.parse(localStorage.getItem("posts")) || [];
