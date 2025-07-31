@@ -12,12 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Show loader and disable button
     loader.classList.remove("hidden");
     loginBtn.disabled = true;
     loginBtn.textContent = "Logging in...";
 
-    // Simulate login delay
     setTimeout(() => {
       loader.classList.add("hidden");
       loginBtn.disabled = false;
@@ -27,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2000);
   });
 
-  // Allow Enter key to trigger login
   document.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       loginBtn.click();
