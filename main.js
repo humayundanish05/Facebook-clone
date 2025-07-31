@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Only JPG, PNG, WebP, SVG, or GIF images are allowed.");
         return;
       }
-      if (imageFile.size > maxSizeMB * 2048  * 2048) {
+      if (imageFile.size > maxSizeMB * 1024  * 1024) {
         alert("Image too large. Max allowed size is 10MB.");
         return;
       }
