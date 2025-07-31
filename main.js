@@ -17,40 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Create new post
   postBtn?.addEventListener("click", () => {
-    const text = statusInput.value.trim();
-    const imageFile = imageInput.files[0];
+  const text = statusInput.value.trim();
+  const imageFile = imageInput.files[0];
 
-    if (!text && !imageFile) return;
+  if (!text && !imageFile) return;
 
+  if (imageFile) {
     const reader = new FileReader();
-    reader.onload = () => {
-      const imageSrc = imageFile ? reader.result : "";
-      const newPost = {
-        id: Date.now(),
-        text,
-        image: imageSrc,
-        time: new Date().toISOString(),
-        likes: 0,
-        comments: []
-      };
-      savePost(newPost);
-      renderPost(newPost, true);
-      statusInput.value = "";
 
-      // ✅ Properly reset image input
-      imageInput.value = "";
-      imageInput.type = "";
-      imageInput.type = "file";
+    reader.onload = () => {
+      const imageSrc = reader.result;
+      createAndSavePost(text, imageSrc);
+      resetInputs();
     };
 
-    if (imageFile) {
-      reader.readAsDataURL(imageFile);
-    } else {
-      reader.onload(); // Force run if no image
-    }
-  });
+    reader.readAsDataURL(imageFile);
+  } else {
+    createAndSavePost(text, "");
+    resetInputs();
+  }
 });
 
+function resetInputs() {
+  statusInput.value = "";
+  imageInput.value = "";
+  // Trick to fully reset file input
+  imageInput.type = "";
+  imageInput.type = "file";
+}
 // Load saved posts from localStorage
 function loadSavedPosts() {
   const posts = JSON.parse(localStorage.getItem("posts")) || [];
