@@ -25,12 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ==================== STATUS POST ==================== */
-  const postBtn = document.getElementById("post-btn");
-  const photoBtn = document.getElementById("photo-btn");
-  const statusInput = document.getElementById("status-text");
-  const imageInput = document.getElementById("status-image");
-  const feed = document.getElementById("post-feed");
-
+  const postBtn = document.getElementById("submitPost");
+const photoBtn = document.querySelector(".custom-upload");
+const statusInput = document.getElementById("postText");
+const imageInput = document.getElementById("postImage");
+const feed = document.getElementById("postFeed"); 
   if (photoBtn && imageInput) {
     photoBtn.addEventListener("click", () => imageInput.click());
   }
