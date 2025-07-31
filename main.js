@@ -12,16 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Show loader and disable button
     loader.classList.remove("hidden");
     loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
 
+    // Simulate login delay
     setTimeout(() => {
+      loader.classList.add("hidden");
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Log In";
       alert("Login successful!");
       window.location.href = "home.html";
     }, 2000);
   });
 
-  // Optional: press Enter to login
+  // Allow Enter key to trigger login
   document.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       loginBtn.click();
