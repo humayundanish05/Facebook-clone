@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.querySelector("button");
   const inputs = document.querySelectorAll("input");
+  const loader = document.getElementById("loader");
 
   loginBtn.addEventListener("click", () => {
     const email = inputs[0].value.trim();
@@ -8,9 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (email === "" || password === "") {
       alert("Please fill in both fields.");
-    } else {
-      // Fake login - allow anything
+      return;
+    }
+
+    loader.classList.remove("hidden");
+    loginBtn.disabled = true;
+
+    setTimeout(() => {
+      alert("Login successful!");
       window.location.href = "home.html";
+    }, 2000);
+  });
+
+  // Optional: press Enter to login
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      loginBtn.click();
     }
   });
 });
