@@ -1,39 +1,3 @@
-console.log("JS Loaded");
-
-document.addEventListener("DOMContentLoaded", () => {
-  const postBtn = document.getElementById("submitPost");
-  const photoBtn = document.querySelector(".custom-upload");
-  const statusInput = document.getElementById("postText");
-  const imageInput = document.getElementById("postImage");
-  const feed = document.getElementById("postFeed");
-
-  if (photoBtn && imageInput) {
-    photoBtn.addEventListener("click", () => imageInput.click());
-  }
-
-  // Load all saved posts from localStorage on page load
-  loadSavedPosts();
-
-  if (postBtn && statusInput && feed) {
-    postBtn.addEventListener("click", () => {
-      const text = statusInput.value.trim();
-      const imageFile = imageInput.files[0];
-
-      if (!text && !imageFile) return;
-
-      const reader = new FileReader();
-      reader.onload = function () {
-        const imageSrc = imageFile ? reader.result : "";
-        const postData = { text, image: imageSrc };
-        savePostToLocal(postData);
-
-        const postElement = createPostElement(postData.text, postData.image);
-        feed.prepend(postElement);
-        attachPostEvents(postElement);
-
-        statusInput.value = "";
-        imageInput.value = "";
-      };
 
 console.log("JS Loaded");
 
