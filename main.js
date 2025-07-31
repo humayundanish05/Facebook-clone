@@ -1,3 +1,20 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.querySelector("button");
+  const inputs = document.querySelectorAll("input");
+
+  loginBtn.addEventListener("click", () => {
+    const email = inputs[0].value.trim();
+    const password = inputs[1].value.trim();
+
+    if (email === "" || password === "") {
+      alert("Please fill in both fields.");
+    } else {
+      // Fake login - allow anything
+      window.location.href = "home.html";
+    }
+  });
+});
+
 console.log("JS Loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
