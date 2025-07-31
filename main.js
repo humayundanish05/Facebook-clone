@@ -16,10 +16,57 @@ document.addEventListener("DOMContentLoaded", () => {
   savedPosts.forEach(post => renderPost(post));
 
   postBtn.addEventListener("click", () => {
-    const text = statusInput.value.trim();
-    const imageFile = imageInput.files[0];
 
-    if (!text && !imageFile) return;
+
+const text = statusInput.value.trim();
+const imageFile = imageInput.files[0];
+
+if (!text && !imageFile) return;
+
+// 👇 NEW validation logic added here
+const allowedTypes = [
+  "image/jpeg", "image/jpg", "image/png",
+  "image/webp", "image/gif", "image/bmp",
+  "image/svg+xml"
+];
+const maxSizeMB = 10;
+
+const createPost = (imageData = "") => {
+  const newPost = {
+    id: Date.now(),
+    text,
+    image: imageData,
+    time: new Date().toISOString(),
+    likes: 0,
+    comments: []
+  };
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+  posts.unshift(newPost);
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderPost(newPost, true);
+};
+
+if (imageFile) {
+  if (!allowedTypes.includes(imageFile.type)) {
+    alert("Only JPG, PNG, WebP, SVG, or GIF images are allowed.");
+    return;
+  }
+  if (imageFile.size > maxSizeMB * 1024 * 1024) {
+    alert("Image too large. Max allowed size is 10MB.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => createPost(reader.result);
+  reader.readAsDataURL(imageFile);
+} else {
+  createPost();
+}
+
+statusInput.value = "";
+imageInput.value = "";
+
+    
 
     const createPost = (imageData = "") => {
       const newPost = {
