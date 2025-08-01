@@ -519,20 +519,3 @@ body, html {
   font-size: 28px;
 }
 
-/* light dark mode*/
-
-body.light-mode {
-  background-color: #f0f2f5;
-  color: #050505;
-}
-
-body.dark-mode {
-  background-color: #18191a;
-  color: #e4e6eb;
-}
-
-.container, .menu-item, .settings, .logout-section, .invite-box, .profile-section {
-  background-color: inherit;
-  color: inherit;
-  transition: background 0.3s, color 0.3s;
-}
