@@ -182,26 +182,3 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   `;
 
-// light dark mode 
-
-
-  // Apply stored theme on load
-  window.onload = () => {
-    const mode = localStorage.getItem("theme") || "light";
-    document.body.classList.add(`${mode}-mode`);
-    updateLabel(mode);
-  };
-
-  function toggleTheme() {
-    const isDark = document.body.classList.contains("dark-mode");
-    document.body.classList.toggle("dark-mode", !isDark);
-    document.body.classList.toggle("light-mode", isDark);
-    localStorage.setItem("theme", isDark ? "light" : "dark");
-    updateLabel(isDark ? "light" : "dark");
-  }
-
-  function updateLabel(mode) {
-    const label = document.getElementById("themeLabel");
-    if (label) label.innerText = mode === "dark" ? "Dark Mode ✅" : "Light Mode 🌞";
-  }
-
