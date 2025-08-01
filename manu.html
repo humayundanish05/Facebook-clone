@@ -83,6 +83,30 @@
     height: 20px;
   }
 
+  .toast {
+  visibility: hidden;
+  min-width: 240px;
+  background-color: #1877f2;
+  color: white;
+  text-align: center;
+  border-radius: 30px;
+  padding: 12px 20px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
   .menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -263,10 +287,29 @@
       window.location.href = "index.html";
     }, 2000);
   } 
+
+    //copy link with invite friend section to share 
+
+    function copyInviteLink() {
+    const link = "https://humayundanish05.github.io/Facebook-clone/";
+
+    navigator.clipboard.writeText(link).then(() => {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }).catch(err => {
+      alert("❌ Failed to copy link. Try again.");
+    });
+    }
+    
   </script>
   
 </body>
 </html>
+
 
 
 
