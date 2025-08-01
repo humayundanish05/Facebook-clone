@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background-color: #f0f2f5;
+      color: #050505;
+    }
+
+
+    #menu-container {
+      max-width: 360px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      padding: 12px 0;
+      overflow: hidden;
+    }
+
+
+    .menu-header {
+      padding: 12px 16px;
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+      background-color: #fff;
+    }
+
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+
+    .profile-section:hover {
+      background-color: #f0f2f5;
+    }
+
+
+    .profile-name {
+      font-weight: bold;
+      margin-left: 12px;
+    }
+
+
+    .divider {
+      height: 1px;
+      background-color: #ddd;
+      margin: 8px 0;
+    }
+
+
+    .section-title {
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #606770;
+    }
+
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+
+    .menu-item:hover {
+      background-color: #f0f2f5;
+    }
+
+
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .menu-item-left i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+
+    .menu-item-right i {
+      color: #606770;
+    }
+
+
+    .logout-section {
+      padding: 12px 16px;
+      color: #ff3b3b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+
+    .logout-section:hover {
+      background-color: #ffe5e5;
+    }
+
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #18191a;
+        color: #e4e6eb;
+      }
+
+
+      #menu-container {
+        background-color: #242526;
+        box-shadow: none;
+      }
+
+
+      .menu-header {
+        border-bottom: 1px solid #3a3b3c;
+      }
+
+
+      .menu-item:hover,
+      .profile-section:hover {
+        background-color: #3a3b3c;
+      }
+
+
+      .divider {
+        background-color: #3e4042;
+      }
+
+
+      .section-title {
+        color: #b0b3b8;
+      }
+
+
+      .logout-section:hover {
+        background-color: #3a3b3c;
+      }
+
+
+      .menu-item-right i {
+        color: #b0b3b8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div id="menu-container">
+    <div class="menu-header">Menu</div>
+
+
+    <div class="profile-section">
+      <i class="fas fa-user-circle fa-lg"></i>
+      <div class="profile-name">Humayun Danish</div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-id-card"></i> View your profile
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="section-title">Invite friends</div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-briefcase"></i> Professional Dashboard
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-users"></i> Groups
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-video"></i> Live Videos
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-bookmark"></i> Saved
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-calendar-day"></i> Events
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-rss"></i> Feeds
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="section-title">Settings & privacy</div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-cog"></i> Settings
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="menu-item">
+      <div class="menu-item-left">
+        <i class="fas fa-shield-alt"></i> Privacy
+      </div>
+      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="logout-section">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </div>
+  </div>
+
+
+  <script>
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        console.log('Clicked:', item.innerText.trim());
+        // Your navigation logic can go here
+      });
+    });
+
+
+    document.querySelector('.logout-section').addEventListener('click', () => {
+      console.log('Logout clicked');
+      alert('Logging out...');
+      // Redirect or logout logic here
+    });
+  </script>
+
+
+</body>
+</html>
