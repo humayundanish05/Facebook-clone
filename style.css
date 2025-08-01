@@ -79,7 +79,7 @@ body, html {
   font-weight: bold;
 }
 
-/* Status Box */
+/* ✅ Status Box (Horizontal Layout: Profile Pic + Input + Button) */
 .create-post-top {
   display: flex;
   align-items: center;
@@ -88,6 +88,13 @@ body, html {
   margin: 10px;
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .input-wrapper {
@@ -124,14 +131,6 @@ body, html {
 
 .input-wrapper button:hover {
   background: #145dbf;
-}
-
-/* Avatar */
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
 }
 
 /* Stories Section */
