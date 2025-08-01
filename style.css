@@ -88,6 +88,7 @@ body, html {
   margin: 10px;
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  gap: 12px;
 }
 
 .avatar {
@@ -100,8 +101,9 @@ body, html {
 .input-wrapper {
   display: flex;
   align-items: center;
-  flex: 1;
-  margin-left: 10px;
+  flex: none; /* no automatic growth */
+  width: 100%;
+  max-width: 300px;  /* make input section narrower */
   background: #f0f2f5;
   border-radius: 20px;
   padding: 6px 10px;
@@ -110,29 +112,24 @@ body, html {
 
 .input-wrapper input {
   flex: 1;
-  padding: 8px;
+  padding: 6px;
   border: none;
   background: transparent;
   outline: none;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .input-wrapper button {
   background: #1877f2;
   color: white;
   border: none;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 18px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   transition: background 0.2s ease;
 }
-
-.input-wrapper button:hover {
-  background: #145dbf;
-}
-
 /* Stories Section */
 .stories {
   display: flex;
