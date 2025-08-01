@@ -142,5 +142,36 @@
 </div>
 
   </div>
+  <script>
+  // Toggle settings dropdown
+  const settings = document.querySelector(".settings");
+  const logout = document.querySelector(".logout-section");
+
+  let settingsExpanded = false;
+
+  settings.addEventListener("click", () => {
+    if (!settingsExpanded) {
+      const dropdown = document.createElement("div");
+      dropdown.className = "logout-section";
+      dropdown.innerText = "Account Settings";
+      dropdown.style.marginTop = "8px";
+      dropdown.id = "dropdown-settings";
+      settings.insertAdjacentElement("afterend", dropdown);
+    } else {
+      const existing = document.getElementById("dropdown-settings");
+      if (existing) existing.remove();
+    }
+    settingsExpanded = !settingsExpanded;
+  });
+
+  // Log out confirmation
+  logout.addEventListener("click", () => {
+    const confirmLogout = confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+      alert("You have been logged out (fake action for demo).");
+      // Here you can redirect or clear session, etc.
+    }
+  });
+  </script>
 </body>
 </html>
