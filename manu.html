@@ -177,12 +177,22 @@
     transform: rotate(360deg);
   }
 }
+
+        /* greetings message */
+        .greeting-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1877f2;
+        }
         
    </style>
   
 </head>
 <body>
   <div class="container">
+
+    <div id="greeting" class="greeting-text"></div>
 
     <!-- Header -->
 <div class="header">
@@ -304,11 +314,23 @@
       alert("❌ Failed to copy link. Try again.");
     });
     }
+
+    // greetings message 
+    
+  const hour = new Date().getHours();
+  let greeting = "Hello";
+  if (hour < 12) greeting = "Good morning";
+  else if (hour < 18) greeting = "Good afternoon";
+  else greeting = "Good evening";
+
+  document.getElementById("greeting").innerText = `${greeting}, Humayun 👋`;
+
     
   </script>
   
 </body>
 </html>
+
 
 
 
