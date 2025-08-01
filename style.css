@@ -489,3 +489,31 @@ body, html {
   cursor: pointer;
   font-size: 14px;
 }
+
+  .greeting-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(90deg, #e7f3ff, #f3f8ff);
+  border-left: 5px solid #1877f2;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.greeting-box::before {
+  content: "👋";
+  font-size: 28px;
+}
