@@ -1,8 +1,67 @@
 let currentChatName = "User";
-// === FAB click === 
-document.querySelector('.fab').addEventListener('click', () => { 
-  alert('Start new chat — functionality coming soon.'); 
+// === New Chat Creation ===
+const fab = document.querySelector(".fab");
+const modal = document.getElementById("newChatModal");
+const createBtn = document.getElementById("createChatBtn");
+const cancelBtn = document.getElementById("cancelChatBtn");
+const nameInput = document.getElementById("newChatName");
+
+const avatarURLs = [
+  "https://i.pravatar.cc/150?img=1",
+  "https://i.pravatar.cc/150?img=2",
+  "https://i.pravatar.cc/150?img=3",
+  "https://i.pravatar.cc/150?img=4",
+  "https://i.pravatar.cc/150?img=5",
+  "https://i.pravatar.cc/150?img=6"
+];
+
+fab.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+  nameInput.value = "";
+  nameInput.focus();
 });
+
+cancelBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+createBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  if (!name) return alert("Please enter a name.");
+
+  const avatar = avatarURLs[Math.floor(Math.random() * avatarURLs.length)];
+
+  const newMsg = document.createElement("div");
+  newMsg.className = "message";
+  newMsg.innerHTML = `
+    <img src="${avatar}" />
+    <div>
+      <strong>${name}</strong><br/>
+      <span>Start your conversation</span>
+    </div>
+  `;
+
+  // Make new chat openable
+  newMsg.addEventListener("click", () => openChatWindow(name, avatar));
+  document.querySelector(".message-list").prepend(newMsg);
+
+  modal.classList.add("hidden");
+});
+
+// Function to simulate clicking and opening a chat
+function openChatWindow(name, avatar) {
+  currentChatName = name;
+  document.getElementById("chat-name").textContent = name;
+  document.querySelector(".chat-avatar").src = avatar;
+
+  messages.innerHTML = "";
+  document.querySelector(".chat-window").classList.remove("hidden");
+  document.querySelector(".message-list").style.display = "none";
+  fab.style.display = "none";
+  document.querySelector(".nav-row")?.classList.add("hidden");
+  document.querySelector(".info-row")?.classList.add("hidden");
+  document.querySelector(".bottom-bar")?.classList.add("hidden");
+}
 
 // === Search filter === 
 document.getElementById('searchInput').addEventListener('input', function () { 
@@ -159,3 +218,4 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
