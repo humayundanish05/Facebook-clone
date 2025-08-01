@@ -1,290 +1,148 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menu</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
+      padding: 0;
       margin: 0;
-      padding: 16px;
-      background-color: #f0f2f5;
-      color: #050505;
     }
 
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+      color: #fff;
+      padding: 20px;
+    }
 
-    #menu-container {
-      max-width: 360px;
-      margin: 0 auto;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-      padding: 12px 0;
+    .menu-container {
+      max-width: 400px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
       overflow: hidden;
+      animation: slideIn 0.6s ease-out;
     }
 
+    @keyframes slideIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
     .menu-header {
-      padding: 12px 16px;
-      font-size: 20px;
+      padding: 20px;
+      font-size: 24px;
       font-weight: bold;
-      border-bottom: 1px solid #ddd;
-      background-color: #fff;
+      background: rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-
-
-    .profile-section {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-
-    .profile-section:hover {
-      background-color: #f0f2f5;
-    }
-
-
-    .profile-name {
-      font-weight: bold;
-      margin-left: 12px;
-    }
-
-
-    .divider {
-      height: 1px;
-      background-color: #ddd;
-      margin: 8px 0;
-    }
-
-
-    .section-title {
-      padding: 8px 16px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #606770;
-    }
-
 
     .menu-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 10px 16px;
+      justify-content: space-between;
+      padding: 16px 20px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s;
     }
-
 
     .menu-item:hover {
-      background-color: #f0f2f5;
+      background: rgba(255, 255, 255, 0.08);
     }
 
+    .menu-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      fill: #00bcd4;
+    }
 
-    .menu-item-left {
+    .item-left {
       display: flex;
       align-items: center;
+      font-size: 16px;
     }
 
-
-    .menu-item-left i {
-      margin-right: 10px;
-      width: 20px;
-      text-align: center;
+    .section-title {
+      padding: 14px 20px 6px;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #aaa;
     }
 
-
-    .menu-item-right i {
-      color: #606770;
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 8px 0;
     }
 
-
-    .logout-section {
-      padding: 12px 16px;
-      color: #ff3b3b;
+    .logout {
+      color: #ff5252;
       font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-
-    .logout-section:hover {
-      background-color: #ffe5e5;
-    }
-
-
-    /* Dark Mode Support */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #18191a;
-        color: #e4e6eb;
-      }
-
-
-      #menu-container {
-        background-color: #242526;
-        box-shadow: none;
-      }
-
-
-      .menu-header {
-        border-bottom: 1px solid #3a3b3c;
-      }
-
-
-      .menu-item:hover,
-      .profile-section:hover {
-        background-color: #3a3b3c;
-      }
-
-
-      .divider {
-        background-color: #3e4042;
-      }
-
-
-      .section-title {
-        color: #b0b3b8;
-      }
-
-
-      .logout-section:hover {
-        background-color: #3a3b3c;
-      }
-
-
-      .menu-item-right i {
-        color: #b0b3b8;
-      }
     }
   </style>
 </head>
 <body>
 
-
-  <div id="menu-container">
+  <div class="menu-container">
     <div class="menu-header">Menu</div>
 
-
-    <div class="profile-section">
-      <i class="fas fa-user-circle fa-lg"></i>
-      <div class="profile-name">Humayun Danish</div>
+    <div class="menu-item">
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-9 1.7-9 5v2h18v-2c0-3.3-5.7-5-9-5z"/></svg>
+        Humayun Danish
+      </div>
     </div>
-
 
     <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-id-card"></i> View your profile
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        View your profile
       </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
     </div>
-
 
     <div class="divider"></div>
 
-
-    <div class="section-title">Invite friends</div>
-
+    <div class="section-title">Quick Access</div>
 
     <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-briefcase"></i> Professional Dashboard
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M2 12l1.5 1.5L6 11l3.5 3.5L14 10l5 5 3.5-3.5L22 12l-10 10z"/></svg>
+        Groups
       </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
     </div>
-
 
     <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-users"></i> Groups
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 6l3 1v13h12V7l3-1V4H3v2zm3 0h12v1H6V6z"/></svg>
+        Reels
       </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
     </div>
-
 
     <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-video"></i> Live Videos
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 3.87 7 13 7 13s7-9.13 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        Nearby
       </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
     </div>
-
-
-    <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-bookmark"></i> Saved
-      </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
-    </div>
-
-
-    <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-calendar-day"></i> Events
-      </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
-    </div>
-
-
-    <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-rss"></i> Feeds
-      </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
-    </div>
-
 
     <div class="divider"></div>
 
+    <div class="section-title">Settings</div>
 
-    <div class="section-title">Settings & privacy</div>
-
-
-    <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-cog"></i> Settings
+    <div class="menu-item logout">
+      <div class="item-left">
+        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-9v2h9v14h-9v2h9c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+        Logout
       </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
-    </div>
-
-
-    <div class="menu-item">
-      <div class="menu-item-left">
-        <i class="fas fa-shield-alt"></i> Privacy
-      </div>
-      <div class="menu-item-right"><i class="fas fa-chevron-right"></i></div>
-    </div>
-
-
-    <div class="divider"></div>
-
-
-    <div class="logout-section">
-      <i class="fas fa-sign-out-alt"></i> Logout
     </div>
   </div>
-
-
-  <script>
-    document.querySelectorAll('.menu-item').forEach(item => {
-      item.addEventListener('click', () => {
-        console.log('Clicked:', item.innerText.trim());
-        // Your navigation logic can go here
-      });
-    });
-
-
-    document.querySelector('.logout-section').addEventListener('click', () => {
-      console.log('Logout clicked');
-      alert('Logging out...');
-      // Redirect or logout logic here
-    });
-  </script>
-
 
 </body>
 </html>
