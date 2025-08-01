@@ -1,148 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook Menu Clone</title>
   <style>
-    * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-    }
-
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
-      color: #fff;
-      padding: 20px;
-    }
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      color: #050505;
+    }.container {
+  max-width: 450px;
+  margin: auto;
+  padding: 16px;
+  background-color: #fff;
+  min-height: 100vh;
+}
 
-    .menu-container {
-      max-width: 400px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-      overflow: hidden;
-      animation: slideIn 0.6s ease-out;
-    }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    @keyframes slideIn {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+.header-icons {
+  display: flex;
+  gap: 10px;
+}
 
-    .menu-header {
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      background: rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
+.profile-card,
+.menu-item,
+.logout-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
 
-    .menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .menu-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
+.profile-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
 
-    .menu-icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-      fill: #00bcd4;
-    }
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
 
-    .item-left {
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-    }
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
 
-    .section-title {
-      padding: 14px 20px 6px;
-      font-size: 14px;
-      text-transform: uppercase;
-      color: #aaa;
-    }
+.menu-item img {
+  width: 24px;
+  height: 24px;
+}
 
-    .divider {
-      height: 1px;
-      background: rgba(255, 255, 255, 0.08);
-      margin: 8px 0;
-    }
+.settings {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 12px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+}
 
-    .logout {
-      color: #ff5252;
-      font-weight: bold;
-    }
+.logout-section {
+  text-align: center;
+  padding: 16px;
+  background-color: #fff;
+  font-weight: bold;
+  color: #1877f2;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
   </style>
 </head>
 <body>
-
-  <div class="menu-container">
-    <div class="menu-header">Menu</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-9 1.7-9 5v2h18v-2c0-3.3-5.7-5-9-5z"/></svg>
-        Humayun Danish
+  <div class="container">
+    <div class="header">
+      <div>&larr; Menu</div>
+      <div class="header-icons">
+        <span>&#x21C5;</span>
+        <span>&#x1F50D;</span>
       </div>
-    </div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        View your profile
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="section-title">Quick Access</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M2 12l1.5 1.5L6 11l3.5 3.5L14 10l5 5 3.5-3.5L22 12l-10 10z"/></svg>
-        Groups
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 6l3 1v13h12V7l3-1V4H3v2zm3 0h12v1H6V6z"/></svg>
-        Reels
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 3.87 7 13 7 13s7-9.13 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-        Nearby
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="section-title">Settings</div>
-
-    <div class="menu-item logout">
-      <div class="item-left">
-        <svg class="menu-icon" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-9v2h9v14h-9v2h9c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
-        Logout
-      </div>
-    </div>
+    </div><div class="profile-card">
+  <img src="https://via.placeholder.com/48" alt="Profile">
+  <div>
+    <div><strong>Humayun Danish</strong></div>
+    <small>View your profile</small>
   </div>
+</div>
 
+<div class="menu-item">
+  <img src="https://img.icons8.com/emoji/48/heart-suit.png" alt="Invite">
+  Invite friends
+</div>
+
+<div class="menu-grid">
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/live-tv.png">Live videos</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/facebook-flag.png">Pages</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</div>
+  <div class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</div>
+</div>
+
+<div class="settings">
+  <img src="https://img.icons8.com/ios-filled/50/settings.png" width="20" />
+  Settings & privacy
+</div>
+
+<div class="logout-section">
+  Log out
+</div>
+
+  </div>
 </body>
 </html>
