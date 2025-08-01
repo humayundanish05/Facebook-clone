@@ -15,6 +15,7 @@
   padding: 16px;
   background-color: #fff;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .header {
@@ -26,31 +27,44 @@
   font-weight: bold;
 }
 
+.header a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header-icons {
   display: flex;
   gap: 10px;
 }
 
-.profile-card,
-.menu-item,
-.logout-section {
+.profile-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #fff;
-  border-radius: 12px;
   padding: 12px;
+  border-radius: 12px;
   margin-bottom: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.profile-card {
+.profile-info {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.profile-card img {
+.profile-info img {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+}
+
+.invite-friends {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .menu-grid {
@@ -59,7 +73,7 @@
   gap: 12px;
   width: 100%;
   box-sizing: border-box;
-
+  margin-bottom: 20px;
 }
 
 .menu-item {
@@ -68,6 +82,12 @@
   gap: 12px;
   font-size: 14px;
   font-weight: 500;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: inherit;
 }
 
 .menu-item img {
@@ -87,6 +107,10 @@
   cursor: pointer;
 }
 
+.settings img {
+  width: 20px;
+}
+
 .logout-section {
   text-align: center;
   padding: 16px;
@@ -101,50 +125,47 @@
 </head>
 <body>
   <div class="container">
-  <div class="header">
-    <a href="home.html" style="text-decoration: none; color: inherit;">
-      <div>&larr; Menu</div>
-    </a>
-    <div class="header-icons">
-      <span>&#x21C5;</span>
-      <span>&#x1F50D;</span>
-    </div>
-  </div>
-
-  <div class="profile-card">
+    <div class="header">
+      <a href="home.html">
+        <div>&larr; Menu</div>
+      </a>
+      <div class="header-icons">
+        <span>&#x21C5;</span>
+        <span>&#x1F50D;</span>
+      </div>
+    </div><div class="profile-section">
+  <div class="profile-info">
     <img src="user.jpg" alt="Profile">
-    <div>
-    
     <a href="profile.html" style="text-decoration: none; color: inherit;">
-  <div>
-    <strong>Humayun Danish</strong><br>
-    <small>View your profile</small>
-  </div>
+      <div>
+        <strong>Humayun Danish</strong><br>
+        <small>View your profile</small>
+      </div>
     </a>
-</div>
-
-<div class="menu-item">
-  <img src="https://img.icons8.com/emoji/48/heart-suit.png" alt="Invite">
-  Invite friends
+  </div>
+  <div class="invite-friends">
+    <img src="https://img.icons8.com/emoji/48/heart-suit.png" alt="Invite">
+    Invite friends
+  </div>
 </div>
 
 <div class="menu-grid">
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/live-tv.png">Live videos</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/facebook-flag.png">Pages</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</div>
-  <div class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</div>
+  <a href="dashboard.html" class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</a>
+  <a href="messages.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</a>
+  <a href="groups.html" class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</a>
+  <a href="reels.html" class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</a>
+  <a href="live.html" class="menu-item"><img src="https://img.icons8.com/color/48/live-tv.png">Live videos</a>
+  <a href="pages.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-flag.png">Pages</a>
+  <a href="saved.html" class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</a>
+  <a href="birthdays.html" class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</a>
+  <a href="events.html" class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</a>
+  <a href="verified.html" class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</a>
+  <a href="feeds.html" class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</a>
+  <a href="memories.html" class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</a>
 </div>
 
 <div class="settings">
-  <img src="https://img.icons8.com/ios-filled/50/settings.png" width="20" />
+  <img src="https://img.icons8.com/ios-filled/50/settings.png" alt="Settings" />
   Settings & privacy
 </div>
 
@@ -153,36 +174,5 @@
 </div>
 
   </div>
-  <script>
-  // Toggle settings dropdown
-  const settings = document.querySelector(".settings");
-  const logout = document.querySelector(".logout-section");
-
-  let settingsExpanded = false;
-
-  settings.addEventListener("click", () => {
-    if (!settingsExpanded) {
-      const dropdown = document.createElement("div");
-      dropdown.className = "logout-section";
-      dropdown.innerText = "Account Settings";
-      dropdown.style.marginTop = "8px";
-      dropdown.id = "dropdown-settings";
-      settings.insertAdjacentElement("afterend", dropdown);
-    } else {
-      const existing = document.getElementById("dropdown-settings");
-      if (existing) existing.remove();
-    }
-    settingsExpanded = !settingsExpanded;
-  });
-
-  // Log out confirmation
-  logout.addEventListener("click", () => {
-    const confirmLogout = confirm("Are you sure you want to log out?");
-    if (confirmLogout) {
-      alert("You have been logged out (fake action for demo).");
-      // Here you can redirect or clear session, etc.
-    }
-  });
-  </script>
 </body>
 </html>
