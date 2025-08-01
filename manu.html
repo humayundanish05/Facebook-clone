@@ -207,13 +207,15 @@
       Settings & privacy
     </div>
 
-    <div class="logout-section">
-      Log out
+    <div class="logout-section" onclick="handleLogout()">
+  Log out
     </div>
 
   </div>
 
   <script>
+
+    //search 
   const searchInput = document.getElementById('menu-search');
   const menuItems = document.querySelectorAll('.menu-item');
   const toggleBtn = document.getElementById('toggle-search');
@@ -231,7 +233,18 @@
       item.style.display = text.includes(query) ? 'flex' : 'none';
     });
   });
+
+    // logout loader 
+  function handleLogout() {
+    const logoutDiv = document.querySelector('.logout-section');
+    logoutDiv.innerHTML = '<span style="margin-right:8px;" class="loader"></span> Logging out...';
+    logoutDiv.style.pointerEvents = 'none'; // prevent multiple clicks
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+  } 
   </script>
   
 </body>
 </html>
+
