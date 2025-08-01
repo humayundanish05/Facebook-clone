@@ -1,11 +1,13 @@
- <!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facebook Menu Clone</title>
 
-</head>
-   <style>
+ 
+
+      <style>
   body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -135,8 +137,12 @@
     border-radius: 12px;
   }
    </style>
+  
+</head>
 <body>
   <div class="container">
+
+    <!-- Header -->
     <div class="header">
       <a href="home.html">
         <div>&larr; Menu</div>
@@ -145,47 +151,52 @@
         <span>&#x21C5;</span>
         <span>&#x1F50D;</span>
       </div>
+    </div> <!-- ✅ This closing div was missing -->
+
+    <!-- Profile Section -->
     <div class="profile-section">
-  <div class="profile-info">
-    <img src="user.jpg" alt="Profile">
-    <a href="profile.html" style="text-decoration: none; color: inherit;">
-      <div>
-        <strong>Humayun Danish</strong><br>
-        <small>View your profile</small>
+      <div class="profile-info">
+        <img src="user.jpg" alt="Profile">
+        <a href="profile.html" style="text-decoration: none; color: inherit;">
+          <div>
+            <strong>Humayun Danish</strong><br>
+            <small>View your profile</small>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-</div>
+    </div>
 
-<div class="invite-box">
-  <img src="https://img.icons8.com/emoji/48/heart-suit.png" />
-  Invite friends
-</div>
-</div>
+    <!-- Invite Friends Section -->
+    <div class="invite-box">
+      <img src="https://img.icons8.com/emoji/48/heart-suit.png" />
+      Invite friends
+    </div>
 
-<div class="menu-grid">
-  <a href="dashboard.html" class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</a>
-  <a href="messenger.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</a>
-  <a href="groups.html" class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</a>
-  <a href="watch.html" class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</a>
-  <a href="live.html" class="menu-item"><img src="https://img.icons8.com/color/48/live-tv.png">Live videos</a>
-  <a href="pages.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-flag.png">Pages</a>
-  <a href="saved.html" class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</a>
-  <a href="birthdays.html" class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</a>
-  <a href="events.html" class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</a>
-  <a href="verified.html" class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</a>
-  <a href="feeds.html" class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</a>
-  <a href="memories.html" class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</a>
-</div>
+    <!-- Menu Grid -->
+    <div class="menu-grid">
+      <a href="dashboard.html" class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</a>
+      <a href="messenger.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</a>
+      <a href="groups.html" class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</a>
+      <a href="watch.html" class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</a>
+      <a href="live.html" class="menu-item"><img src="https://img.icons8.com/color/48/live-tv.png">Live videos</a>
+      <a href="pages.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-flag.png">Pages</a>
+      <a href="saved.html" class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</a>
+      <a href="birthdays.html" class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</a>
+      <a href="events.html" class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</a>
+      <a href="verified.html" class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</a>
+      <a href="feeds.html" class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</a>
+      <a href="memories.html" class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</a>
+    </div>
 
-<div class="settings">
-  <img src="https://img.icons8.com/ios-filled/50/settings.png" alt="Settings" />
-  Settings & privacy
-</div>
+    <!-- Settings & Logout -->
+    <div class="settings">
+      <img src="https://img.icons8.com/ios-filled/50/settings.png" alt="Settings" />
+      Settings & privacy
+    </div>
 
-<div class="logout-section">
-  Log out
-</div>
+    <div class="logout-section">
+      Log out
+    </div>
 
   </div>
 </body>
