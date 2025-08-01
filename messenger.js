@@ -1,5 +1,6 @@
 let currentChatName = "User";
 // === New Chat Creation ===
+// === New Chat Creation ===
 const fab = document.querySelector(".fab");
 const modal = document.getElementById("newChatModal");
 const createBtn = document.getElementById("createChatBtn");
@@ -15,6 +16,8 @@ const avatarURLs = [
   "https://i.pravatar.cc/150?img=6"
 ];
 
+let savedChats = JSON.parse(localStorage.getItem("chats")) || [];
+
 fab.addEventListener("click", () => {
   modal.classList.remove("hidden");
   nameInput.value = "";
@@ -29,7 +32,16 @@ createBtn.addEventListener("click", () => {
   const name = nameInput.value.trim();
   if (!name) return alert("Please enter a name.");
 
+  // Prevent duplicate chat
+  if (savedChats.some(c => c.name === name)) {
+    return alert("Chat with this name already exists.");
+  }
+
   const avatar = avatarURLs[Math.floor(Math.random() * avatarURLs.length)];
+
+  const newChat = { name, avatar };
+  savedChats.push(newChat);
+  localStorage.setItem("chats", JSON.stringify(savedChats));
 
   const newMsg = document.createElement("div");
   newMsg.className = "message";
@@ -40,8 +52,6 @@ createBtn.addEventListener("click", () => {
       <span>Start your conversation</span>
     </div>
   `;
-
-  // Make new chat openable
   newMsg.addEventListener("click", () => openChatWindow(name, avatar));
   document.querySelector(".message-list").prepend(newMsg);
 
@@ -54,7 +64,21 @@ function openChatWindow(name, avatar) {
   document.getElementById("chat-name").textContent = name;
   document.querySelector(".chat-avatar").src = avatar;
 
-  messages.innerHTML = "";
+  // Load message history from localStorage
+  const chatMessages = document.getElementById("chatMessages");
+  chatMessages.innerHTML = "";
+  const history = JSON.parse(localStorage.getItem("chatHistory")) || {};
+  const messages = history[name] || [];
+
+  messages.forEach(msg => {
+    const div = document.createElement("div");
+    div.className = `message ${msg.type}`;
+    div.textContent = msg.text;
+    chatMessages.appendChild(div);
+  });
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
   document.querySelector(".chat-window").classList.remove("hidden");
   document.querySelector(".message-list").style.display = "none";
   fab.style.display = "none";
@@ -62,7 +86,6 @@ function openChatWindow(name, avatar) {
   document.querySelector(".info-row")?.classList.add("hidden");
   document.querySelector(".bottom-bar")?.classList.add("hidden");
 }
-
 // === Search filter === 
 document.getElementById('searchInput').addEventListener('input', function () { 
   const query = this.value.toLowerCase(); 
@@ -218,4 +241,5 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
