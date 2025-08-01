@@ -351,7 +351,7 @@ html, body {
   max-width: fit-content;
 }
 
-/* New Chat Modal */
+/* New Chat Modal --------------------- modified from here  */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -401,4 +401,8 @@ html, body {
 #createChatBtn {
   background: #1877f2;
   color: white;
+}
+
+.hidden {
+  display: none !important;
 }
