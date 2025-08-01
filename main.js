@@ -146,3 +146,39 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Date(isoString).toLocaleDateString();
   }
 });
+
+// greeting messages 
+  const hour = new Date().getHours();
+  let greeting = "";
+  let message = "";
+
+  if (hour >= 5 && hour < 9) {
+    greeting = "Good early morning";
+    message = "Hope you woke up refreshed ☕";
+  } else if (hour >= 9 && hour < 12) {
+    greeting = "Good morning";
+    message = "Let’s make today awesome!";
+  } else if (hour >= 12 && hour < 14) {
+    greeting = "Good noon";
+    message = "Perfect time for a little break 🍽️";
+  } else if (hour >= 14 && hour < 17) {
+    greeting = "Good afternoon";
+    message = "Keep crushing your goals 🔥";
+  } else if (hour >= 17 && hour < 20) {
+    greeting = "Good evening";
+    message = "Hope you had a productive day 💻";
+  } else if (hour >= 20 && hour < 24) {
+    greeting = "Good night";
+    message = "Time to relax and unwind 🌙";
+  } else {
+    greeting = "Still up?";
+    message = "Burning the midnight oil? 🕯️";
+  }
+
+  document.getElementById("greeting").innerHTML = `
+    <div>
+      <strong>${greeting}, Humayun!</strong><br />
+      <small>${message}</small>
+    </div>
+  `;
+
