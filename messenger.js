@@ -30,8 +30,6 @@ const avatarURLs = [
   "https://i.pravatar.cc/150?img=69", "https://i.pravatar.cc/150?img=70"
 ];
 
-const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
-
 
 //---------
 
@@ -269,6 +267,7 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
 
 
