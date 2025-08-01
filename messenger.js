@@ -1,6 +1,6 @@
 let currentChatName = "User";
-// === New Chat Creation ===
-// === New Chat Creation ===
+
+// === New Chat Creation + Local Storage Integration ===
 const fab = document.querySelector(".fab");
 const modal = document.getElementById("newChatModal");
 const createBtn = document.getElementById("createChatBtn");
@@ -32,41 +32,47 @@ createBtn.addEventListener("click", () => {
   const name = nameInput.value.trim();
   if (!name) return alert("Please enter a name.");
 
-  // Prevent duplicate chat
   if (savedChats.some(c => c.name === name)) {
     return alert("Chat with this name already exists.");
   }
 
   const avatar = avatarURLs[Math.floor(Math.random() * avatarURLs.length)];
-
   const newChat = { name, avatar };
   savedChats.push(newChat);
   localStorage.setItem("chats", JSON.stringify(savedChats));
 
-  const newMsg = document.createElement("div");
-  newMsg.className = "message";
-  newMsg.innerHTML = `
+  renderChatItem(newChat);
+  modal.classList.add("hidden");
+});
+
+function renderChatItem({ name, avatar }) {
+  const msg = document.createElement("div");
+  msg.className = "message";
+  msg.innerHTML = `
     <img src="${avatar}" />
     <div>
       <strong>${name}</strong><br/>
       <span>Start your conversation</span>
     </div>
   `;
-  newMsg.addEventListener("click", () => openChatWindow(name, avatar));
-  document.querySelector(".message-list").prepend(newMsg);
+  msg.addEventListener("click", () => openChatWindow(name, avatar));
+  document.querySelector(".message-list").prepend(msg);
+}
 
-  modal.classList.add("hidden");
+// === Load chats on page load ===
+window.addEventListener("DOMContentLoaded", () => {
+  savedChats.forEach(chat => renderChatItem(chat));
 });
 
-// Function to simulate clicking and opening a chat
+// === Function to open chat and load its messages ===
 function openChatWindow(name, avatar) {
   currentChatName = name;
   document.getElementById("chat-name").textContent = name;
   document.querySelector(".chat-avatar").src = avatar;
 
-  // Load message history from localStorage
   const chatMessages = document.getElementById("chatMessages");
   chatMessages.innerHTML = "";
+
   const history = JSON.parse(localStorage.getItem("chatHistory")) || {};
   const messages = history[name] || [];
 
@@ -86,6 +92,8 @@ function openChatWindow(name, avatar) {
   document.querySelector(".info-row")?.classList.add("hidden");
   document.querySelector(".bottom-bar")?.classList.add("hidden");
 }
+
+  
 // === Search filter === 
 document.getElementById('searchInput').addEventListener('input', function () { 
   const query = this.value.toLowerCase(); 
@@ -241,5 +249,6 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
 
