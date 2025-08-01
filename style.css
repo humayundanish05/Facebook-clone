@@ -489,7 +489,8 @@ body, html {
   cursor: pointer;
   font-size: 14px;
 }
-
+  
+/* greeting messages*/
   .greeting-box {
   display: flex;
   align-items: center;
