@@ -1,128 +1,140 @@
-<!DOCTYPE html><html lang="en">
+ <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facebook Menu Clone</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f2f5;
-      color: #050505;
-    }.container {
-  max-width: 450px;
-  margin: auto;
-  padding: 16px;
-  background-color: #fff;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.header a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.header-icons {
-  display: flex;
-  gap: 10px;
-}
-
-.profile-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.profile-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.profile-info img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-}
-
-.invite-friends {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  text-decoration: none;
-  color: inherit;
-}
-
-.menu-item img {
-  width: 24px;
-  height: 24px;
-}
-
-.settings {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  font-size: 15px;
-  padding: 12px;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  cursor: pointer;
-}
-
-.settings img {
-  width: 20px;
-}
-
-.logout-section {
-  text-align: center;
-  padding: 16px;
-  background-color: #fff;
-  font-weight: bold;
-  color: #1877f2;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
-  </style>
 </head>
+   <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    color: #050505;
+  }
+
+  .container {
+    max-width: 450px;
+    margin: auto;
+    padding: 16px;
+    background-color: #fff;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .header a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .profile-info img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .invite-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .invite-box img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .menu-item img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .settings {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+  }
+
+  .settings img {
+    width: 20px;
+  }
+
+  .logout-section {
+    text-align: center;
+    padding: 16px;
+    background-color: #fff;
+    font-weight: bold;
+    color: #1877f2;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+   </style>
 <body>
   <div class="container">
     <div class="header">
@@ -133,7 +145,7 @@
         <span>&#x21C5;</span>
         <span>&#x1F50D;</span>
       </div>
-    </div><div class="profile-section">
+    <div class="profile-section">
   <div class="profile-info">
     <img src="user.jpg" alt="Profile">
     <a href="profile.html" style="text-decoration: none; color: inherit;">
@@ -143,10 +155,12 @@
       </div>
     </a>
   </div>
-  <div class="invite-friends">
-    <img src="https://img.icons8.com/emoji/48/heart-suit.png" alt="Invite">
-    Invite friends
-  </div>
+</div>
+
+<div class="invite-box">
+  <img src="https://img.icons8.com/emoji/48/heart-suit.png" />
+  Invite friends
+</div>
 </div>
 
 <div class="menu-grid">
