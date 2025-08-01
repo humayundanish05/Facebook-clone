@@ -6,17 +6,12 @@ const modal = document.getElementById("newChatModal");
 const createBtn = document.getElementById("createChatBtn");
 const cancelBtn = document.getElementById("cancelChatBtn");
 const nameInput = document.getElementById("newChatName");
-
-const avatarURLs = [
-  "https://i.pravatar.cc/150?img=1",
-  "https://i.pravatar.cc/150?img=2",
-  "https://i.pravatar.cc/150?img=3",
-  "https://i.pravatar.cc/150?img=4",
-  "https://i.pravatar.cc/150?img=5",
-  "https://i.pravatar.cc/150?img=6"
-];
+//pick random avatar for new generated chats 
+const randomAvatar = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70) + 1}`;
+//---------
 
 let savedChats = JSON.parse(localStorage.getItem("chats")) || [];
+
 
 fab.addEventListener("click", () => {
   modal.classList.remove("hidden");
@@ -249,6 +244,7 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
 
 
