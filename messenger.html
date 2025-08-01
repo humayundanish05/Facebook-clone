@@ -148,9 +148,21 @@
 
 <!-- Floating Add Button -->
 <button class="fab" title="Start new chat">+</button>
+  <!-- New Chat Modal -->
+<div class="modal-overlay hidden" id="newChatModal">
+  <div class="modal">
+    <h3>Start New Chat</h3>
+    <input type="text" id="newChatName" placeholder="Enter name" />
+    <div class="modal-buttons">
+      <button id="createChatBtn">Create</button>
+      <button id="cancelChatBtn">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <!-- JS Script -->
 <script src="messenger.js"></script>
 
 </body>
 </html>
+
