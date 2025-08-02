@@ -106,7 +106,7 @@ html, body {
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #f0f0f0;
-
+}
 
 .message img {
   width: 45px;
@@ -419,6 +419,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
