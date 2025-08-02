@@ -107,7 +107,7 @@ html, body {
   display: flex;
   align-items: center;
   padding: 10px 0;
-  border-bo/* Story Bar */
+  border-bottom: 1px solid #f0f0f0;
 
 
 .message img {
@@ -421,5 +421,6 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
