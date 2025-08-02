@@ -61,23 +61,6 @@ html, body {
   font-size: 14px;
 }
 
-/* Story Bar */
-.story-bar {
-  display: flex;
-  overflow-x: auto;
-  background: #fff;
-  padding: 10px;
-  gap: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.story {
-  background: #e4e6eb;
-  padding: 8px 12px;
-  border-radius: 20px;
-  white-space: nowrap;
-  font-size: 14px;
-}
 
 /* Message List */
 .message-list {
@@ -91,7 +74,36 @@ html, body {
   display: flex;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bo/* Story Bar */
+.story-bar {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
+  background: #fff;
+  gap: 10px;
+  border-bottom: 1px solid #ccc;
+  scroll-snap-type: x mandatory;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+  scroll-snap-align: start;
+  text-align: center;
+  font-size: 12px;
+  color: #000;
+}
+
+.story img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1877f2; /* Optional blue border like Facebook */
+  margin-bottom: 5px;
+}ttom: 1px solid #f0f0f0;
   gap: 10px;
 }
 
@@ -406,3 +418,4 @@ html, body {
 .hidden {
   display: none !important;
 }
+
