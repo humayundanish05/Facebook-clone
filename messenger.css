@@ -91,8 +91,6 @@ html, body {
   object-fit: cover;
   border: 2px solid #1877f2; /* Optional blue border like Facebook */
   margin-bottom: 5px;
-}ttom: 1px solid #f0f0f0;
-  gap: 10px;
 }
 
 /* Message List */
@@ -421,6 +419,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
