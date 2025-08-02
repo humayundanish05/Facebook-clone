@@ -62,19 +62,7 @@ html, body {
 }
 
 
-/* Message List */
-.message-list {
-  overflow-y: auto;
-  height: calc(100vh - 180px); /* Adjusted height */
-  background: white;
-  padding: 10px;
-}
-
-.message {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  border-bo/* Story Bar */
+/* story */
 .story-bar {
   display: flex;
   overflow-x: auto;
@@ -106,6 +94,21 @@ html, body {
 }ttom: 1px solid #f0f0f0;
   gap: 10px;
 }
+
+/* Message List */
+.message-list {
+  overflow-y: auto;
+  height: calc(100vh - 180px); /* Adjusted height */
+  background: white;
+  padding: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bo/* Story Bar */
+
 
 .message img {
   width: 45px;
@@ -418,4 +421,5 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
