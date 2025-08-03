@@ -36,7 +36,7 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "che na saroona de hagha sang-e-marmar la na ze😒"
   }
-  
+
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
@@ -147,7 +147,6 @@ function handlePlayback() {
     if (visible) {
       video.play().catch(() => {});
 
-      // If user has manually unmuted one video, unmute others too
       if (userUnmuted) {
         video.muted = false;
       }
@@ -174,6 +173,11 @@ function adjustVideoSize() {
   reels.forEach(video => {
     video.style.height = height + 'px';
     video.style.width = width + 'px';
+    video.style.objectFit = 'cover'; // Ensures it fills the screen perfectly
+    video.style.objectPosition = 'center'; // Ensures center alignment
+    video.style.display = 'block'; // Prevent inline whitespace
+    video.style.margin = '0';
+    video.style.padding = '0';
   });
 }
 
