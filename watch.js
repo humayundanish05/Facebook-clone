@@ -56,12 +56,17 @@ function createReel(reel) {
     </div>
 
     <div class="reel-actions">
-      <button><i class="fas fa-heart"></i></button>
-      <button><i class="fas fa-comment"></i></button>
-      <button><i class="fas fa-share"></i></button>
-      <button><i class="fas fa-bookmark"></i></button>
-      <button><i class="fas fa-ellipsis-v"></i></button>
-    </div>
+  <button class="like-btn"><i class="fas fa-heart"></i></button>
+  <button class="comment-btn"><i class="fas fa-comment"></i></button>
+  <button class="share-btn" title="Share this reel" aria-label="Share"><i class="fas fa-share"></i></button>
+  <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+  <button class="more-btn"><i class="fas fa-ellipsis-v"></i></button>
+</div>
+
+ 
+<div id="copyMessage" class="copy-message">
+  <i class="fas fa-check-circle"></i> Link copied to clipboard
+</div>
 
     <div class="reel-info">
   <div class="user-row">
@@ -267,6 +272,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
