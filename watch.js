@@ -75,62 +75,77 @@ function createReel(reel) {
   reelsWrapper.appendChild(container);
 
   setTimeout(() => {
-    const video = container.querySelector("video");
-    const controls = container.querySelector(".center-controls");
-    const rewindBtn = controls.querySelector(".rewind");
-    const forwardBtn = controls.querySelector(".forward");
-    const toggleBtn = controls.querySelector(".toggle-play");
-    let hideTimeout;
+  const video = container.querySelector("video");
+  const controls = container.querySelector(".center-controls");
+  const rewindBtn = controls.querySelector(".rewind");
+  const forwardBtn = controls.querySelector(".forward");
+  const toggleBtn = controls.querySelector(".toggle-play");
+  let hideTimeout;
 
+  // Show controls for 2s on load
+  controls.classList.remove("hidden");
+  hideTimeout = setTimeout(() => {
+    controls.classList.add("hidden");
+  }, 2000);
+
+  // 👆 Show/hide controls on video click
+  video.addEventListener("click", () => {
+    // Pause all other videos and mute them
+    document.querySelectorAll("video").forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.muted = true;
+      }
+    });
+
+    // Unmute and play current video
+    video.muted = false;
+    if (video.paused) {
+      video.play().catch(err => console.warn("Play error:", err));
+      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+
+    // Show controls and reset hide timer
     controls.classList.remove("hidden");
+    clearTimeout(hideTimeout);
     hideTimeout = setTimeout(() => {
       controls.classList.add("hidden");
-    }, 1500);
+    }, 2000);
+  });
 
-    video.addEventListener("click", () => {
-      document.querySelectorAll("video").forEach(v => {
-        if (v !== video) {
-          v.pause();
-          v.muted = true;
-        }
-      });
+  // 👆 Optional: Also show controls on mouse move
+  video.addEventListener("mousemove", () => {
+    controls.classList.remove("hidden");
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      controls.classList.add("hidden");
+    }, 2000);
+  });
 
-      video.muted = false;
-      userUnmuted = true;
+  // Rewind button
+  rewindBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.max(video.currentTime - 5, 0);
+  });
 
-      if (video.paused) {
-        video.play().catch(err => console.warn("Play error:", err));
-      }
+  // Forward button
+  forwardBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.min(video.currentTime + 5, video.duration);
+  });
 
-      controls.classList.remove("hidden");
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        controls.classList.add("hidden");
-      }, 1500);
-    });
-
-    rewindBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.max(video.currentTime - 5, 0);
-    });
-
-    forwardBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.min(video.currentTime + 5, video.duration);
-    });
-
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (video.paused) {
-        video.play();
-        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        video.pause();
-        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-      }
-    });
-  }, 0);
-}
+  // Play/Pause toggle button
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play();
+      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      video.pause();
+      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  });
+}, 0);
 
 // Create all reels
 reelsData.forEach(createReel);
@@ -179,4 +194,5 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
