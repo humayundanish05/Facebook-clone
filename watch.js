@@ -82,7 +82,7 @@ setTimeout(() => {
   const toggleBtn = controls.querySelector(".toggle-play");
   let hideTimeout;
 
-  // 👁️‍🗨️ Utility function to show & auto-hide controls
+// Utility function to show & auto-hide controls
 function showControlsTemporarily() {
   controls.classList.add("visible");
   clearTimeout(hideTimeout);
@@ -91,29 +91,31 @@ function showControlsTemporarily() {
   }, 2000);
 }
 
-  // 🔁 Auto-hide after initial load
-  showControlsTemporarily();
+// Show controls for 2s on load
+showControlsTemporarily();
 
-  // 👆 Click unmute & show controls
-  video.addEventListener("click", () => {
-    document.querySelectorAll("video").forEach(v => {
-      if (v !== video) {
-        v.pause();
-        v.muted = true;
-      }
-    });
-
-    video.muted = false;
-    if (video.paused) {
-      video.play().catch(err => console.warn("Play error:", err));
-      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+// Show controls on click
+video.addEventListener("click", () => {
+  // Pause other videos and mute them
+  document.querySelectorAll("video").forEach(v => {
+    if (v !== video) {
+      v.pause();
+      v.muted = true;
     }
-
-    showControlsTemporarily();
   });
 
-  // 🖱️ Mouse move re-shows controls
-  video.addEventListener("mousemove", showControlsTemporarily);
+  // Unmute and play current video
+  video.muted = false;
+  if (video.paused) {
+    video.play().catch(err => console.warn("Play error:", err));
+    toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  }
+
+  showControlsTemporarily();
+});
+
+// Also trigger on mousemove (optional)
+video.addEventListener("mousemove", showControlsTemporarily);
 
   // 🎛️ Rewind
   rewindBtn.addEventListener("click", (e) => {
@@ -191,4 +193,5 @@ window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
 });
+
 
