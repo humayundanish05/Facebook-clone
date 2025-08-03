@@ -70,7 +70,7 @@ function createReel(reel) {
   </div>
   <p class="description">${reel.description}</p>
 </div>
-
+`;
   reelsWrapper.appendChild(container);
 
   setTimeout(() => {
@@ -191,4 +191,5 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
