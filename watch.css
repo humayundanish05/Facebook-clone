@@ -90,7 +90,7 @@ body {
 .reel-container video {
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
+  bject-fit: contain;
   object-position: center;
   display: block;
   position: absolute;
@@ -203,3 +203,4 @@ body {
   color: #ddd;
   margin-top: 5px;
 }
+
