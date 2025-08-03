@@ -159,7 +159,7 @@ setTimeout(() => {
     liked = !liked;
   });
 }, 0);
-    
+}   
 
 // Create all reels
 reelsData.forEach(createReel);
@@ -212,6 +212,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
