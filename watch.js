@@ -1,5 +1,4 @@
 const reelsData = [
-
   {
     video: "video1.mp4",
     avatar: "user.jpg",
@@ -36,7 +35,6 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "che na saroona de hagha sang-e-marmar la na ze😒"
   }
-  
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
@@ -73,78 +71,73 @@ function createReel(reel) {
   `;
 
   reelsWrapper.appendChild(container);
-  
-setTimeout(() => {
-  const video = container.querySelector("video");
-  const controls = container.querySelector(".center-controls");
-  const rewindBtn = controls.querySelector(".rewind");
-  const forwardBtn = controls.querySelector(".forward");
-  const toggleBtn = controls.querySelector(".toggle-play");
-  let hideTimeout;
 
-  // Show controls for 2s on load
-  controls.classList.remove("hidden");
-  hideTimeout = setTimeout(() => {
-    controls.classList.add("hidden");
-  }, 2000);
+  setTimeout(() => {
+    const video = container.querySelector("video");
+    const controls = container.querySelector(".center-controls");
+    const rewindBtn = controls.querySelector(".rewind");
+    const forwardBtn = controls.querySelector(".forward");
+    const toggleBtn = controls.querySelector(".toggle-play");
+    let hideTimeout;
 
-  // Show controls on click or mouse move
-  const showControls = () => {
+    // Show controls for 2s initially
     controls.classList.remove("hidden");
-    clearTimeout(hideTimeout);
     hideTimeout = setTimeout(() => {
       controls.classList.add("hidden");
     }, 2000);
-  };
 
-  video.addEventListener("click", () => {
-    // Pause other videos and mute them
-    document.querySelectorAll("video").forEach(v => {
-      if (v !== video) {
-        v.pause();
-        v.muted = true;
+    const showControls = () => {
+      controls.classList.remove("hidden");
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        controls.classList.add("hidden");
+      }, 2000);
+    };
+
+    video.addEventListener("click", () => {
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.muted = true;
+        }
+      });
+
+      userUnmuted = true; // ✅ Mark that user unmuted a video
+
+      video.muted = false;
+      if (video.paused) {
+        video.play().catch(err => console.warn("Play error:", err));
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
       }
+
+      showControls();
     });
 
-    // Unmute and play current video
-    video.muted = false;
-    if (video.paused) {
-      video.play().catch(err => console.warn("Play error:", err));
-      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
+    video.addEventListener("mousemove", showControls);
 
-    showControls();
-  });
+    rewindBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.max(video.currentTime - 5, 0);
+    });
 
-  video.addEventListener("mousemove", showControls);
+    forwardBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.min(video.currentTime + 5, video.duration);
+    });
 
-  rewindBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.max(video.currentTime - 5, 0);
-  });
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        video.pause();
+        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  }, 0);
+}
 
-  forwardBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.min(video.currentTime + 5, video.duration);
-  });
-
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (video.paused) {
-      video.play();
-      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-      video.pause();
-      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-  });
-}, 0);
-  
-
-// Create all reels
-reelsData.forEach(createReel);
-
-// Playback based on scroll visibility
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
 
@@ -155,9 +148,8 @@ function handlePlayback() {
     if (visible) {
       video.play().catch(() => {});
 
-      // If user has manually unmuted one video, unmute others too
       if (userUnmuted) {
-        video.muted = false;
+        video.muted = false; // ✅ Auto unmute future videos after first manual unmute
       }
     } else {
       video.pause();
@@ -166,14 +158,6 @@ function handlePlayback() {
   });
 }
 
-// Scroll and resize events
-window.addEventListener("load", handlePlayback);
-window.addEventListener("resize", handlePlayback);
-document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
-  setTimeout(handlePlayback, 100);
-});
-
-// Adjust video size to full screen
 function adjustVideoSize() {
   const reels = document.querySelectorAll('.reel-container video');
   const height = window.innerHeight;
@@ -189,5 +173,12 @@ adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
 
+// ✅ Create reels only after sizing
+reelsData.forEach(createReel);
 
-
+// ✅ Scroll & visibility
+window.addEventListener("load", handlePlayback);
+window.addEventListener("resize", handlePlayback);
+document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
+  setTimeout(handlePlayback, 100);
+});
