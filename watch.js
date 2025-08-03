@@ -72,71 +72,80 @@ function createReel(reel) {
 
   reelsWrapper.appendChild(container);
 
-  setTimeout(() => {
-    const video = container.querySelector("video");
-    const controls = container.querySelector(".center-controls");
-    const rewindBtn = controls.querySelector(".rewind");
-    const forwardBtn = controls.querySelector(".forward");
-    const toggleBtn = controls.querySelector(".toggle-play");
-    let hideTimeout;
+//--------------&
 
-    // Show controls for 2s initially
-    controls.classList.remove("hidden");
-    hideTimeout = setTimeout(() => {
-      controls.classList.add("hidden");
-    }, 2000);
+setTimeout(() => {
+  const video = container.querySelector("video");
+  const controls = container.querySelector(".center-controls");
+  const rewindBtn = controls.querySelector(".rewind");
+  const forwardBtn = controls.querySelector(".forward");
+  const toggleBtn = controls.querySelector(".toggle-play");
+  let hideTimeout;
 
-    const showControls = () => {
-      controls.classList.remove("hidden");
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        controls.classList.add("hidden");
-      }, 2000);
-    };
-
-    video.addEventListener("click", () => {
-      document.querySelectorAll("video").forEach(v => {
-        if (v !== video) {
-          v.pause();
-          v.muted = true;
-        }
-      });
-
-      userUnmuted = true; // ✅ Mark that user unmuted a video
-
-      video.muted = false;
-      if (video.paused) {
-        video.play().catch(err => console.warn("Play error:", err));
-        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      }
-
-      showControls();
-    });
-
-    video.addEventListener("mousemove", showControls);
-
-    rewindBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.max(video.currentTime - 5, 0);
-    });
-
-    forwardBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.min(video.currentTime + 5, video.duration);
-    });
-
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (video.paused) {
-        video.play();
-        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        video.pause();
-        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-      }
-    });
-  }, 0);
+  // 👁️‍🗨️ Utility function to show & auto-hide controls
+function showControlsTemporarily() {
+  controls.classList.add("visible");
+  clearTimeout(hideTimeout);
+  hideTimeout = setTimeout(() => {
+    controls.classList.remove("visible");
+  }, 2000);
 }
+
+  // 🔁 Auto-hide after initial load
+  showControlsTemporarily();
+
+  // 👆 Click unmute & show controls
+  video.addEventListener("click", () => {
+    document.querySelectorAll("video").forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.muted = true;
+      }
+    });
+
+    video.muted = false;
+    if (video.paused) {
+      video.play().catch(err => console.warn("Play error:", err));
+      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+
+    showControlsTemporarily();
+  });
+
+  // 🖱️ Mouse move re-shows controls
+  video.addEventListener("mousemove", showControlsTemporarily);
+
+  // 🎛️ Rewind
+  rewindBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.max(video.currentTime - 5, 0);
+    showControlsTemporarily();
+  });
+
+  // ⏩ Forward
+  forwardBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.min(video.currentTime + 5, video.duration);
+    showControlsTemporarily();
+  });
+
+  // ⏯️ Toggle Play
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play();
+      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      video.pause();
+      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+    showControlsTemporarily();
+  });
+}, 0);
+
+  
+
+  //---------------
 
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
@@ -182,3 +191,4 @@ window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
 });
+
