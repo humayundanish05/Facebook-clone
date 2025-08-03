@@ -139,25 +139,33 @@ setTimeout(() => {
       toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
     }
   });
+// ❤️ Double-click to show big heart and like
+const heartIcon = container.querySelector(".fa-heart");
+const heartBtn = heartIcon.closest("button");
+let liked = false;
 
-  // ❤️ Double-click to show big heart and like
-  video.addEventListener("dblclick", (e) => {
-    // Create heart element
-    const heart = document.createElement("i");
-    heart.className = "fas fa-heart big-heart";
-    heart.style.left = `${e.clientX}px`;
-    heart.style.top = `${e.clientY}px`;
+video.addEventListener("dblclick", (e) => {
+  const heart = document.createElement("i");
+  heart.className = "fas fa-heart big-heart";
+  heart.style.left = `${e.clientX}px`;
+  heart.style.top = `${e.clientY}px`;
 
-    container.appendChild(heart);
+  container.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 1000);
+  setTimeout(() => {
+    heart.remove();
+  }, 1000);
 
-    // Toggle heart icon color
-    heartIcon.style.color = liked ? "#fff" : "red";
-    liked = !liked;
-  });
+  liked = true;
+  heartIcon.style.color = "red";
+});
+
+// ❤️ Click on heart icon to toggle like/unlike
+heartBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // stop from triggering video click
+  liked = !liked;
+  heartIcon.style.color = liked ? "red" : "#fff";
+});
 }, 0);
 }   
 
@@ -212,6 +220,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
