@@ -46,41 +46,55 @@ function createReel(reel) {
   const container = document.createElement("div");
   container.className = "reel-container";
 
-  container.innerHTML = `
-    <video src="${reel.video}" autoplay loop muted playsinline></video>
+    //----------html
+    container.innerHTML = `
+  <video src="${reel.video}" autoplay loop muted playsinline></video>
 
-    <div class="center-controls">
-      <button class="rewind"><i class="fas fa-undo"></i></button>
-      <button class="toggle-play"><i class="fas fa-pause"></i></button>
-      <button class="forward"><i class="fas fa-redo"></i></button>
-    </div>
-
-    <div class="reel-actions">
-  <button class="like-btn"><i class="fas fa-heart"></i></button>
-  <button class="comment-btn"><i class="fas fa-comment"></i></button>
-  <button class="share-btn" title="Share this reel" aria-label="Share"><i class="fas fa-share"></i></button>
-  <button class="save-btn"><i class="fas fa-bookmark"></i></button>
-  <button class="more-btn"><i class="fas fa-ellipsis-v"></i></button>
-</div>
-
- 
-<div id="copyMessage" class="copy-message">
-  <i class="fas fa-check-circle"></i> Link copied to clipboard, <br>
-  share with friends 😉
-</div>
-<div id="saveMessage" class="save-message">
-  <i class="fas fa-check-circle"></i>
-  <span>Saved to your collection</span>
-</div>
-
-    <div class="reel-info">
-  <div class="user-row">
-    <a href="profile.html"><img src="${reel.avatar}" class="avatar"></a>
-    <a href="profile.html" class="username">${reel.username}</a>
+  <div class="center-controls">
+    <button class="rewind"><i class="fas fa-undo"></i></button>
+    <button class="toggle-play"><i class="fas fa-pause"></i></button>
+    <button class="forward"><i class="fas fa-redo"></i></button>
   </div>
-  <p class="description">${reel.description}</p>
-</div>
+
+  <div class="reel-actions">
+    <button class="like-btn"><i class="fas fa-heart"></i></button>
+    <button class="comment-btn"><i class="fas fa-comment"></i></button>
+    <button class="share-btn" title="Share this reel" aria-label="Share"><i class="fas fa-share"></i></button>
+    <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+    <button class="more-btn"><i class="fas fa-ellipsis-v"></i></button>
+  </div>
+
+  <div class="more-menu hidden">
+    <button class="download-option"><i class="fas fa-download"></i> Download</button>
+    <button class="not-interested-option"><i class="fas fa-ban"></i> Not Interested</button>
+  </div>
+
+  <div class="reel-info">
+    <div class="user-row">
+      <a href="profile.html"><img src="${reel.avatar}" class="avatar"></a>
+      <a href="profile.html" class="username">${reel.username}</a>
+    </div>
+    <p class="description">${reel.description}</p>
+  </div>
+
+  <div id="copyMessage" class="copy-message">
+    <i class="fas fa-check-circle"></i> Link copied to clipboard,<br>share with friends 😉
+  </div>
+
+  <div id="saveMessage" class="save-message">
+    <i class="fas fa-check-circle"></i>
+    <span>Saved to your collection</span>
+  </div>
+
+  <div id="feedbackMessage" class="save-message">
+    <i class="fas fa-check-circle"></i>
+    <span>Thanks! We’ll show you fewer videos like this.</span>
+  </div>
 `;
+
+
+
+    
   reelsWrapper.appendChild(container);
 
 setTimeout(() => {
@@ -244,6 +258,49 @@ saveBtn.addEventListener("click", (e) => {
     saveMessage.classList.remove("show");
   }, 2000);
 });
+
+    // more button 
+
+const moreBtn = container.querySelector(".more-btn");
+const moreMenu = container.querySelector(".more-menu");
+const downloadBtn = container.querySelector(".download-option");
+const notInterestedBtn = container.querySelector(".not-interested-option");
+const feedbackMessage = document.getElementById("feedbackMessage");
+
+moreBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  moreMenu.classList.toggle("hidden");
+});
+
+// Hide menu if clicked outside
+document.addEventListener("click", () => {
+  moreMenu.classList.add("hidden");
+});
+
+// 🚀 Download
+downloadBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const videoURL = video.src;
+  const a = document.createElement("a");
+  a.href = videoURL;
+  a.download = "video.mp4";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  moreMenu.classList.add("hidden");
+});
+
+// 🚫 Not Interested
+notInterestedBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  moreMenu.classList.add("hidden");
+
+  feedbackMessage.querySelector("span").textContent = "Thanks! We’ll show you fewer videos like this.";
+  feedbackMessage.classList.add("show");
+  setTimeout(() => {
+    feedbackMessage.classList.remove("show");
+  }, 2000);
+});
     
     
 }, 0);
@@ -299,6 +356,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
