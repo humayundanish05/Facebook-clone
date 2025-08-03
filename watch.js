@@ -80,9 +80,12 @@ setTimeout(() => {
   const forwardBtn = controls.querySelector(".forward");
   const toggleBtn = controls.querySelector(".toggle-play");
   const heartIcon = container.querySelector(".fa-heart");
+  const heartBtn = heartIcon.closest("button");
+
   let hideTimeout;
   let liked = false;
 
+  // 👇 Show center controls for 2s
   function showControlsTemporarily() {
     controls.classList.add("visible");
     clearTimeout(hideTimeout);
@@ -111,13 +114,8 @@ setTimeout(() => {
     showControlsTemporarily();
   });
 
-  video.addEventListener("mousemove", () => {
-    showControlsTemporarily();
-  });
-
-  video.addEventListener("touchstart", () => {
-    showControlsTemporarily();
-  });
+  video.addEventListener("mousemove", showControlsTemporarily);
+  video.addEventListener("touchstart", showControlsTemporarily);
 
   rewindBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -139,35 +137,32 @@ setTimeout(() => {
       toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
     }
   });
-// ❤️ Double-click to show big heart and like
-const heartIcon = container.querySelector(".fa-heart");
-const heartBtn = heartIcon.closest("button");
 
-video.addEventListener("dblclick", (e) => {
-  const heart = document.createElement("i");
-  heart.className = "fas fa-heart big-heart";
-  heart.style.left = `${e.clientX}px`;
-  heart.style.top = `${e.clientY}px`;
+  // ❤️ Double-click to show big heart and like
+  video.addEventListener("dblclick", (e) => {
+    const heart = document.createElement("i");
+    heart.className = "fas fa-heart big-heart";
+    heart.style.left = `${e.clientX}px`;
+    heart.style.top = `${e.clientY}px`;
+    container.appendChild(heart);
 
-  container.appendChild(heart);
+    setTimeout(() => {
+      heart.remove();
+    }, 1000);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 1000);
-
-  liked = true;
-  heartIcon.style.color = "red";
-});
-
-// ❤️ Click on heart icon to toggle like/unlike
-heartBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // stop from triggering video click
-  liked = !liked;
-  heartIcon.style.color = liked ? "red" : "#fff";
+    liked = true;
+    heartIcon.style.color = "red";
   });
- }, 0);
-}   
 
+  // ❤️ Click on heart icon to toggle like/unlike
+  heartBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    liked = !liked;
+    heartIcon.style.color = liked ? "red" : "#fff";
+  });
+
+}, 0);
+}
 // Create all reels
 reelsData.forEach(createReel);
 
@@ -219,6 +214,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
