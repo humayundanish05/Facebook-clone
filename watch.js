@@ -72,7 +72,6 @@ function createReel(reel) {
 </div>
 `;
   reelsWrapper.appendChild(container);
-//_______________________
 
 setTimeout(() => {
   const video = container.querySelector("video");
@@ -213,6 +212,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
