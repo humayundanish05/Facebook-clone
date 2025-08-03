@@ -75,63 +75,75 @@ function createReel(reel) {
   reelsWrapper.appendChild(container);
 
   setTimeout(() => {
-    const video = container.querySelector("video");
-    const controls = container.querySelector(".center-controls");
-    const rewindBtn = controls.querySelector(".rewind");
-    const forwardBtn = controls.querySelector(".forward");
-    const toggleBtn = controls.querySelector(".toggle-play");
-    let hideTimeout;
+  const video = container.querySelector("video");
+  const controls = container.querySelector(".center-controls");
+  const rewindBtn = controls.querySelector(".rewind");
+  const forwardBtn = controls.querySelector(".forward");
+  const toggleBtn = controls.querySelector(".toggle-play");
+  let hideTimeout;
 
-    controls.classList.remove("hidden");
+  // Function to show and auto-hide controls
+  function showControlsTemporarily() {
+    controls.classList.add("visible");
+    clearTimeout(hideTimeout);
     hideTimeout = setTimeout(() => {
-      controls.classList.add("hidden");
-    }, 1500);
+      controls.classList.remove("visible");
+    }, 2000); // ⏱️ 2 seconds
+  }
 
-    video.addEventListener("click", () => {
-      document.querySelectorAll("video").forEach(v => {
-        if (v !== video) {
-          v.pause();
-          v.muted = true;
-        }
-      });
+  // Show on load
+  showControlsTemporarily();
 
-      video.muted = false;
-      userUnmuted = true;
-
-      if (video.paused) {
-        video.play().catch(err => console.warn("Play error:", err));
-      }
-
-      controls.classList.remove("hidden");
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        controls.classList.add("hidden");
-      }, 1500);
-    });
-
-    rewindBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.max(video.currentTime - 5, 0);
-    });
-
-    forwardBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.currentTime = Math.min(video.currentTime + 5, video.duration);
-    });
-
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (video.paused) {
-        video.play();
-        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        video.pause();
-        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+  // Show on video click
+  video.addEventListener("click", () => {
+    document.querySelectorAll("video").forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.muted = true;
       }
     });
-  }, 0);
-}
 
+    video.muted = false;
+    userUnmuted = true;
+
+    if (video.paused) {
+      video.play().catch(err => console.warn("Play error:", err));
+    }
+
+    showControlsTemporarily();
+  });
+
+  // Show on mouse move (desktop)
+  video.addEventListener("mousemove", () => {
+    showControlsTemporarily();
+  });
+
+  // Touch move (mobile)
+  video.addEventListener("touchstart", () => {
+    showControlsTemporarily();
+  });
+
+  rewindBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.max(video.currentTime - 5, 0);
+  });
+
+  forwardBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.currentTime = Math.min(video.currentTime + 5, video.duration);
+  });
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play();
+      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      video.pause();
+      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  });
+}, 0);
 
 // Create all reels
 reelsData.forEach(createReel);
@@ -184,3 +196,4 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
