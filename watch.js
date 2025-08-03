@@ -14,6 +14,7 @@ const reelsData = [
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
+let userUnmuted = false;
 
 function createReel(reel) {
   const container = document.createElement("div");
@@ -55,15 +56,12 @@ function createReel(reel) {
     const toggleBtn = controls.querySelector(".toggle-play");
     let hideTimeout;
 
-    // Show controls on load for 1.5s
     controls.classList.remove("hidden");
     hideTimeout = setTimeout(() => {
       controls.classList.add("hidden");
     }, 1500);
 
-    // Show controls on video click
     video.addEventListener("click", () => {
-      // Pause others and unmute this one
       document.querySelectorAll("video").forEach(v => {
         if (v !== video) {
           v.pause();
@@ -72,6 +70,8 @@ function createReel(reel) {
       });
 
       video.muted = false;
+      userUnmuted = true;
+
       if (video.paused) {
         video.play().catch(err => console.warn("Play error:", err));
       }
@@ -83,7 +83,6 @@ function createReel(reel) {
       }, 1500);
     });
 
-    // Button actions
     rewindBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       video.currentTime = Math.max(video.currentTime - 5, 0);
@@ -113,11 +112,18 @@ reelsData.forEach(createReel);
 // Playback based on scroll visibility
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
+
   videos.forEach((video) => {
     const rect = video.getBoundingClientRect();
     const visible = rect.top < window.innerHeight && rect.bottom > 0;
+
     if (visible) {
       video.play().catch(() => {});
+
+      // If user has manually unmuted one video, unmute others too
+      if (userUnmuted) {
+        video.muted = false;
+      }
     } else {
       video.pause();
       video.muted = true;
