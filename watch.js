@@ -73,8 +73,8 @@ function createReel(reel) {
   `;
 
   reelsWrapper.appendChild(container);
-
-  setTimeout(() => {
+  
+setTimeout(() => {
   const video = container.querySelector("video");
   const controls = container.querySelector(".center-controls");
   const rewindBtn = controls.querySelector(".rewind");
@@ -88,9 +88,17 @@ function createReel(reel) {
     controls.classList.add("hidden");
   }, 2000);
 
-  // 👆 Show/hide controls on video click
+  // Show controls on click or mouse move
+  const showControls = () => {
+    controls.classList.remove("hidden");
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      controls.classList.add("hidden");
+    }, 2000);
+  };
+
   video.addEventListener("click", () => {
-    // Pause all other videos and mute them
+    // Pause other videos and mute them
     document.querySelectorAll("video").forEach(v => {
       if (v !== video) {
         v.pause();
@@ -105,36 +113,21 @@ function createReel(reel) {
       toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
     }
 
-    // Show controls and reset hide timer
-    controls.classList.remove("hidden");
-    clearTimeout(hideTimeout);
-    hideTimeout = setTimeout(() => {
-      controls.classList.add("hidden");
-    }, 2000);
+    showControls();
   });
 
-  // 👆 Optional: Also show controls on mouse move
-  video.addEventListener("mousemove", () => {
-    controls.classList.remove("hidden");
-    clearTimeout(hideTimeout);
-    hideTimeout = setTimeout(() => {
-      controls.classList.add("hidden");
-    }, 2000);
-  });
+  video.addEventListener("mousemove", showControls);
 
-  // Rewind button
   rewindBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     video.currentTime = Math.max(video.currentTime - 5, 0);
   });
 
-  // Forward button
   forwardBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     video.currentTime = Math.min(video.currentTime + 5, video.duration);
   });
 
-  // Play/Pause toggle button
   toggleBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     if (video.paused) {
@@ -146,6 +139,7 @@ function createReel(reel) {
     }
   });
 }, 0);
+  
 
 // Create all reels
 reelsData.forEach(createReel);
@@ -194,5 +188,6 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
