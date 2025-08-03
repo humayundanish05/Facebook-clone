@@ -142,7 +142,6 @@ setTimeout(() => {
 // ❤️ Double-click to show big heart and like
 const heartIcon = container.querySelector(".fa-heart");
 const heartBtn = heartIcon.closest("button");
-let liked = false;
 
 video.addEventListener("dblclick", (e) => {
   const heart = document.createElement("i");
@@ -165,8 +164,8 @@ heartBtn.addEventListener("click", (e) => {
   e.stopPropagation(); // stop from triggering video click
   liked = !liked;
   heartIcon.style.color = liked ? "red" : "#fff";
-});
-}, 0);
+  });
+ }, 0);
 }   
 
 // Create all reels
@@ -220,6 +219,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
