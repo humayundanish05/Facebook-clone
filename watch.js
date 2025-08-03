@@ -65,8 +65,12 @@ function createReel(reel) {
 
  
 <div id="copyMessage" class="copy-message">
-  <i class="fas fa-check-circle"></i> Link copied to clipboard,
+  <i class="fas fa-check-circle"></i> Link copied to clipboard, <br>
   share with friends 😉
+</div>
+<div id="saveMessage" class="save-message">
+  <i class="fas fa-check-circle"></i>
+  <span>Saved to your collection</span>
 </div>
 
     <div class="reel-info">
@@ -219,6 +223,28 @@ shareBtn.addEventListener("click", (e) => {
   });
 });
 
+//saved 
+    const saveBtn = container.querySelector(".save-btn");
+const saveIcon = saveBtn.querySelector("i");
+const saveMessage = document.getElementById("saveMessage");
+let saved = false;
+
+saveBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  saved = !saved;
+  saveIcon.style.color = saved ? "#facc15" : "#fff";
+
+  // Update message text
+  const messageText = saved ? "Saved to your collection" : "Removed from your collection";
+  saveMessage.querySelector("span").textContent = messageText;
+
+  // Show animated toast message
+  saveMessage.classList.add("show");
+  setTimeout(() => {
+    saveMessage.classList.remove("show");
+  }, 2000);
+});
+    
     
 }, 0);
 }
@@ -273,6 +299,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
