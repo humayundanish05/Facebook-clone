@@ -1,4 +1,11 @@
 const reelsData = [
+
+  {
+    video: "video1.mp4",
+    avatar: "user.jpg",
+    username: "@HumayunDanish",
+    description: "sight loss😭"
+  },
   {
     video: "video2.mp4",
     avatar: "user.jpg",
@@ -6,11 +13,30 @@ const reelsData = [
     description: "Ya Allah tu mujhe maaf krde😭"
   },
   {
-    video: "video1.mp4",
+    video: "video3.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
-    description: "Ya Allah tu mujhe maaf krde😭"
+    description: "pa be didana mulaqat sang gozara wakama😭"
   },
+  {
+    video: "video4.mp4",
+    avatar: "user.jpg",
+    username: "@HumayunDanish",
+    description: "starge de moor 🥀 pase garzege kna😭"
+  },
+  {
+    video: "video5.mp4",
+    avatar: "user.jpg",
+    username: "@HumayunDanish",
+    description: "che me qabar la raze pa jara nashe😭"
+  },
+  {
+    video: "video6.mp4",
+    avatar: "user.jpg",
+    username: "@HumayunDanish",
+    description: "che na saroona de hagha sang-e-marmar la na ze😒"
+  }
+  
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
@@ -153,3 +179,4 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
