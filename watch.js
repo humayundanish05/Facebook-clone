@@ -64,13 +64,12 @@ function createReel(reel) {
     </div>
 
     <div class="reel-info">
-      <div class="user-row">
-        <img src="${reel.avatar}" class="avatar">
-        <p class="username">${reel.username}</p>
-      </div>
-      <p class="description">${reel.description}</p>
-    </div>
-  `;
+  <div class="user-row">
+    <a href="profile.html"><img src="${reel.avatar}" class="avatar"></a>
+    <a href="profile.html" class="username">${reel.username}</a>
+  </div>
+  <p class="description">${reel.description}</p>
+</div>
 
   reelsWrapper.appendChild(container);
 
@@ -192,3 +191,4 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
