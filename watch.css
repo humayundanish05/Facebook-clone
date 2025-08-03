@@ -38,12 +38,15 @@ body {
 }
 
 /* Top Watch Header - Below shortcut bar */
+/* Top Watch Header - Below shortcut bar */
 .watch-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: #18191a;
+  background: rgba(24, 25, 26, 0.4); /* translucent black */
+  backdrop-filter: blur(10px);       /* frosted glass blur */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
   position: fixed;
   top: 50px;
   width: 100%;
@@ -53,6 +56,7 @@ body {
 
 .watch-header h2 {
   font-size: 18px;
+  color: #fff;
 }
 
 .watch-icons i {
@@ -60,6 +64,7 @@ body {
   font-size: 18px;
   margin-left: 15px;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .watch-icons i:hover {
@@ -203,4 +208,5 @@ body {
   color: #ddd;
   margin-top: 5px;
 }
+
 
