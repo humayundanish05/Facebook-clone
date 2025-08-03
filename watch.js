@@ -47,7 +47,7 @@ function createReel(reel) {
   container.innerHTML = `
     <video src="${reel.video}" autoplay loop muted playsinline></video>
 
-    <div class="center-controls hidden">
+<div class="center-controls">
       <button class="rewind"><i class="fas fa-undo"></i></button>
       <button class="toggle-play"><i class="fas fa-pause"></i></button>
       <button class="forward"><i class="fas fa-redo"></i></button>
@@ -193,5 +193,6 @@ window.addEventListener("resize", handlePlayback);
 document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
   setTimeout(handlePlayback, 100);
 });
+
 
 
