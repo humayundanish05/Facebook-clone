@@ -161,6 +161,37 @@ setTimeout(() => {
     heartIcon.style.color = liked ? "red" : "#fff";
   });
 
+    //comments 
+const commentPanel = document.getElementById("commentsPanel");
+const commentList = document.getElementById("commentsList");
+const commentInput = document.getElementById("commentInput");
+const sendComment = document.getElementById("sendComment");
+const closeComments = document.getElementById("closeComments");
+
+// 📥 Open comment panel on comment icon click
+const commentIconBtn = container.querySelector(".fa-comment").closest("button");
+commentIconBtn.addEventListener("click", () => {
+  commentPanel.classList.add("visible");
+});
+
+// ❌ Close panel
+closeComments.addEventListener("click", () => {
+  commentPanel.classList.remove("visible");
+});
+
+// ➕ Add comment
+sendComment.addEventListener("click", () => {
+  const text = commentInput.value.trim();
+  if (text !== "") {
+    const comment = document.createElement("p");
+    comment.textContent = text;
+    commentList.appendChild(comment);
+    commentInput.value = "";
+    commentList.scrollTop = commentList.scrollHeight;
+  }
+});
+
+    
 }, 0);
 }
 // Create all reels
@@ -214,6 +245,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
