@@ -304,34 +304,40 @@ body {
   font-size: 18px;
 }
 
-/* share button click message */
+/* 🔗 Share Toast Message */
 .copy-message {
   position: fixed;
-  bottom: 100px;
+  bottom: 90px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-  color: #e8f5ff;
-  padding: 12px 22px;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: 600;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #1c1c1c, #2e2e2e);
+  color: #e6faff;
+  padding: 14px 24px;
+  border-radius: 28px;
+  font-size: 14.5px;
+  font-weight: 500;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
   z-index: 99999;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(6px);
+  align-items: flex-start;
+  gap: 12px;
+  backdrop-filter: blur(8px);
+  max-width: 85%;
+  line-height: 1.4;
+  text-align: left;
 }
 
+/* ✅ Check Icon Style */
 .copy-message i {
-  color: #34d399; 
-  font-size: 18px;
+  color: #22c55e; /* soft success green */
+  font-size: 20px;
+  margin-top: 2px;
 }
 
+/* ✨ Show Animation */
 .copy-message.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
