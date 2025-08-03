@@ -65,7 +65,8 @@ function createReel(reel) {
 
  
 <div id="copyMessage" class="copy-message">
-  <i class="fas fa-check-circle"></i> Link copied to clipboard share with friends 😍
+  <i class="fas fa-check-circle"></i> Link copied to clipboard,
+  share with friends 😉
 </div>
 
     <div class="reel-info">
@@ -272,6 +273,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
