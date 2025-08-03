@@ -49,7 +49,7 @@ function createReel(reel) {
   container.innerHTML = `
     <video src="${reel.video}" autoplay loop muted playsinline></video>
 
-    <div class="center-controls hidden">
+    <div class="center-controls">
       <button class="rewind"><i class="fas fa-undo"></i></button>
       <button class="toggle-play"><i class="fas fa-pause"></i></button>
       <button class="forward"><i class="fas fa-redo"></i></button>
@@ -75,75 +75,71 @@ function createReel(reel) {
   reelsWrapper.appendChild(container);
 
   setTimeout(() => {
-  const video = container.querySelector("video");
-  const controls = container.querySelector(".center-controls");
-  const rewindBtn = controls.querySelector(".rewind");
-  const forwardBtn = controls.querySelector(".forward");
-  const toggleBtn = controls.querySelector(".toggle-play");
-  let hideTimeout;
+    const video = container.querySelector("video");
+    const controls = container.querySelector(".center-controls");
+    const rewindBtn = controls.querySelector(".rewind");
+    const forwardBtn = controls.querySelector(".forward");
+    const toggleBtn = controls.querySelector(".toggle-play");
+    let hideTimeout;
 
-  // Function to show and auto-hide controls
-  function showControlsTemporarily() {
-    controls.classList.add("visible");
-    clearTimeout(hideTimeout);
-    hideTimeout = setTimeout(() => {
-      controls.classList.remove("visible");
-    }, 2000); // ⏱️ 2 seconds
-  }
+    function showControlsTemporarily() {
+      controls.classList.add("visible");
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        controls.classList.remove("visible");
+      }, 2000);
+    }
 
-  // Show on load
-  showControlsTemporarily();
+    showControlsTemporarily();
 
-  // Show on video click
-  video.addEventListener("click", () => {
-    document.querySelectorAll("video").forEach(v => {
-      if (v !== video) {
-        v.pause();
-        v.muted = true;
+    video.addEventListener("click", () => {
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.muted = true;
+        }
+      });
+
+      video.muted = false;
+      userUnmuted = true;
+
+      if (video.paused) {
+        video.play().catch(err => console.warn("Play error:", err));
       }
+
+      showControlsTemporarily();
     });
 
-    video.muted = false;
-    userUnmuted = true;
+    video.addEventListener("mousemove", () => {
+      showControlsTemporarily();
+    });
 
-    if (video.paused) {
-      video.play().catch(err => console.warn("Play error:", err));
-    }
+    video.addEventListener("touchstart", () => {
+      showControlsTemporarily();
+    });
 
-    showControlsTemporarily();
-  });
+    rewindBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.max(video.currentTime - 5, 0);
+    });
 
-  // Show on mouse move (desktop)
-  video.addEventListener("mousemove", () => {
-    showControlsTemporarily();
-  });
+    forwardBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.min(video.currentTime + 5, video.duration);
+    });
 
-  // Touch move (mobile)
-  video.addEventListener("touchstart", () => {
-    showControlsTemporarily();
-  });
-
-  rewindBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.max(video.currentTime - 5, 0);
-  });
-
-  forwardBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.min(video.currentTime + 5, video.duration);
-  });
-
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (video.paused) {
-      video.play();
-      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-      video.pause();
-      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-  });
-}, 0);
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        video.pause();
+        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  }, 0);
+}
 
 // Create all reels
 reelsData.forEach(createReel);
@@ -185,9 +181,9 @@ function adjustVideoSize() {
   reels.forEach(video => {
     video.style.height = height + 'px';
     video.style.width = width + 'px';
-    video.style.objectFit = 'cover'; // Ensures it fills the screen perfectly
-    video.style.objectPosition = 'center'; // Ensures center alignment
-    video.style.display = 'block'; // Prevent inline whitespace
+    video.style.objectFit = 'cover';
+    video.style.objectPosition = 'center';
+    video.style.display = 'block';
     video.style.margin = '0';
     video.style.padding = '0';
   });
@@ -196,4 +192,3 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
-
