@@ -191,6 +191,28 @@ sendComment.addEventListener("click", () => {
   }
 });
 
+    //Share 
+    const shareIcon = container.querySelector(".fa-share");
+const shareBtn = shareIcon.closest("button");
+const copyMessage = document.getElementById("copyMessage");
+
+shareBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const link = "https://humayundanish05.github.io/Facebook-clone/watch.html";
+
+  navigator.clipboard.writeText(link).then(() => {
+    // Show "Link copied!" message
+    copyMessage.classList.add("show");
+
+    // Hide after 2s
+    setTimeout(() => {
+      copyMessage.classList.remove("show");
+    }, 2000);
+  }).catch((err) => {
+    console.error("Copy failed:", err);
+  });
+});
+
     
 }, 0);
 }
@@ -245,6 +267,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
