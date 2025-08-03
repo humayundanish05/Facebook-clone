@@ -377,3 +377,40 @@ body {
   color: #facc15; /* yellow check icon */
   font-size: 18px;
 }
+
+/* more button*/
+
+.more-menu {
+  position: absolute;
+  right: 60px;
+  bottom: 120px;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 160px;
+}
+
+.more-menu button {
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.more-menu button:hover {
+  background: #333;
+}
+
+.more-menu.hidden {
+  display: none;
+}
