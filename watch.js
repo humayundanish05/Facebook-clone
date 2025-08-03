@@ -1,5 +1,6 @@
 const reelsData = [
-  {
+
+{
     video: "video1.mp4",
     avatar: "user.jpg",
     username: "@HumayunDanish",
@@ -35,6 +36,7 @@ const reelsData = [
     username: "@HumayunDanish",
     description: "che na saroona de hagha sang-e-marmar la na ze😒"
   }
+  
 ];
 
 const reelsWrapper = document.querySelector(".reels-wrapper");
@@ -47,7 +49,7 @@ function createReel(reel) {
   container.innerHTML = `
     <video src="${reel.video}" autoplay loop muted playsinline></video>
 
-<div class="center-controls">
+    <div class="center-controls hidden">
       <button class="rewind"><i class="fas fa-undo"></i></button>
       <button class="toggle-play"><i class="fas fa-pause"></i></button>
       <button class="forward"><i class="fas fa-redo"></i></button>
@@ -72,83 +74,69 @@ function createReel(reel) {
 
   reelsWrapper.appendChild(container);
 
-//--------------&
+  setTimeout(() => {
+    const video = container.querySelector("video");
+    const controls = container.querySelector(".center-controls");
+    const rewindBtn = controls.querySelector(".rewind");
+    const forwardBtn = controls.querySelector(".forward");
+    const toggleBtn = controls.querySelector(".toggle-play");
+    let hideTimeout;
 
-setTimeout(() => {
-  const video = container.querySelector("video");
-  const controls = container.querySelector(".center-controls");
-  const rewindBtn = controls.querySelector(".rewind");
-  const forwardBtn = controls.querySelector(".forward");
-  const toggleBtn = controls.querySelector(".toggle-play");
-  let hideTimeout;
+    controls.classList.remove("hidden");
+    hideTimeout = setTimeout(() => {
+      controls.classList.add("hidden");
+    }, 1500);
 
-// Utility function to show & auto-hide controls
-function showControlsTemporarily() {
-  controls.classList.add("visible");
-  clearTimeout(hideTimeout);
-  hideTimeout = setTimeout(() => {
-    controls.classList.remove("visible");
-  }, 2000);
+    video.addEventListener("click", () => {
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.muted = true;
+        }
+      });
+
+      video.muted = false;
+      userUnmuted = true;
+
+      if (video.paused) {
+        video.play().catch(err => console.warn("Play error:", err));
+      }
+
+      controls.classList.remove("hidden");
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        controls.classList.add("hidden");
+      }, 1500);
+    });
+
+    rewindBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.max(video.currentTime - 5, 0);
+    });
+
+    forwardBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.currentTime = Math.min(video.currentTime + 5, video.duration);
+    });
+
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        video.pause();
+        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  }, 0);
 }
 
-// Show controls for 2s on load
-showControlsTemporarily();
 
-// Show controls on click
-video.addEventListener("click", () => {
-  // Pause other videos and mute them
-  document.querySelectorAll("video").forEach(v => {
-    if (v !== video) {
-      v.pause();
-      v.muted = true;
-    }
-  });
+// Create all reels
+reelsData.forEach(createReel);
 
-  // Unmute and play current video
-  video.muted = false;
-  if (video.paused) {
-    video.play().catch(err => console.warn("Play error:", err));
-    toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  }
-
-  showControlsTemporarily();
-});
-
-// Also trigger on mousemove (optional)
-video.addEventListener("mousemove", showControlsTemporarily);
-
-  // 🎛️ Rewind
-  rewindBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.max(video.currentTime - 5, 0);
-    showControlsTemporarily();
-  });
-
-  // ⏩ Forward
-  forwardBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    video.currentTime = Math.min(video.currentTime + 5, video.duration);
-    showControlsTemporarily();
-  });
-
-  // ⏯️ Toggle Play
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (video.paused) {
-      video.play();
-      toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-      video.pause();
-      toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-    showControlsTemporarily();
-  });
-}, 0);
-
-  
-
-  //---------------
-
+// Playback based on scroll visibility
 function handlePlayback() {
   const videos = document.querySelectorAll(".reel-container video");
 
@@ -159,8 +147,9 @@ function handlePlayback() {
     if (visible) {
       video.play().catch(() => {});
 
+      // If user has manually unmuted one video, unmute others too
       if (userUnmuted) {
-        video.muted = false; // ✅ Auto unmute future videos after first manual unmute
+        video.muted = false;
       }
     } else {
       video.pause();
@@ -169,6 +158,14 @@ function handlePlayback() {
   });
 }
 
+// Scroll and resize events
+window.addEventListener("load", handlePlayback);
+window.addEventListener("resize", handlePlayback);
+document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
+  setTimeout(handlePlayback, 100);
+});
+
+// Adjust video size to full screen
 function adjustVideoSize() {
   const reels = document.querySelectorAll('.reel-container video');
   const height = window.innerHeight;
@@ -183,16 +180,3 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
-
-// ✅ Create reels only after sizing
-reelsData.forEach(createReel);
-
-// ✅ Scroll & visibility
-window.addEventListener("load", handlePlayback);
-window.addEventListener("resize", handlePlayback);
-document.querySelector(".reels-wrapper").addEventListener("scroll", () => {
-  setTimeout(handlePlayback, 100);
-});
-
-
-
