@@ -90,54 +90,65 @@
       white-space: pre-line;
     }
 
-    .dashboard-btn {
-      display: flex;
-      justify-content: center;
-      margin: 10px;
-    }
+  /* === Dashboard Button (Blue) === */
+.dashboard-btn {
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px;
+}
 
-    .dashboard-btn button {
-      background-color: #0866ff;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+.dashboard-btn button {
+  width: 100%;
+  background-color: #0866ff;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
 
-    .actions-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      border-top: 1px solid #ccc;
-    }
+/* === Bottom Actions Bar (Add to Story / More) === */
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
 
-    .actions-bar button {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: #e4e6eb;
-      margin: 0 5px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+.actions-bar button {
+  flex: 1;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #050505;
+  background-color: #e4e6eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-    @media (max-width: 480px) {
-      .profile-name {
-        font-size: 18px;
-      }
-      .followers {
-        font-size: 13px;
-      }
-      .dashboard-btn button,
-      .actions-bar button {
-        font-size: 14px;
-        padding: 8px;
-      }
-    }
+/* === Responsive === */
+@media (max-width: 480px) {
+  .dashboard-btn button,
+  .actions-bar button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .profile-name {
+    font-size: 17px;
+  }
+
+  .followers {
+    font-size: 13px;
+  }
+}  
 
 
 /* Tabs */
@@ -186,6 +197,7 @@
   background-color: #1877f2;
   border-radius: 3px;
 }
+
 
 /* Tab Content */
 .tab-content {
@@ -412,5 +424,6 @@
   height: auto;
   border-radius: 6px;
 }
+
 
 
