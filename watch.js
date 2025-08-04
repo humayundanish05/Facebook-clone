@@ -208,7 +208,9 @@ sendComment.addEventListener("click", () => {
     const commentDiv = document.createElement("div");
     commentDiv.className = "comment";
     commentDiv.innerHTML = `
-      <img src="your-avatar.jpg" class="comment-avatar">
+      <a href="profile.html">
+  <img src="user.jpg" class="comment-avatar">
+</a>
       <div class="comment-content">
         <strong>You</strong>
         <div class="comment-meta">
@@ -365,4 +367,5 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
