@@ -28,13 +28,13 @@
     .profile-header {
       position: relative;
       background: #d9dadb;
-      height: 150px;
+      height: 180px;
     }
 
     .profile-pic {
       position: absolute;
       bottom: -55px;
-      left: 50%;
+      left: 30%;
       transform: translateX(-50%);
       width: 110px;
       height: 110px;
@@ -438,6 +438,7 @@ border-radius: 6px;
 }
 
       
+
 
 
 
