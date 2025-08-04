@@ -2,72 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Humayun Danish - Profile</title>
-  <link rel="stylesheet" href="profile.css">
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2d9d5ea9c.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Humayun Danish</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="profile.css">
+  
 </head>
 <body>
 
-<!-- Top Bar with SVG Icons -->
-<div class="top-bar">
-  <div class="nav-left">
-    <a href="home.html" class="back-arrow">
-      <!-- Back arrow SVG -->
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M15 6L9 12L15 18" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-    <div class="profile-title">Humayun Danish</div>
-  </div>
-  <div class="search-icon">
-    <!-- Search icon SVG -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="11" cy="11" r="7" stroke="#333" stroke-width="2"/>
-      <line x1="16" y1="16" x2="21" y2="21" stroke="#333" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </div>
-</div>
+<header>
+    <i class="fas fa-arrow-left"></i>
+    <h3>Humayun Danish</h3>
+  </header>
 
-  <!-- Profile Header -->
   <div class="profile-header">
-    <div class="cover-photo">
-      <img src="Story2.jpg" alt="Cover" />
-      <button class="edit-cover"><i class="fas fa-camera"></i></button>
-    </div>
-    <div class="profile-info">
-      <div class="profile-pic-container">
-        <img class="profile-pic" src="user.jpg" alt="Profile Picture" />
-        <button class="edit-pic"><i class="fas fa-camera"></i></button>
-      </div>
-      <div class="profile-text">
-        <h1>Humayun Danish <span>(普赫图恩)</span></h1>
-        <p><strong>3.5K</strong> followers • <strong>1.4K</strong> following</p>
-        <div class="followers-preview">
-          <img src="https://picsum.photos/id/1035/100/100" alt="Photo 3" />
-          <img src="https://picsum.photos/id/1045/100/100" alt="Photo 4" />
-          <img src="https://picsum.photos/id/1055/100/100" alt="Photo 5" />
-          <img src="https://picsum.photos/id/1065/100/100" alt="Photo 6" />         
-          <img src="https://picsum.photos/id/1075/100/100" alt="Photo 7" />
-          <img src="https://picsum.photos/id/237/100/100" alt="Dog" />
-          <img src="https://picsum.photos/id/1035/100/100" alt="Beach" />
-          <img src="https://picsum.photos/id/1043/100/100" alt="Mountains" />
-        </div>
-      </div>
+    <div class="profile-pic">
+      <img src="user.jpg" alt="Profile Picture">
     </div>
   </div>
 
-  <!-- Bio -->
-  <div class="bio">
-    <p>at your lowest, <br> you see the real faces of people</p>
+  <div class="profile-name" contenteditable="true">Humayun Danish (普赫图恩)</div>
+
+  <div class="followers">
+    <span contenteditable="true">3.5K</span> followers •
+    <span contenteditable="true">1.4K</span> following
   </div>
 
-  <!-- Buttons -->
-  <div class="profile-buttons">
-    <button class="dashboard"><i class="fas fa-briefcase"></i> Professional dashboard</button>
-    <button class="story"><i class="fas fa-plus"></i> Add to story</button>
+  <div class="avatars-list">
+    <img src="user.jpg">
+    <img src="user.jpg">
+    <img src="user.jpg">
+    <img src="user.jpg">
+    <img src="user.jpg">
+    <img src="user.jpg">
   </div>
+
+  <div class="bio" contenteditable="true">
+.
+.
+at your lowest,
+you see the real faces of people
+.
+.
+  </div>
+
+  <div class="dashboard-btn">
+    <button>Professional dashboard</button>
+  </div>
+
+  <div class="actions-bar">
+    <button>Add to story</button>
+    <button><i class="fas fa-ellipsis-h"></i></button>
+  </div>
+  
 
 <!-- Tabs (buttons) -->
 <div class="tabs">
@@ -194,3 +181,4 @@
 
   </body>
 </html>
+
