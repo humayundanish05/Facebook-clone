@@ -164,5 +164,279 @@
 }
 
 
+/* Tabs */
+.tabs {
+display: flex;
+justify-content: space-around;
+background-color: #fff;
+border-bottom: 1px solid #ddd;
+padding: 10px 0;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+
+.tab {
+flex: 1;
+text-align: center;
+background: none;
+border: none;
+outline: none;
+font-weight: bold;
+font-size: 16px;
+color: #555;
+padding: 10px 0;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.tab:hover {
+background-color: #f0f2f5;
+color: #000;
+}
+
+.tab.active {
+color: #1877f2;
+}
+
+.tab.active::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 25%;
+width: 50%;
+height: 3px;
+background-color: #1877f2;
+border-radius: 3px;
+}
+
+/* Tab Content */
+.tab-content {
+padding: 12px 16px
+background: #f0f2f5;
+}
+
+/* Feed Posts */
+.post {
+background: white;
+margin: 10px 0;
+padding: 0;
+border-radius: 0;
+box-shadow: none;
+overflow: hidden;
+}
+
+/* Post Header */
+.post-header {
+display: flex;
+align-items: center;
+padding: 10px 12px;
+}
+
+.post-header img {
+width: 38px;
+height: 38px;
+border-radius: 50%;
+object-fit: cover;
+margin-right: 10px;
+}
+
+.post-header .name {
+font-weight: bold;
+font-size: 15px;
+}
+
+.post-header .time {
+font-size: 12px;
+color: #888;
+}
+
+/* Post Content */
+.post-content p {
+font-size: 15px;
+margin: 0;
+padding: 0 12px 10px;
+}
+
+.post-content img {
+width: 100vw;
+max-width: 100%;
+display: block;
+border-radius: 0;
+object-fit: cover;
+max-height: 400px;
+}
+
+/* Post Actions */
+.post-actions {
+display: flex;
+justify-content: space-between;
+padding: 10px 12px;
+font-size: 14px;
+color: #65676b;
+border-top: 1px solid #eee;
+}
+
+.post-actions span {
+cursor: pointer;
+padding: 6px 8px;
+border-radius: 8px;
+transition: background 0.2s ease;
+}
+
+.post-actions span:hover {
+background: #f0f2f5;
+}
+
+/* Like Button Styling */
+.like-btn.liked {
+color: #1877f2;
+font-weight: bold;
+}
+
+/* Like Count */
+.like-count {
+margin-top: 4px;
+font-size: 13px;
+color: #65676b;
+}
+
+/* Comment Section */
+.comment-section {
+margin-top: 10px;
+border-top: 1px solid #ddd;
+padding: 10px 12px 0;
+}
+
+.comment-section.hidden {
+display: none;
+}
+
+.comment-input {
+display: flex;
+margin-bottom: 8px;
+}
+
+.comment-input input {
+flex: 1;
+padding: 8px 10px;
+border-radius: 20px;
+border: 1px solid #ccc;
+font-size: 14px;
+margin-right: 6px;
+}
+
+.comment-input .add-comment {
+background: #1877f2;
+color: white;
+border: none;
+border-radius: 20px;
+padding: 8px 14px;
+font-size: 13px;
+cursor: pointer;
+transition: background 0.2s ease;
+}
+
+.comment-input .add-comment:hover {
+background: #145dbf;
+}
+
+.comments .comment {
+background: #f0f2f5;
+padding: 6px 10px;
+border-radius: 18px;
+margin-bottom: 5px;
+font-size: 14px;
+width: fit-content;
+max-width: 90%;
+}
+
+/* Top Navigation */
+.top-nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 14px;
+background-color: white;
+border-bottom: 1px solid #ccc;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+
+.logo {
+font-family: 'Segoe UI', sans-serif;
+color: #1877f2;
+font-size: 24px;
+font-weight: bold;
+}
+
+.top-icons {
+display: flex;
+gap: 10px;
+}
+
+.top-btn {
+background-color: #e4e6eb;
+border: none;
+border-radius: 50%;
+padding: 8px 10px;
+font-size: 16px;
+cursor: pointer;
+}
+
+/* About Tab */
+.simple-about {
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 12px;
+padding: 20px;
+max-width: 600px;
+margin: 20px auto;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+font-family: 'Segoe UI', sans-serif;
+color: #333;
+}
+
+.simple-about h2 {
+font-size: 22px;
+margin-bottom: 16px;
+color: #1a1a1a;
+}
+
+.simple-about p {
+margin: 10px 0;
+font-size: 15px;
+line-height: 1.5;
+}
+
+.simple-about strong {
+color: #444;
+}
+
+.simple-about a {
+color: #007bff;
+text-decoration: none;
+}
+
+.simple-about a:hover {
+text-decoration: underline;
+}
+
+/* Photos Grid */
+.photo-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 6px;
+}
+
+.photo-grid img {
+width: 100%;
+height: auto;
+border-radius: 6px;
+}
+
+      
 
 
