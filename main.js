@@ -205,3 +205,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (label) label.innerText = mode === "dark" ? "Dark Mode ✅" : "Light Mode 🌞";
   }
 
+
+
+  const postFeed = document.getElementById('postFeed');
+
+  async function loadPosts() {
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
+      .then(res => res.json());
+
+    const users = await fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json());
+
+    posts.forEach(post => {
+      const user = users.find(u => u.id === post.userId);
+
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `
+        <div class="post-header">
+          <img src="https://i.pravatar.cc/40?u=${user.id}" alt="${user.name}" />
+          <div>
+            <div class="name">${user.name}</div>
+            <div class="time">Just now</div>
+          </div>
+        </div>
+        <div class="post-content">
+          <p>${post.title}</p>
+          <p>${post.body}</p>
+        </div>
+        <div class="post-actions">
+          <span><i class="far fa-thumbs-up"></i> Like</span>
+          <span><i class="far fa-comment"></i> Comment</span>
+          <span><i class="fas fa-share"></i> Share</span>
+        </div>
+      `;
+      postFeed.appendChild(postElement);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadPosts);
