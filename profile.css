@@ -33,7 +33,7 @@
 
     .profile-pic {
       position: absolute;
-      bottom: -80px;
+      bottom: -70px;
       left: 30%;
       transform: translateX(-50%);
       width: 150px;
@@ -438,6 +438,7 @@ border-radius: 6px;
 }
 
       
+
 
 
 
