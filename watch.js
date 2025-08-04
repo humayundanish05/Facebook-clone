@@ -162,8 +162,8 @@ setTimeout(() => {
     }
   });
 
-  // ❤️ Double-click to show big heart and like
-
+  
+// ❤️ Double-click to show big heart and like
 video.addEventListener("dblclick", (e) => {
   const heart = document.createElement("i");
   heart.className = "fas fa-heart big-heart";
@@ -186,7 +186,6 @@ heartBtn.addEventListener("click", (e) => {
   heartIcon.style.color = liked ? "red" : "#fff";
 });
 
-
 // 💬 Comments Section
 const commentIconBtn = container.querySelector(".comment-btn");
 const commentPanel = document.getElementById("commentsPanel");
@@ -206,44 +205,22 @@ closeComments.addEventListener("click", () => {
 sendComment.addEventListener("click", () => {
   const text = commentInput.value.trim();
   if (text !== "") {
-    const comment = document.createElement("div");
-    comment.className = "comment";
-
-    // Create elements
-    const avatar = document.createElement("img");
-    avatar.className = "comment-avatar";
-    avatar.src = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70) + 1}`; // Random avatar
-
-    const content = document.createElement("div");
-    content.className = "comment-content";
-
-    const name = document.createElement("strong");
-    name.textContent = "You";
-
-    const meta = document.createElement("div");
-    meta.className = "comment-meta";
-    meta.innerHTML = `Just now <button class="reply-btn">Reply</button>`;
-
-    const textNode = document.createElement("span");
-    textNode.textContent = text;
-
-    const actions = document.createElement("div");
-    actions.className = "comment-actions";
-    actions.innerHTML = `
-      <i class="fas fa-heart"></i> 
-      <i class="fas fa-thumbs-down"></i>
+    const commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+    commentDiv.innerHTML = `
+      <img src="your-avatar.jpg" class="comment-avatar">
+      <div class="comment-content">
+        <strong>You</strong>
+        <div class="comment-meta">
+          <span>Just now</span> • <button class="reply-btn">Reply</button>
+        </div>
+      </div>
+      <div class="comment-actions">
+        <i class="fas fa-heart"></i><span>0</span>
+        <i class="fas fa-thumbs-down"></i>
+      </div>
     `;
-
-    // Build structure
-    content.appendChild(name);
-    content.appendChild(textNode);
-    content.appendChild(meta);
-
-    comment.appendChild(avatar);
-    comment.appendChild(content);
-    comment.appendChild(actions);
-
-    commentList.appendChild(comment);
+    commentList.appendChild(commentDiv);
     commentInput.value = "";
     commentList.scrollTop = commentList.scrollHeight;
   }
@@ -258,9 +235,7 @@ shareBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   const link = "https://humayundanish05.github.io/Facebook-clone/watch.html";
 
-  navigator.clipboard.writeText(link).then((
-    
-  ) => {
+  navigator.clipboard.writeText(link).then(() => {
     copyMessage.classList.add("show");
     setTimeout(() => {
       copyMessage.classList.remove("show");
@@ -269,6 +244,7 @@ shareBtn.addEventListener("click", (e) => {
     console.error("Copy failed:", err);
   });
 });
+
 
 //saved 
     const saveBtn = container.querySelector(".save-btn");
@@ -389,20 +365,4 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
