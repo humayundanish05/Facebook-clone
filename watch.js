@@ -163,60 +163,73 @@ setTimeout(() => {
   });
 
   // ❤️ Double-click to show big heart and like
-  video.addEventListener("dblclick", (e) => {
-    const heart = document.createElement("i");
-    heart.className = "fas fa-heart big-heart";
-    heart.style.left = `${e.clientX}px`;
-    heart.style.top = `${e.clientY}px`;
-    container.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 1000);
+video.addEventListener("dblclick", (e) => {
+  const heart = document.createElement("i");
+  heart.className = "fas fa-heart big-heart";
+  heart.style.left = `${e.clientX}px`;
+  heart.style.top = `${e.clientY}px`;
+  container.appendChild(heart);
 
-    liked = true;
-    heartIcon.style.color = "red";
-  });
+  setTimeout(() => {
+    heart.remove();
+  }, 1000);
 
-  // ❤️ Click on heart icon to toggle like/unlike
-  heartBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    liked = !liked;
-    heartIcon.style.color = liked ? "red" : "#fff";
-  });
+  liked = true;
+  heartIcon.style.color = "red";
+});
 
-    //comments 
+// ❤️ Click on heart icon to toggle like/unlike
+heartBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  liked = !liked;
+  heartIcon.style.color = liked ? "red" : "#fff";
+});
+
+
+// 💬 Comments Section
+const commentIconBtn = container.querySelector(".comment-btn");
 const commentPanel = document.getElementById("commentsPanel");
 const commentList = document.getElementById("commentsList");
 const commentInput = document.getElementById("commentInput");
 const sendComment = document.getElementById("sendComment");
 const closeComments = document.getElementById("closeComments");
 
-// 📥 Open comment panel on comment icon click
-const commentIconBtn = container.querySelector(".fa-comment").closest("button");
 commentIconBtn.addEventListener("click", () => {
   commentPanel.classList.add("visible");
 });
 
-// ❌ Close panel
 closeComments.addEventListener("click", () => {
   commentPanel.classList.remove("visible");
 });
 
-// ➕ Add comment
 sendComment.addEventListener("click", () => {
   const text = commentInput.value.trim();
   if (text !== "") {
-    const comment = document.createElement("p");
-    comment.textContent = text;
-    commentList.appendChild(comment);
+    const commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+    commentDiv.innerHTML = `
+      <img src="your-avatar.jpg" class="comment-avatar">
+      <div class="comment-content">
+        <strong>You</strong>
+        <div class="comment-meta">
+          <span>Just now</span> • <button class="reply-btn">Reply</button>
+        </div>
+      </div>
+      <div class="comment-actions">
+        <i class="fas fa-heart"></i><span>0</span>
+        <i class="fas fa-thumbs-down"></i>
+      </div>
+    `;
+    commentList.appendChild(commentDiv);
     commentInput.value = "";
     commentList.scrollTop = commentList.scrollHeight;
   }
 });
 
-    //Share 
-    const shareIcon = container.querySelector(".fa-share");
+
+// 📤 Share Button Logic
+const shareIcon = container.querySelector(".fa-share");
 const shareBtn = shareIcon.closest("button");
 const copyMessage = document.getElementById("copyMessage");
 
@@ -225,10 +238,7 @@ shareBtn.addEventListener("click", (e) => {
   const link = "https://humayundanish05.github.io/Facebook-clone/watch.html";
 
   navigator.clipboard.writeText(link).then(() => {
-    // Show "Link copied!" message
     copyMessage.classList.add("show");
-
-    // Hide after 2s
     setTimeout(() => {
       copyMessage.classList.remove("show");
     }, 2000);
@@ -356,6 +366,7 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
 
