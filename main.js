@@ -258,3 +258,4 @@ async function loadRealPosts() {
 }
 
 document.addEventListener('DOMContentLoaded', loadRealPosts);
+
