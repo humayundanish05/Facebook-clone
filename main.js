@@ -206,41 +206,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+//posts from outer source 
+const postFeed = document.getElementById('postFeed');
 
-  const postFeed = document.getElementById('postFeed');
+// List of sample photos
+const photos = [
+  'https://picsum.photos/600/400?image=1050',
+  'https://picsum.photos/600/400?image=1043',
+  'https://picsum.photos/600/400?image=1027',
+  'https://picsum.photos/600/400?image=1015',
+  'https://picsum.photos/600/400?image=1035',
+  'https://picsum.photos/600/400?image=1065',
+  'https://picsum.photos/600/400?image=1075',
+  'https://picsum.photos/600/400?image=1084'
+];
 
-  async function loadPosts() {
-    const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
-      .then(res => res.json());
+const descriptions = [
+  'Enjoying the mountain view 🌄',
+  'Sunset vibes by the beach 🌅',
+  'City lights and peaceful nights',
+  'A walk among the forest giants',
+  'Stunning aerial landscape',
+  'Simple moments captured',
+  'Roads less traveled',
+  'Adventures worth memories'
+];
 
-    const users = await fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json());
+async function loadPosts() {
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=8')
+    .then(res => res.json());
 
-    posts.forEach(post => {
-      const user = users.find(u => u.id === post.userId);
+  const users = await fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json());
 
-      const postElement = document.createElement('div');
-      postElement.className = 'post';
-      postElement.innerHTML = `
-        <div class="post-header">
-          <img src="https://i.pravatar.cc/40?u=${user.id}" alt="${user.name}" />
-          <div>
-            <div class="name">${user.name}</div>
-            <div class="time">Just now</div>
-          </div>
+  posts.forEach((post, index) => {
+    const user = users.find(u => u.id === post.userId);
+    const photo = photos[index % photos.length];
+    const desc = descriptions[index % descriptions.length];
+
+    const postElement = document.createElement('div');
+    postElement.className = 'post';
+    postElement.innerHTML = `
+      <div class="post-header">
+        <img src="https://i.pravatar.cc/40?u=${user.id}" alt="${user.name}">
+        <div>
+          <div class="name">${user.name}</div>
+          <div class="time">Just now</div>
         </div>
-        <div class="post-content">
-          <p>${post.title}</p>
-          <p>${post.body}</p>
-        </div>
-        <div class="post-actions">
-          <span><i class="far fa-thumbs-up"></i> Like</span>
-          <span><i class="far fa-comment"></i> Comment</span>
-          <span><i class="fas fa-share"></i> Share</span>
-        </div>
-      `;
-      postFeed.appendChild(postElement);
-    });
-  }
+      </div>
+      <div class="post-content">
+        <img src="${photo}" alt="Post image">
+        <p>${post.title}</p>
+        <p>${desc}</p>
+      </div>
+      <div class="post-actions">
+        <span><i class="far fa-thumbs-up"></i> Like</span>
+        <span><i class="far fa-comment"></i> Comment</span>
+        <span><i class="fas fa-share"></i> Share</span>
+      </div>
+    `;
+    postFeed.appendChild(postElement);
+  });
+}
 
-  document.addEventListener('DOMContentLoaded', loadPosts);
+document.addEventListener('DOMContentLoaded', loadPosts);
+
+  
