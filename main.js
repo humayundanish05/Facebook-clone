@@ -195,65 +195,66 @@ function updateLabel(mode) {
 }
 
 // External posts from JSONPlaceholder
-const postFeed = document.getElementById("postFeed");
+const postFeed = document.getElementById('postFeed');
 
 const photos = [
-  "https://picsum.photos/600/400?image=1050",
-  "https://picsum.photos/600/400?image=1043",
-  "https://picsum.photos/600/400?image=1027",
-  "https://picsum.photos/600/400?image=1015",
-  "https://picsum.photos/600/400?image=1035",
-  "https://picsum.photos/600/400?image=1065",
-  "https://picsum.photos/600/400?image=1075",
-  "https://picsum.photos/600/400?image=1084"
+  'https://picsum.photos/600/400?random=1',
+  'https://picsum.photos/600/400?random=2',
+  'https://picsum.photos/600/400?random=3',
+  'https://picsum.photos/600/400?random=4',
+  'https://picsum.photos/600/400?random=5',
+  'https://picsum.photos/600/400?random=6',
+  'https://picsum.photos/600/400?random=7',
+  'https://picsum.photos/600/400?random=8',
+  'https://picsum.photos/600/400?random=9',
+  'https://picsum.photos/600/400?random=10',
 ];
 
-const descriptions = [
-  "Enjoying the mountain view 🌄",
-  "Sunset vibes by the beach 🌅",
-  "City lights and peaceful nights",
-  "A walk among the forest giants",
-  "Stunning aerial landscape",
-  "Simple moments captured",
-  "Roads less traveled",
-  "Adventures worth memories"
-];
+async function loadRealPosts() {
+  try {
+    const [postsRes, usersRes] = await Promise.all([
+      fetch('https://dummyjson.com/posts?limit=10'),
+      fetch('https://dummyjson.com/users')
+    ]);
 
-async function loadPosts() {
-  const posts = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=8")
-    .then(res => res.json());
+    const postsData = await postsRes.json();
+    const usersData = await usersRes.json();
 
-  const users = await fetch("https://jsonplaceholder.typicode.com/users")
-    .then(res => res.json());
+    const posts = postsData.posts;
+    const users = usersData.users;
 
-  posts.forEach((post, index) => {
-    const user = users.find(u => u.id === post.userId);
-    const photo = photos[index % photos.length];
-    const desc = descriptions[index % descriptions.length];
+    posts.forEach((post, index) => {
+      const user = users.find(u => u.id === post.userId);
+      const photo = photos[index % photos.length];
 
-    const postElement = document.createElement("div");
-    postElement.className = "post";
-    postElement.innerHTML = `
-      <div class="post-header">
-        <img src="https://i.pravatar.cc/40?u=${user.id}" alt="${user.name}">
-        <div>
-          <div class="name">${user.name}</div>
-          <div class="time">Just now</div>
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+
+      postElement.innerHTML = `
+        <div class="post-header">
+          <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${user.firstName}">
+          <div>
+            <div class="name">${user.firstName} ${user.lastName}</div>
+            <div class="time">Just now</div>
+          </div>
         </div>
-      </div>
-      <div class="post-content">
-        <img src="${photo}" alt="Post image">
-        <p>${post.title}</p>
-        <p>${desc}</p>
-      </div>
-      <div class="post-actions">
-        <span><i class="far fa-thumbs-up"></i> Like</span>
-        <span><i class="far fa-comment"></i> Comment</span>
-        <span><i class="fas fa-share"></i> Share</span>
-      </div>
-    `;
-    postFeed.appendChild(postElement);
-  });
+        <div class="post-content">
+          <img src="${photo}" alt="Post image" />
+          <h4>${post.title}</h4>
+          <p>${post.body}</p>
+        </div>
+        <div class="post-actions">
+          <span><i class="far fa-thumbs-up"></i> Like</span>
+          <span><i class="far fa-comment"></i> Comment</span>
+          <span><i class="fas fa-share"></i> Share</span>
+        </div>
+      `;
+      postFeed.appendChild(postElement);
+    });
+
+  } catch (error) {
+    console.error('Failed to load posts:', error);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", loadPosts);
+document.addEventListener('DOMContentLoaded', loadRealPosts);
