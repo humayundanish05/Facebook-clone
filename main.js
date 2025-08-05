@@ -86,9 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
     <div class="like-count">${postData.likes} likes</div>
     <div class="post-actions">
-      <span class="like-btn">👍 Like</span>
-      <span class="comment-toggle">💬 Comment</span>
-      <span>↪️ Share</span>
+        <span><i class="far fa-thumbs-up"></i> Like</span>
+        <span><i class="far fa-comment"></i> Comment</span>
+        <span><i class="fas fa-share"></i> Share</span>
+      
     </div>
     <div class="comment-section hidden">
       <div class="comment-input">
