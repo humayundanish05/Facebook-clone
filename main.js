@@ -21,7 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
       loginBtn.disabled = false;
       loginBtn.textContent = "Log In";
       alert("Login successful!");
-      window.location.href = "home.html";
+
+      // ✅ Store login status
+      localStorage.setItem("isLoggedIn", "true");
+
+      // ✅ Get redirect path if available
+      const params = new URLSearchParams(window.location.search);
+      const redirectTo = params.get("redirect");
+
+      // ✅ Redirect to original page or home
+      if (redirectTo) {
+        window.location.href = redirectTo;
+      } else {
+        window.location.href = "home.html";
+      }
     }, 2000);
   });
 
@@ -31,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
+//------
 console.log("JS Loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
