@@ -1,3 +1,11 @@
+// ✅ Redirect to login if not logged in
+if (localStorage.getItem("isLoggedIn") !== "true") {
+  const currentPage = encodeURIComponent(window.location.pathname);
+  window.location.href = `index.html?redirect=${currentPage}`;
+}
+}
+//_______
+
 let currentChatName = "User";
 
 // === New Chat Creation + Local Storage Integration ===
@@ -267,6 +275,7 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
 
 
