@@ -1,3 +1,9 @@
+// ✅ Redirect to login if not logged in
+if (localStorage.getItem("isLoggedIn") !== "true") {
+  const currentPage = encodeURIComponent(window.location.pathname);
+  window.location.href = `index.html?redirect=${currentPage}`;
+}
+//______
 const reelsData = [
 
 {
@@ -367,5 +373,6 @@ function adjustVideoSize() {
 adjustVideoSize();
 window.addEventListener('resize', adjustVideoSize);
 window.addEventListener('orientationchange', adjustVideoSize);
+
 
 
