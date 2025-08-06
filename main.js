@@ -1,3 +1,8 @@
+if (localStorage.getItem("isLoggedIn") !== "true") {
+  const currentPage = encodeURIComponent(window.location.pathname);
+  window.location.href = `index.html?redirect=${currentPage}`;
+}
+//______
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.querySelector("button");
   const inputs = document.querySelectorAll("input");
