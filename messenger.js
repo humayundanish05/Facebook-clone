@@ -1,6 +1,3 @@
-
-//_______
-
 let currentChatName = "User";
 
 // === New Chat Creation + Local Storage Integration ===
@@ -270,6 +267,7 @@ function sendFakeReply() {
     messages.scrollTop = messages.scrollHeight;
   }, 1500);
 }
+
 
 
 
