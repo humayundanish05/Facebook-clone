@@ -115,27 +115,36 @@ body {
   text-decoration: none;
 }
 
-/* Friend request item */
+/* Friend request card */
 .friend-request {
   display: flex;
-  padding: 14px;
+  align-items: center;
+  padding: 10px 14px;
   border-bottom: 1px solid #3a3b3c;
 }
 
+/* Profile picture */
 .avatar {
   border-radius: 50%;
-  margin-right: 12px;
-  width: 65px;
-  height: 65px; /* Bigger profile pics */
+  margin-right: 10px;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
 }
 
+/* Info section */
 .info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Name + time row */
 .name {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .time {
@@ -144,42 +153,46 @@ body {
   margin-left: 6px;
 }
 
+/* Mutual friends */
 .mutual {
   display: flex;
   align-items: center;
   font-size: 13px;
   color: #b0b3b8;
-  margin: 6px 0;
+  margin: 4px 0;
 }
 
 .mutual-img {
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  margin-right: -5px;
+  width: 20px;
+  height: 20px;
+  margin-right: -6px;
   border: 2px solid #18191a;
 }
 
+/* Buttons */
 .actions {
   display: flex;
-  gap: 12px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .confirm {
-  background-color: #2e89ff;
+  background-color: #2374e1;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 6px;
   color: white;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .delete {
   background-color: #3a3b3c;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 6px;
   color: white;
   font-size: 14px;
+  font-weight: bold;
 }
