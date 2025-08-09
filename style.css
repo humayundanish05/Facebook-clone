@@ -33,52 +33,35 @@ body, html {
   cursor: pointer;
 }
 
-/* Shortcut Icons Row */
-.shortcut-bar {
+/* Facebook header icons row */
+.fb-header {
+  background-color: #242526;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  background: #ffffff;
-  padding: 10px 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 50px;
-  z-index: 998;
-  font-size: 20px;
-}
-
-.shortcut-bar a {
-  color: #050505;
-  text-decoration: none;
+  padding: 12px 0;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  transition: background 0.2s ease;
-  border-radius: 50%;
 }
 
-.shortcut-bar a:hover {
-  background: #f0f2f5;
+.fb-header i {
+  position: relative;
+  font-size: 22px; /* Bigger icons */
+  color: #b0b3b8;
+}
+
+.fb-header .active {
+  color: #2e89ff;
 }
 
 .badge {
-  background: red;
+  background-color: red;
   color: white;
-  font-size: 10px;
-  border-radius: 50%;
-  padding: 1px 5px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
   position: absolute;
-  top: -4px;
-  right: -6px;
-  line-height: 1;
-  min-width: 16px;
-  text-align: center;
-  font-weight: bold;
+  top: -6px;
+  right: -10px;
 }
-
 /* ✅ Status Box (Horizontal Layout: Profile Pic + Input + Button) */
 .create-post-top {
   display: flex;
