@@ -32,35 +32,35 @@
   </div>
 
 
+
 <!-- Tabs -->
 <div class="tabs">
   <button class="tab active" data-tab="suggestions">Suggestions</button>
   <button class="tab" data-tab="friends">Your friends</button>
 </div>
 
-<!-- Suggestions tab content -->
+<!-- Suggestions tab -->
 <div id="suggestions" class="tab-content" style="display: block;">
-  <!-- Friend requests header -->
   <div class="friend-requests-header">
     <h2>Friend requests</h2>
     <a href="#" class="see-all">See all</a>
   </div>
 
-  <!-- Friend request items -->
-  <div id="suggestions" class="tab-content" style="display: block;">
-  <div class="friend-requests-header">
-    <h2>Friend requests</h2>
-    <a href="#" class="see-all">See all</a>
-  </div>
-
-  <!-- Multiple friend requests -->
   <div class="friend-requests-list">
-    <!-- JS will inject 30 requests here -->
+    <!-- Friend requests injected here -->
   </div>
-  </div>
-  
+</div>
 
-  <div id="notification"></div>
+<!-- Your friends tab -->
+<div id="friends" class="tab-content" style="display: none;">
+  <h2>Your friends</h2>
+  <div class="your-friends-list">
+    <!-- Confirmed friends will appear here -->
+  </div>
+</div>
+
+<!-- Notification div -->
+<div id="notification"></div>
 
 <!-- Your friends tab content -->
 <div id="friends" class="tab-content" style="display: none;">
@@ -128,74 +128,88 @@ document.querySelectorAll('.delete').forEach(btn => {
   const friendRequestsList = document.querySelector('.friend-requests-list');
 
   // Example 30 names (you can change or add more)
-  const names = [
-    "Ibad Afghan", "Ali Khan", "Sara Malik", "Ahmed Raza", "Fatima Noor",
-    "Zain Siddiqui", "Ayesha Iqbal", "Omar Farooq", "Hina Shah", "Bilal Qureshi",
-    "Sana Tariq", "Usman Javed", "Mariam Zafar", "Adil Hassan", "Khadija Saeed",
-    "Nabeel Aslam", "Saba Rehman", "Farhan Ali", "Iqra Nasir", "Waseem Abbas",
-    "Zoya Mir", "Haris Anwar", "Nadia Imran", "Shahid Latif", "Samina Chaudhry",
-    "Danish Ahmed", "Rabia Arif", "Kamran Malik", "Noor Fatima", "Faizan Malik"
-  ];
+  const friendRequestsList = document.querySelector('.friend-requests-list');
+const yourFriendsList = document.querySelector('.your-friends-list');
+const notification = document.getElementById('notification');
 
-  // Generate friend requests HTML
-  let html = "";
-  for(let i = 0; i < 30; i++) {
-    const avatarNum = 33 + i; // unique avatar img
-    const mutualImg1 = 70 + (i % 10);
-    const mutualImg2 = 71 + (i % 10);
+// Sample names
+const names = [
+  "Ibad Afghan", "Ali Khan", "Sara Malik", "Ahmed Raza", "Fatima Noor",
+  "Zain Siddiqui", "Ayesha Iqbal", "Omar Farooq", "Hina Shah", "Bilal Qureshi",
+  "Sana Tariq", "Usman Javed", "Mariam Zafar", "Adil Hassan", "Khadija Saeed",
+  "Nabeel Aslam", "Saba Rehman", "Farhan Ali", "Iqra Nasir", "Waseem Abbas",
+  "Zoya Mir", "Haris Anwar", "Nadia Imran", "Shahid Latif", "Samina Chaudhry",
+  "Danish Ahmed", "Rabia Arif", "Kamran Malik", "Noor Fatima", "Faizan Malik"
+];
 
-    html += `
-      <div class="friend-request">
-        <img src="https://i.pravatar.cc/60?img=${avatarNum}" class="avatar">
-        <div class="info">
-          <div class="name">${names[i]} <span class="time">${Math.floor(Math.random() * 5 + 1)}d</span></div>
-          <div class="mutual">
-            <img src="https://i.pravatar.cc/20?img=${mutualImg1}" class="mutual-img" />
-            <img src="https://i.pravatar.cc/20?img=${mutualImg2}" class="mutual-img" />
-            <div class="mutualfriendsnames">${Math.floor(Math.random() * 100 + 1)} mutual friends</div>
-          </div>
-          <div class="actions">
-            <button class="confirm">Confirm</button>
-            <button class="delete">Delete</button>
-          </div>
+// Create 30 friend requests
+let html = "";
+for(let i = 0; i < 30; i++) {
+  const avatarNum = 33 + i;
+  const mutualImg1 = 70 + (i % 10);
+  const mutualImg2 = 71 + (i % 10);
+
+  html += `
+    <div class="friend-request">
+      <img src="https://i.pravatar.cc/60?img=${avatarNum}" class="avatar">
+      <div class="info">
+        <div class="name">${names[i]} <span class="time">${Math.floor(Math.random() * 5 + 1)}d</span></div>
+        <div class="mutual">
+          <img src="https://i.pravatar.cc/20?img=${mutualImg1}" class="mutual-img" />
+          <img src="https://i.pravatar.cc/20?img=${mutualImg2}" class="mutual-img" />
+          <div class="mutualfriendsnames">${Math.floor(Math.random() * 100 + 1)} mutual friends</div>
+        </div>
+        <div class="actions">
+          <button class="confirm">Confirm</button>
+          <button class="delete">Delete</button>
         </div>
       </div>
-    `;
-  }
-  friendRequestsList.innerHTML = html;
+    </div>
+  `;
+}
+friendRequestsList.innerHTML = html;
 
-  // After injecting, reattach event listeners to buttons (Confirm/Delete)
-  function attachFriendRequestListeners() {
-    const notification = document.getElementById('notification');
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.add('show');
+  setTimeout(() => notification.classList.remove('show'), 3000);
+}
 
-    function showNotification(message) {
-      notification.textContent = message;
-      notification.classList.add('show');
-      setTimeout(() => notification.classList.remove('show'), 3000);
-    }
+function attachListeners() {
+  document.querySelectorAll('.confirm').forEach(btn => {
+    btn.onclick = () => {
+      const friendRequest = btn.closest('.friend-request');
+      // Clone the node to move to friends tab (remove confirm/delete buttons)
+      const friendClone = friendRequest.cloneNode(true);
 
-    document.querySelectorAll('.confirm').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const friendRequest = btn.closest('.friend-request');
-        friendRequest.style.display = 'none';
-        showNotification('Friend request confirmed!');
-      });
-    });
+      // Remove confirm/delete buttons from clone
+      friendClone.querySelector('.actions').remove();
 
-    document.querySelectorAll('.delete').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const friendRequest = btn.closest('.friend-request');
-        friendRequest.style.display = 'none';
-      });
-    });
-  }
+      // Hide original from suggestions
+      friendRequest.style.display = 'none';
 
-  attachFriendRequestListeners();
-  
+      // Add clone to Your friends list
+      yourFriendsList.appendChild(friendClone);
+
+      showNotification('Friend request confirmed!');
+    };
+  });
+
+  document.querySelectorAll('.delete').forEach(btn => {
+    btn.onclick = () => {
+      const friendRequest = btn.closest('.friend-request');
+      friendRequest.style.display = 'none';
+      // No notification on delete
+    };
+  });
+}
+
+attachListeners();
 </script>
 </body>
 
 </html>
+
 
 
 
