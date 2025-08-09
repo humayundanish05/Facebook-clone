@@ -177,18 +177,16 @@ body {
 }
 
 .mutualfriendsnames {
-  margin-left: 12px !important;
+  margin-left: 8px !important;
   white-space: nowrap;
 }
   
-  white-space: nowrap; /* keep text in one line */
-}
 /* Buttons container */
 .actions {
   display: flex;
   gap: 8px;
   margin-top: 4px;
-  padding-left: 8px; /* profile image ki width + margin ka space */
+  padding-left: 8px; 
   padding-right: 8px; /* edge se door rakhne ke liye */
 }
 
@@ -214,6 +212,7 @@ body {
   background-color: #3a3b3c;
   color: white;
 }
+
 
 
 
