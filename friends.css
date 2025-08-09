@@ -165,7 +165,7 @@ body {
 .mutual {
   display: flex;
   align-items: center;
-  gap: 8px;
+
 }
 
 .mutual-img {
@@ -177,6 +177,9 @@ body {
 }
 
 .mutualfriendsnames {
+  margin-left: 5px !important;
+  white-space: nowrap;
+}
   
   white-space: nowrap; /* keep text in one line */
 }
@@ -211,6 +214,7 @@ body {
   background-color: #3a3b3c;
   color: white;
 }
+
 
 
 
