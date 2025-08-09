@@ -1,99 +1,94 @@
-﻿body {
+body {
   background-color: #18191a;
   margin: 0;
   font-family: Arial, sans-serif;
   color: #e4e6eb;
+  font-size: 16px; /* Bigger base text */
 }
 
-
+/* Top bar (Data mode) */
 .top-bar {
   background-color: #242526;
-  padding: 8px 12px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
 }
-
 
 .buy-data-btn {
   background-color: #3a3b3c;
   border: none;
-  padding: 4px 10px;
-  border-radius: 5px;
+  padding: 6px 14px;
+  border-radius: 6px;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-
+/* Facebook header icons row */
 .fb-header {
   background-color: #242526;
   display: flex;
   justify-content: space-around;
-  padding: 8px 0;
+  padding: 12px 0;
   position: relative;
 }
-
 
 .fb-header i {
   position: relative;
-  font-size: 18px;
+  font-size: 22px; /* Bigger icons */
   color: #b0b3b8;
 }
-
 
 .fb-header .active {
   color: #2e89ff;
 }
 
-
 .badge {
   background-color: red;
   color: white;
-  font-size: 10px;
-  padding: 1px 4px;
-  border-radius: 10px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
   position: absolute;
-  top: -4px;
-  right: -8px;
+  top: -6px;
+  right: -10px;
 }
 
-
+/* Friends header (Friend requests page title) */
 .friends-header {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 14px;
   background-color: #18191a;
 }
 
-
 .friends-header h1 {
   margin: 0;
+  font-size: 22px;
+}
+
+.back-icon {
+  margin-right: 14px;
   font-size: 20px;
 }
 
-
-.back-icon {
-  margin-right: 10px;
-}
-
-
+/* Tabs */
 .tabs {
   display: flex;
   background-color: #242526;
-  padding: 8px;
+  padding: 10px;
 }
-
 
 .tab {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   border: none;
   background: none;
   color: #b0b3b8;
   font-weight: bold;
+  font-size: 15px;
 }
-
 
 .tab.active {
   background-color: #3a3b3c;
@@ -101,96 +96,90 @@
   color: white;
 }
 
-
+/* Friend requests header */
 .friend-requests-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 14px;
 }
-
 
 .friend-requests-header h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
 }
-
 
 .friend-requests-header a {
   color: #2e89ff;
-  font-size: 14px;
+  font-size: 15px;
   text-decoration: none;
 }
 
-
+/* Friend request item */
 .friend-request {
   display: flex;
-  padding: 10px;
+  padding: 14px;
   border-bottom: 1px solid #3a3b3c;
 }
 
-
 .avatar {
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 12px;
+  width: 65px;
+  height: 65px; /* Bigger profile pics */
 }
-
 
 .info {
   flex: 1;
 }
 
-
 .name {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
 }
-
 
 .time {
-  font-size: 12px;
+  font-size: 13px;
   color: #b0b3b8;
-  margin-left: 5px;
+  margin-left: 6px;
 }
-
 
 .mutual {
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
   color: #b0b3b8;
-  margin: 5px 0;
+  margin: 6px 0;
 }
-
 
 .mutual-img {
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   margin-right: -5px;
   border: 2px solid #18191a;
 }
 
-
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 6px;
 }
-
 
 .confirm {
   background-color: #2e89ff;
   border: none;
-  padding: 5px 12px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 6px;
   color: white;
+  font-size: 14px;
 }
-
 
 .delete {
   background-color: #3a3b3c;
   border: none;
-  padding: 5px 12px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 6px;
   color: white;
+  font-size: 14px;
 }
