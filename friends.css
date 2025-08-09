@@ -175,7 +175,7 @@ body {
   display: flex;
   gap: 8px;
   margin-top: 4px;
-  padding-left: 10px; /* profile image ki width + margin ka space */
+  padding-left: 8px; /* profile image ki width + margin ka space */
   padding-right: 8px; /* edge se door rakhne ke liye */
 }
 
@@ -201,4 +201,5 @@ body {
   background-color: #3a3b3c;
   color: white;
 }
+
 
