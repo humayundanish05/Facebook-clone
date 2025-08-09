@@ -250,73 +250,73 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------------- External posts (DummyJSON + photos) ---------------------- */
   // Use same id "dynamicPostFeed" for external posts to append
   const postFeed = document.getElementById("dynamicPostFeed");
-const photos = [/* photos array same as before */];
 
-let limit = 20;  // per batch posts
-let skip = 0;    // start at zero
+  const photos = [
+    'https://picsum.photos/600/400?random=1',
+    'https://picsum.photos/600/400?random=2',
+    'https://picsum.photos/600/400?random=3',
+    'https://picsum.photos/600/400?random=4',
+    'https://picsum.photos/600/400?random=5',
+    'https://picsum.photos/600/400?random=6',
+    'https://picsum.photos/600/400?random=7',
+    'https://picsum.photos/600/400?random=8',
+    'https://picsum.photos/600/400?random=9',
+    'https://picsum.photos/600/400?random=10',
+  ];
 
-async function loadRealPosts() {
-  if (!postFeed) return;
+  async function loadRealPosts() {
+    if (!postFeed) return; // guard
 
-  try {
-    const [postsRes, usersRes] = await Promise.all([
-      fetch(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`),
-      fetch('https://dummyjson.com/users')
-    ]);
+    try {
+      const [postsRes, usersRes] = await Promise.all([
+        fetch('https://dummyjson.com/posts?limit=10'),
+        fetch('https://dummyjson.com/users')
+      ]);
 
-    const postsData = await postsRes.json();
-    const usersData = await usersRes.json();
+      const postsData = await postsRes.json();
+      const usersData = await usersRes.json();
 
-    const posts = postsData.posts;
-    const users = usersData.users;
+      const posts = postsData.posts;
+      const users = usersData.users;
 
-    if (posts.length === 0) {
-      console.log('No more posts to load.');
-      return; // no more posts
-    }
+      posts.forEach((post, index) => {
+        const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
+        const photo = photos[index % photos.length];
 
-    posts.forEach((post, index) => {
-      const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-      const photo = photos[(skip + index) % photos.length];
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
 
-      const postElement = document.createElement('div');
-      postElement.className = 'post';
-
-      postElement.innerHTML = `
-        <div class="post-header">
-          <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
-          <div>
-            <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
-            <div class="time">Just now</div>
+        postElement.innerHTML = `
+          <div class="post-header">
+            <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
+            <div>
+              <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
+              <div class="time">Just now</div>
+            </div>
           </div>
-        </div>
-        <div class="post-content">
-          <img src="${photo}" alt="Post image" />
-          <h4>${escapeHtml(post.title)}</h4>
-          <p>${escapeHtml(post.body)}</p>
-        </div>
-        <div class="post-actions">
-          <span><i class="far fa-thumbs-up"></i> Like</span>
-          <span><i class="far fa-comment"></i> Comment</span>
-          <span><i class="fas fa-share"></i> Share</span>
-        </div>
-      `;
+          <div class="post-content">
+            <img src="${photo}" alt="Post image" />
+            <h4>${escapeHtml(post.title)}</h4>
+            <p>${escapeHtml(post.body)}</p>
+          </div>
+          <div class="post-actions">
+            <span><i class="far fa-thumbs-up"></i> Like</span>
+            <span><i class="far fa-comment"></i> Comment</span>
+            <span><i class="fas fa-share"></i> Share</span>
+          </div>
+        `;
 
-      postFeed.appendChild(postElement);
-    });
+        postFeed.appendChild(postElement);
+      });
 
-    skip += posts.length;  // update skip for next batch
-
-  } catch (error) {
-    console.error('Failed to load posts:', error);
+    } catch (error) {
+      console.error('Failed to load posts:', error);
+    }
   }
-}
 
-// Load initial posts
-loadRealPosts();
-
-// Optional: Load more button to fetch next posts on click
-document.getElementById("loadMoreBtn").addEventListener("click", () => {
-  loadRealPosts();
-});
+  // call loadRealPosts if feed exists
+  if (postFeed) {
+    loadRealPosts();
+  }
 }); // end DOMContentLoaded
+
