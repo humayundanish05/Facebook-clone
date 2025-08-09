@@ -216,7 +216,7 @@ body {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  background: #1877f2;
+  background: #696969;
   color: white;
   padding: 12px 20px;
   border-radius: 25px;
@@ -233,6 +233,7 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 
 
