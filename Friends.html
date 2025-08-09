@@ -88,24 +88,35 @@
     });
   });
 
-  // Confirm button
-  document.querySelectorAll('.confirm').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const friendRequest = btn.closest('.friend-request');
-      alert('Friend request confirmed!');
-      friendRequest.style.display = 'none'; // hide after confirm
-    });
-  });
+  const notification = document.getElementById('notification');
 
-  // Delete button
-  document.querySelectorAll('.delete').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const friendRequest = btn.closest('.friend-request');
-      alert('Friend request deleted.');
-      friendRequest.style.display = 'none'; // hide after delete
-    });
-  });
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.add('show');
 
+  // Hide after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Confirm button without alert, with notification
+document.querySelectorAll('.confirm').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const friendRequest = btn.closest('.friend-request');
+    friendRequest.style.display = 'none'; // hide after confirm
+    showNotification('Friend request confirmed!');
+  });
+});
+
+// Delete button without alert
+document.querySelectorAll('.delete').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const friendRequest = btn.closest('.friend-request');
+    friendRequest.style.display = 'none'; // hide after delete
+    // No notification as requested
+  });
+});
   // See all link
   document.querySelector('.see-all').addEventListener('click', e => {
     e.preventDefault();
@@ -115,6 +126,7 @@
 </body>
 
 </html>
+
 
 
 
