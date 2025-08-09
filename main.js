@@ -251,72 +251,88 @@ document.addEventListener("DOMContentLoaded", () => {
   // Use same id "dynamicPostFeed" for external posts to append
   const postFeed = document.getElementById("dynamicPostFeed");
 
-  const photos = [
-    'https://picsum.photos/600/400?random=1',
-    'https://picsum.photos/600/400?random=2',
-    'https://picsum.photos/600/400?random=3',
-    'https://picsum.photos/600/400?random=4',
-    'https://picsum.photos/600/400?random=5',
-    'https://picsum.photos/600/400?random=6',
-    'https://picsum.photos/600/400?random=7',
-    'https://picsum.photos/600/400?random=8',
-    'https://picsum.photos/600/400?random=9',
-    'https://picsum.photos/600/400?random=10',
-  ];
+const photos = [
+  'https://picsum.photos/600/400?random=1',
+  'https://picsum.photos/600/400?random=2',
+  'https://picsum.photos/600/400?random=3',
+  'https://picsum.photos/600/400?random=4',
+  'https://picsum.photos/600/400?random=5',
+  'https://picsum.photos/600/400?random=6',
+  'https://picsum.photos/600/400?random=7',
+  'https://picsum.photos/600/400?random=8',
+  'https://picsum.photos/600/400?random=9',
+  'https://picsum.photos/600/400?random=10',
+];
 
-  async function loadRealPosts() {
-    if (!postFeed) return; // guard
+let repeatCount = 0;  // kitni baar repeat ho chuka
 
-    try {
-      const [postsRes, usersRes] = await Promise.all([
-        fetch('https://dummyjson.com/posts?limit=150'),
-        fetch('https://dummyjson.com/users')
-      ]);
+async function loadRealPosts() {
+  if (!postFeed) return; // guard
 
-      const postsData = await postsRes.json();
-      const usersData = await usersRes.json();
+  try {
+    // Hamesha limit=150 se fetch karenge
+    const [postsRes, usersRes] = await Promise.all([
+      fetch('https://dummyjson.com/posts?limit=150'),
+      fetch('https://dummyjson.com/users')
+    ]);
 
-      const posts = postsData.posts;
-      const users = usersData.users;
+    const postsData = await postsRes.json();
+    const usersData = await usersRes.json();
 
-      posts.forEach((post, index) => {
-        const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-        const photo = photos[index % photos.length];
+    const posts = postsData.posts;
+    const users = usersData.users;
 
-        const postElement = document.createElement('div');
-        postElement.className = 'post';
+    // Posts ko append karne se pehle, agar repeat ho raha hai to thoda alag numbering ke sath lagayen
+    posts.forEach((post, index) => {
+      const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
+      
+      // Photo index ko repeatCount ke mutabiq shift karenge taake images thodi variety mein dikhain
+      const photo = photos[(index + repeatCount * posts.length) % photos.length];
 
-        postElement.innerHTML = `
-          <div class="post-header">
-            <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
-            <div>
-              <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
-              <div class="time">Just now</div>
-            </div>
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+
+      postElement.innerHTML = `
+        <div class="post-header">
+          <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
+          <div>
+            <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
+            <div class="time">Just now (Cycle ${repeatCount + 1})</div>
           </div>
-          <div class="post-content">
-            <img src="${photo}" alt="Post image" />
-            <h4>${escapeHtml(post.title)}</h4>
-            <p>${escapeHtml(post.body)}</p>
-          </div>
-          <div class="post-actions">
-            <span><i class="far fa-thumbs-up"></i> Like</span>
-            <span><i class="far fa-comment"></i> Comment</span>
-            <span><i class="fas fa-share"></i> Share</span>
-          </div>
-        `;
+        </div>
+        <div class="post-content">
+          <img src="${photo}" alt="Post image" />
+          <h4>${escapeHtml(post.title)}</h4>
+          <p>${escapeHtml(post.body)}</p>
+        </div>
+        <div class="post-actions">
+          <span><i class="far fa-thumbs-up"></i> Like</span>
+          <span><i class="far fa-comment"></i> Comment</span>
+          <span><i class="fas fa-share"></i> Share</span>
+        </div>
+      `;
 
-        postFeed.appendChild(postElement);
-      });
+      postFeed.appendChild(postElement);
+    });
 
-    } catch (error) {
-      console.error('Failed to load posts:', error);
-    }
+    repeatCount++;  // increment repeat counter
+
+  } catch (error) {
+    console.error('Failed to load posts:', error);
   }
+}
 
-  // call loadRealPosts if feed exists
-  if (postFeed) {
+// Initial load
+if (postFeed) {
+  loadRealPosts();
+}
+
+// Example: agar aap "Load More" button use kar rahe hain
+const loadMoreBtn = document.getElementById("loadMoreBtn");
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', () => {
     loadRealPosts();
-  }
+  });
+}
 }); // end DOMContentLoaded
 
