@@ -66,10 +66,39 @@
 </div>
 
 
+<script>
+  // Confirm button click
+  document.querySelectorAll('.confirm').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const friendRequest = btn.closest('.friend-request');
+      alert('Friend request confirmed!');
+      // For demo: Hide the friend request card after confirming
+      friendRequest.style.display = 'none';
+    });
+  });
 
+  // Delete button click
+  document.querySelectorAll('.delete').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const friendRequest = btn.closest('.friend-request');
+      alert('Friend request deleted.');
+      // For demo: Hide the friend request card after deleting
+      friendRequest.style.display = 'none';
+    });
+  });
+
+  // See all click
+  const seeAllLink = document.querySelector('.friend-requests-header a');
+  seeAllLink.addEventListener('click', (e) => {
+    e.preventDefault();  // prevent default link action
+    alert('Showing all friend requests (this can be replaced with actual functionality)');
+    // You can replace alert with opening a modal or redirecting to full requests page
+  });
+</script>
 </body>
 
 </html>
+
 
 
 
