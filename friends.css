@@ -159,7 +159,7 @@ body {
   align-items: center;
   font-size: 13px;
   color: #b0b3b8;
-  margin: 4px 0;
+  margin-right: 4px;
 }
 
 .mutual-img {
@@ -196,5 +196,6 @@ body {
   font-size: 14px;
   font-weight: bold;
 }
+
 
 
