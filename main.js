@@ -264,13 +264,15 @@ const photos = [
   'https://picsum.photos/600/400?random=10',
 ];
 
-let repeatCount = 0;  // kitni baar repeat ho chuka
+let repeatCount = 0;  // tracks how many times posts have repeated
+let isLoading = false;
 
 async function loadRealPosts() {
-  if (!postFeed) return; // guard
+  if (!postFeed || isLoading) return;
+  isLoading = true;
 
   try {
-    // Hamesha limit=150 se fetch karenge
+    // Always fetch the same 150 posts
     const [postsRes, usersRes] = await Promise.all([
       fetch('https://dummyjson.com/posts?limit=150'),
       fetch('https://dummyjson.com/users')
@@ -282,11 +284,9 @@ async function loadRealPosts() {
     const posts = postsData.posts;
     const users = usersData.users;
 
-    // Posts ko append karne se pehle, agar repeat ho raha hai to thoda alag numbering ke sath lagayen
     posts.forEach((post, index) => {
       const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-      
-      // Photo index ko repeatCount ke mutabiq shift karenge taake images thodi variety mein dikhain
+      // Offset photo index to vary images on each repeat
       const photo = photos[(index + repeatCount * posts.length) % photos.length];
 
       const postElement = document.createElement('div');
@@ -315,24 +315,36 @@ async function loadRealPosts() {
       postFeed.appendChild(postElement);
     });
 
-    repeatCount++;  // increment repeat counter
-
+    repeatCount++;
   } catch (error) {
     console.error('Failed to load posts:', error);
   }
+
+  isLoading = false;
 }
 
 // Initial load
-if (postFeed) {
-  loadRealPosts();
-}
+loadRealPosts();
 
-// Example: agar aap "Load More" button use kar rahe hain
-const loadMoreBtn = document.getElementById("loadMoreBtn");
-if (loadMoreBtn) {
-  loadMoreBtn.addEventListener('click', () => {
+// Infinite scroll trigger near bottom of page
+window.addEventListener('scroll', () => {
+  if (isLoading) return; // prevent multiple simultaneous loads
+
+  // When near bottom (e.g. 100px from bottom)
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
     loadRealPosts();
-  });
+  }
+});
+
+// Simple HTML helper to escape text (add if you don't have already)
+function escapeHtml(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 }); // end DOMContentLoaded
 
