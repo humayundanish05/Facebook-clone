@@ -45,7 +45,7 @@ body, html {
 .fb-header i {
   position: relative;
   font-size: 22px; /* Bigger icons */
-  color: #b0b3b8;
+  color: #000000;
 }
 
 .fb-header .active {
