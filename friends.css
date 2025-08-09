@@ -73,50 +73,7 @@ body {
   font-size: 20px;
 }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  background-color: #242526;
-  padding: 10px;
-}
 
-.tab {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background: none;
-  color: #b0b3b8;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.tab:hover {
-  background-color: #3a3b3c;
-  color: white;
-}
-
-.tab.active {
-  background-color: #3a3b3c;
-  color: white;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Smooth tab content animation */
-.tab-content {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Friend requests header */
 .friend-requests-header {
@@ -136,6 +93,32 @@ body {
   font-size: 15px;
   text-decoration: none;
 }
+
+/* Tabs */
+.tabs {
+display: flex;
+background-color: #242526;
+padding: 10px;
+}
+
+.tab {
+flex: 1;
+padding: 10px;
+border: none;
+background: none;
+color: #b0b3b8;
+font-weight: bold;
+font-size: 15px;
+}
+
+.tab.active {
+background-color: #3a3b3c;
+border-radius: 20px;
+color: white;
+}
+
+
+
 
 /* Friend request card */
 .friend-request {
@@ -255,5 +238,6 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 
