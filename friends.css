@@ -170,33 +170,34 @@ body {
   border: 2px solid #18191a;
 }
 
-/* Buttons */
+/* Buttons container */
 .actions {
   display: flex;
   gap: 8px;
   margin-top: 4px;
+  padding-left: 80px; /* profile image ki width + margin ka space */
+  padding-right: 8px; /* edge se door rakhne ke liye */
 }
 
+/* Common button style */
+.actions button {
+  flex: 1; /* dono buttons equal width */
+  border: none;
+  padding: 8px 0;
+  border-radius: 8px; /* thoda zyada rounded corners */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Confirm button */
 .confirm {
   background-color: #2374e1;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
   color: white;
-  font-size: 14px;
-  font-weight: bold;
 }
 
+/* Delete button */
 .delete {
   background-color: #3a3b3c;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
   color: white;
-  font-size: 14px;
-  font-weight: bold;
 }
-
-
-
-
