@@ -40,7 +40,7 @@ console.log("JS Loaded");
 document.addEventListener("DOMContentLoaded", () => {
 const postBtn = document.getElementById("submitPost");
 const statusInput = document.getElementById("postText");
-const feed = document.getElementById("postFeed");
+const feed = document.getElementById("dynamicPostFeed");
 
 const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
 savedPosts.forEach(post => renderPost(post));
