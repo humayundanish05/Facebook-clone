@@ -73,37 +73,49 @@
 
 
 <script>
-  // Confirm button click
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.style.display = 'none');
+
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab');
+      document.getElementById(tabId).style.display = 'block';
+    });
+  });
+
+  // Confirm button
   document.querySelectorAll('.confirm').forEach(btn => {
     btn.addEventListener('click', () => {
       const friendRequest = btn.closest('.friend-request');
       alert('Friend request confirmed!');
-      // For demo: Hide the friend request card after confirming
-      friendRequest.style.display = 'none';
+      friendRequest.style.display = 'none'; // hide after confirm
     });
   });
 
-  // Delete button click
+  // Delete button
   document.querySelectorAll('.delete').forEach(btn => {
     btn.addEventListener('click', () => {
       const friendRequest = btn.closest('.friend-request');
       alert('Friend request deleted.');
-      // For demo: Hide the friend request card after deleting
-      friendRequest.style.display = 'none';
+      friendRequest.style.display = 'none'; // hide after delete
     });
   });
 
-  // See all click
-  const seeAllLink = document.querySelector('.friend-requests-header a');
-  seeAllLink.addEventListener('click', (e) => {
-    e.preventDefault();  // prevent default link action
-    alert('Showing all friend requests (this can be replaced with actual functionality)');
-    // You can replace alert with opening a modal or redirecting to full requests page
+  // See all link
+  document.querySelector('.see-all').addEventListener('click', e => {
+    e.preventDefault();
+    alert('Show all friend requests (replace with actual functionality)');
   });
 </script>
 </body>
 
 </html>
+
 
 
 
