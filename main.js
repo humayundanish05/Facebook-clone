@@ -249,73 +249,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------------------- External posts (DummyJSON + photos) ---------------------- */
   // Use same id "dynamicPostFeed" for external posts to append
-  const postFeed = document.getElementById("dynamicPostFeed");
+  
+    const feed = document.getElementById("dynamicPostFeed");
+    let limit = 10; 
+    let skip = 0; 
+    let loading = false; 
+    let totalPosts = null; 
 
-  const photos = [
-    'https://picsum.photos/600/400?random=1',
-    'https://picsum.photos/600/400?random=2',
-    'https://picsum.photos/600/400?random=3',
-    'https://picsum.photos/600/400?random=4',
-    'https://picsum.photos/600/400?random=5',
-    'https://picsum.photos/600/400?random=6',
-    'https://picsum.photos/600/400?random=7',
-    'https://picsum.photos/600/400?random=8',
-    'https://picsum.photos/600/400?random=9',
-    'https://picsum.photos/600/400?random=10',
-  ];
+    const sampleNames = [
+        "Ali Khan", "Sara Ahmed", "Bilal Malik", "Zainab Raza", "Hassan Iqbal",
+        "Fatima Noor", "Omer Siddiqui", "Ayesha Tariq", "Usman Javed", "Mariam Bukhari"
+    ];
 
-  async function loadRealPosts() {
-    if (!postFeed) return; // guard
+    async function fetchPosts() {
+        if (loading) return;
+        loading = true;
 
-    try {
-      const [postsRes, usersRes] = await Promise.all([
-        fetch('https://dummyjson.com/posts?limit=10'),
-        fetch('https://dummyjson.com/users')
-      ]);
+        try {
+            const res = await fetch(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`);
+            const data = await res.json();
 
-      const postsData = await postsRes.json();
-      const usersData = await usersRes.json();
+            if (totalPosts === null) {
+                totalPosts = data.total;
+            }
 
-      const posts = postsData.posts;
-      const users = usersData.users;
+            data.posts.forEach(post => {
+                const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+                const profilePic = `https://i.pravatar.cc/50?img=${Math.floor(Math.random() * 70) + 1}`;
+                const randomImageChance = Math.random() < 0.7; // 70% posts me image hoga
+                const postImage = randomImageChance ? `https://source.unsplash.com/600x400/?random&sig=${Math.floor(Math.random() * 1000)}` : null;
 
-      posts.forEach((post, index) => {
-        const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-        const photo = photos[index % photos.length];
+                const postEl = document.createElement("div");
+                postEl.classList.add("post");
 
-        const postElement = document.createElement('div');
-        postElement.className = 'post';
+                postEl.innerHTML = `
+                    <div class="post-header">
+                        <img src="${profilePic}" alt="${randomName}" class="profile-pic">
+                        <div>
+                            <h4>${randomName}</h4>
+                            <span class="timestamp">${new Date().toLocaleString()}</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3>${post.title}</h3>
+                        <p>${post.body}</p>
+                        ${postImage ? `<img src="${postImage}" class="post-img" alt="Post Image">` : ""}
+                    </div>
+                    <div class="post-actions">
+                        <button>👍 Like</button>
+                        <button>💬 Comment</button>
+                        <button>↗ Share</button>
+                    </div>
+                `;
 
-        postElement.innerHTML = `
-          <div class="post-header">
-            <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
-            <div>
-              <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
-              <div class="time">Just now</div>
-            </div>
-          </div>
-          <div class="post-content">
-            <img src="${photo}" alt="Post image" />
-            <h4>${escapeHtml(post.title)}</h4>
-            <p>${escapeHtml(post.body)}</p>
-          </div>
-          <div class="post-actions">
-            <span><i class="far fa-thumbs-up"></i> Like</span>
-            <span><i class="far fa-comment"></i> Comment</span>
-            <span><i class="fas fa-share"></i> Share</span>
-          </div>
-        `;
+                feed.appendChild(postEl);
+            });
 
-        postFeed.appendChild(postElement);
-      });
-
-    } catch (error) {
-      console.error('Failed to load posts:', error);
+            skip += limit;
+        } catch (err) {
+            console.error("Error fetching posts:", err);
+        } finally {
+            loading = false;
+        }
     }
-  }
 
-  // call loadRealPosts if feed exists
-  if (postFeed) {
-    loadRealPosts();
-  }
+    // Infinite scroll
+    window.addEventListener("scroll", () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+            if (skip < totalPosts) {
+                fetchPosts();
+            }
+        }
+    });
+
+    fetchPosts();
+
 }); // end DOMContentLoaded
