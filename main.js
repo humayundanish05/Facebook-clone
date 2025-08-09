@@ -199,7 +199,7 @@ if (label) label.innerText = mode === "dark" ? "Dark Mode âœ…" : "Light Mode ðŸŒ
 }
 
 // External posts from JSONPlaceholder
-const postFeed = document.getElementById('postFeed');
+const postFeed = document.getElementById('dynamicPostFeed');
 
 const photos = [
 'https://picsum.photos/600/400?random=1',
