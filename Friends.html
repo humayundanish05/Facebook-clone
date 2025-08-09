@@ -32,37 +32,43 @@
   </div>
 
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab active">Suggestions</button>
-    <button class="tab">Your friends</button>
-  </div>
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" data-tab="suggestions">Suggestions</button>
+  <button class="tab" data-tab="friends">Your friends</button>
+</div>
 
-
-  <!-- Friend requests section -->
+<!-- Suggestions tab content -->
+<div id="suggestions" class="tab-content" style="display: block;">
+  <!-- Friend requests header -->
   <div class="friend-requests-header">
     <h2>Friend requests</h2>
-    <a href="#">See all</a>
+    <a href="#" class="see-all">See all</a>
   </div>
-
 
   <!-- Friend request items -->
-<div class="friend-request">
-  <img src="https://i.pravatar.cc/60?img=33" class="avatar">
-  <div class="info">
-    <div class="name">Ibad Afghan <span class="time">3d</span></div>
-    <div class="mutual">
-  <img src="https://i.pravatar.cc/20?img=70" class="mutual-img" />
-  <img src="https://i.pravatar.cc/20?img=71" class="mutual-img" />
-  <div class="mutualfriendsnames">
-    75 mutual friends
-  </div>
+  <div class="friend-request">
+    <img src="https://i.pravatar.cc/60?img=33" class="avatar">
+    <div class="info">
+      <div class="name">Ibad Afghan <span class="time">3d</span></div>
+      <div class="mutual">
+        <img src="https://i.pravatar.cc/20?img=70" class="mutual-img" />
+        <img src="https://i.pravatar.cc/20?img=71" class="mutual-img" />
+        <div class="mutualfriendsnames">75 mutual friends</div>
+      </div>
+      <div class="actions">
+        <button class="confirm">Confirm</button>
+        <button class="delete">Delete</button>
+      </div>
     </div>
-    <div class="actions">
-      <button class="confirm">Confirm</button>
-      <button class="delete">Delete</button>
-    </div>
   </div>
+</div>
+
+<!-- Your friends tab content -->
+<div id="friends" class="tab-content" style="display: none;">
+  <!-- Example content for Your friends tab -->
+  <h2>Your friends list</h2>
+  <p>No friends added yet.</p>
 </div>
 
 
@@ -98,6 +104,7 @@
 </body>
 
 </html>
+
 
 
 
