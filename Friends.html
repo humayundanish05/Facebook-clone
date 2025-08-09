@@ -47,22 +47,18 @@
   </div>
 
   <!-- Friend request items -->
-  <div class="friend-request">
-    <img src="https://i.pravatar.cc/60?img=33" class="avatar">
-    <div class="info">
-      <div class="name">Ibad Afghan <span class="time">3d</span></div>
-      <div class="mutual">
-        <img src="https://i.pravatar.cc/20?img=70" class="mutual-img" />
-        <img src="https://i.pravatar.cc/20?img=71" class="mutual-img" />
-        <div class="mutualfriendsnames">75 mutual friends</div>
-      </div>
-      <div class="actions">
-        <button class="confirm">Confirm</button>
-        <button class="delete">Delete</button>
-      </div>
-    </div>
+  <div id="suggestions" class="tab-content" style="display: block;">
+  <div class="friend-requests-header">
+    <h2>Friend requests</h2>
+    <a href="#" class="see-all">See all</a>
   </div>
-</div>
+
+  <!-- Multiple friend requests -->
+  <div class="friend-requests-list">
+    <!-- JS will inject 30 requests here -->
+  </div>
+  </div>
+  
 
   <div id="notification"></div>
 
@@ -125,10 +121,82 @@ document.querySelectorAll('.delete').forEach(btn => {
     e.preventDefault();
     alert('Show all friend requests (replace with actual functionality)');
   });
+
+  // 30 friend request 
+
+
+  const friendRequestsList = document.querySelector('.friend-requests-list');
+
+  // Example 30 names (you can change or add more)
+  const names = [
+    "Ibad Afghan", "Ali Khan", "Sara Malik", "Ahmed Raza", "Fatima Noor",
+    "Zain Siddiqui", "Ayesha Iqbal", "Omar Farooq", "Hina Shah", "Bilal Qureshi",
+    "Sana Tariq", "Usman Javed", "Mariam Zafar", "Adil Hassan", "Khadija Saeed",
+    "Nabeel Aslam", "Saba Rehman", "Farhan Ali", "Iqra Nasir", "Waseem Abbas",
+    "Zoya Mir", "Haris Anwar", "Nadia Imran", "Shahid Latif", "Samina Chaudhry",
+    "Danish Ahmed", "Rabia Arif", "Kamran Malik", "Noor Fatima", "Faizan Malik"
+  ];
+
+  // Generate friend requests HTML
+  let html = "";
+  for(let i = 0; i < 30; i++) {
+    const avatarNum = 33 + i; // unique avatar img
+    const mutualImg1 = 70 + (i % 10);
+    const mutualImg2 = 71 + (i % 10);
+
+    html += `
+      <div class="friend-request">
+        <img src="https://i.pravatar.cc/60?img=${avatarNum}" class="avatar">
+        <div class="info">
+          <div class="name">${names[i]} <span class="time">${Math.floor(Math.random() * 5 + 1)}d</span></div>
+          <div class="mutual">
+            <img src="https://i.pravatar.cc/20?img=${mutualImg1}" class="mutual-img" />
+            <img src="https://i.pravatar.cc/20?img=${mutualImg2}" class="mutual-img" />
+            <div class="mutualfriendsnames">${Math.floor(Math.random() * 100 + 1)} mutual friends</div>
+          </div>
+          <div class="actions">
+            <button class="confirm">Confirm</button>
+            <button class="delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  friendRequestsList.innerHTML = html;
+
+  // After injecting, reattach event listeners to buttons (Confirm/Delete)
+  function attachFriendRequestListeners() {
+    const notification = document.getElementById('notification');
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
+    }
+
+    document.querySelectorAll('.confirm').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const friendRequest = btn.closest('.friend-request');
+        friendRequest.style.display = 'none';
+        showNotification('Friend request confirmed!');
+      });
+    });
+
+    document.querySelectorAll('.delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const friendRequest = btn.closest('.friend-request');
+        friendRequest.style.display = 'none';
+      });
+    });
+  }
+
+  attachFriendRequestListeners();
+  
 </script>
 </body>
 
 </html>
+
 
 
 
