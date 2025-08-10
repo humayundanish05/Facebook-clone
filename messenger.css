@@ -78,6 +78,7 @@ html, body {
   border-radius: 50%;      /* gol shape */
   transition: background 0.2s ease;
   cursor: pointer;
+  color: black;
 }
 
 .info-icons i.fas.fa-cog:hover {
@@ -443,6 +444,7 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
 .hidden {
   display: none !important;
 }
+
 
 
 
