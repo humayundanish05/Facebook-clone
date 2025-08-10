@@ -13,28 +13,34 @@ body {
   height: 100vh;
 }
 
-/* Shortcut Bar - Fixed at top */
-.shortcut-bar {
+/* Facebook header icons row */
+.fb-header {
+  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
-  background: #18191a;
-  padding: 10px 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  border-bottom: 1px solid #333;
+  padding: 12px 0;
+  position: relative;
 }
 
-.shortcut-bar a {
-  color: #ccc;
-  font-size: 20px;
-  text-decoration: none;
+.fb-header i {
+  position: relative;
+  font-size: 22px; /* Bigger icons */
+  color: #000000;
 }
 
-.shortcut-bar a.active,
-.shortcut-bar a:hover {
-  color: #fff;
+.fb-header .active {
+  color: #000000;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  position: absolute;
+  top: -6px;
+  right: -10px;
 }
 
 /* Top Watch Header - Below shortcut bar */
@@ -508,4 +514,5 @@ body {
 .more-menu.hidden {
   display: none;
 }
+
 
