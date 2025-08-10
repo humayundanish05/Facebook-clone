@@ -25,11 +25,11 @@ body {
 .fb-header i {
   position: relative;
   font-size: 22px; /* Bigger icons */
-  color: #000000;
+  color: #b0b3b8;
 }
 
 .fb-header .active {
-  color: #000000;
+  color: #b0b3b8;
 }
 
 .badge {
@@ -514,6 +514,7 @@ body {
 .more-menu.hidden {
   display: none;
 }
+
 
 
 
