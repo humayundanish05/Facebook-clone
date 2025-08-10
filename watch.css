@@ -15,7 +15,7 @@ body {
 
 /* Facebook header icons row */
 .fb-header {
-  background-color: #ffffff;
+  background-color: #242526;
   display: flex;
   justify-content: space-around;
   padding: 12px 0;
@@ -514,5 +514,6 @@ body {
 .more-menu.hidden {
   display: none;
 }
+
 
 
