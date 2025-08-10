@@ -61,12 +61,11 @@ html, body {
 }
 
 #searchInput {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 40px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 18px;
 }
-
 
 /* story */
 .story-bar {
@@ -425,6 +424,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
