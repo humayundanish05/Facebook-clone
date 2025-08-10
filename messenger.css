@@ -12,29 +12,35 @@ html, body {
   overflow: hidden;
 }
 
-/* Top Bar Navigation */
-.top-bar {
-  background: white;
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
-}
-
-.nav-row {
+/* Facebook header icons row */
+.fb-header {
+  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
-  padding: 5px 0;
+  padding: 12px 0;
+  position: relative;
 }
 
-.nav-row a {
-  color: #333;
-  font-size: 20px;
-  text-decoration: none;
+.fb-header i {
+  position: relative;
+  font-size: 22px; /* Bigger icons */
+  color: #000000;
 }
 
-.nav-row a.active {
-  color: #1877f2;
+.fb-header .active {
+  color: #000000;
 }
 
+.badge {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  position: absolute;
+  top: -6px;
+  right: -10px;
+}
 /* Info Row (Messenger + Search) */
 .info-row {
   display: flex;
@@ -419,6 +425,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
