@@ -42,6 +42,8 @@ html, body {
   right: -10px;
 }
 /* Info Row (Messenger + Search) */
+/* Info Row (Messenger + Search) */
+
 .info-row {
   display: flex;
   justify-content: space-between;
@@ -60,13 +62,27 @@ html, body {
   align-items: center;
 }
 
-/* search input section*/
+/* search input section */
 #searchInput {
-  padding: 12px 18px;     /* height increase */
+  padding: 12px 18px;      /* height increase */
   border-radius: 25px;
   border: 1px solid #ccc;
-  font-size: 16px;        /* text bada */
-  width: 250px;           /* width fix badi */
+ font-size: 16px;         /* text bada */
+  width: 330px;            /* width fix badi */
+}
+
+/* settings icon */
+.info-icons i.fas.fa-cog {
+  font-size: 30px;         /* icon bada */
+  padding: 3px;            /* icon ke aas paas space */
+  border-radius: 50%;      /* gol shape */
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.info-icons i.fas.fa-cog:hover {
+background: rgba(0, 0, 0, 0.1); /* hover effect */
+
 }
 
 
@@ -427,6 +443,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
