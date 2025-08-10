@@ -60,12 +60,34 @@ html, body {
   align-items: center;
 }
 
+/* search input section*/
 #searchInput {
-  padding: 10px 20px;
-  border-radius: 40px;
+  padding: 12px 18px;       /* height increase */
+  border-radius: 25px;
   border: 1px solid #ccc;
-  font-size: 18px;
+  font-size: 16px;
+  width: 100%;              /* responsive width */
+  max-width: 350px;         /* desktop par max limit */
+  box-sizing: border-box;   /* padding ke baad bhi width control */
 }
+
+/* Tablet size ke liye */
+@media (max-width: 768px) {
+  #searchInput {
+    max-width: 250px;       /* tablet pe thoda chhota */
+    font-size: 15px;
+  }
+}
+
+/* Mobile size ke liye */
+@media (max-width: 480px) {
+  #searchInput {
+    max-width: 200px;       /* mobile pe aur chhota */
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
 
 /* story */
 .story-bar {
@@ -424,6 +446,7 @@ html, body {
 .hidden {
   display: none !important;
 }
+
 
 
 
