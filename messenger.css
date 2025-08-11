@@ -124,6 +124,7 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
   height: calc(100vh - 180px); /* Adjusted height */
   background: white;
   padding: 10px;
+  scroll-behavior: smooth; /* smooth scroll when chat updates */
 }
 
 .message {
@@ -131,6 +132,12 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #f0f0f0;
+  position: relative; /* for badge positioning if needed */
+  transition: background-color 0.3s ease;
+}
+
+.message:hover {
+  background-color: #f9f9f9; /* subtle highlight on hover */
 }
 
 .message img {
@@ -138,50 +145,60 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
   height: 45px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .dots-button {
   background: transparent;
   border: none;
-  font-size: 18px;
+  font-size: 20px; /* slightly bigger for easier tap */
   cursor: pointer;
   color: #555;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.25s ease, color 0.25s ease;
   align-self: center;
   margin-left: auto; /* right side align */
+  user-select: none;
 }
 
-.dots-button:hover {
+.dots-button:hover,
+.dots-button:focus {
   background-color: #eee;
   color: #333;
+  outline: none;
 }
 
 .message strong {
   font-size: 15px;
+  user-select: text;
 }
 
 .message span {
   font-size: 13px;
   color: gray;
+  user-select: text;
 }
 
 .badge {
-  margin-left: auto;
+  position: absolute; /* better positioning relative to message */
+  top: 12px;
+  right: 8px;
   background: red;
   color: white;
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 12px;
+  user-select: none;
 }
 
 .time {
   margin-left: auto;
   font-size: 12px;
   color: gray;
+  user-select: none;
 }
-
+ 
 /* Chat Window */
 .chat-window {
   position: fixed;
@@ -462,6 +479,7 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
 .hidden {
   display: none !important;
 }
+
 
 
 
