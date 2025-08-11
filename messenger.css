@@ -140,6 +140,24 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
   object-fit: cover;
 }
 
+.dots-button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  align-self: center;
+  margin-left: auto; /* right side align */
+}
+
+.dots-button:hover {
+  background-color: #eee;
+  color: #333;
+}
+
 .message strong {
   font-size: 15px;
 }
@@ -444,6 +462,7 @@ background: rgba(0, 0, 0, 0.1); /* hover effect */
 .hidden {
   display: none !important;
 }
+
 
 
 
