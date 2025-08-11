@@ -193,20 +193,49 @@ function updateMessageElement(chat) {
 function enhanceExistingMessages() {
   const msgs = messageList.querySelectorAll(".message");
   msgs.forEach(m => {
-    if (!m.querySelector(".dots-button")) {
-      // append minimal actions wrapper
-      const actions = document.createElement('div');
+    // ensure the first inner DIV becomes ".message-content"
+    let contentDiv = m.querySelector('div');
+    if (contentDiv && !contentDiv.classList.contains('message-content')) {
+      contentDiv.classList.add('message-content');
+    }
+
+    // find or create actions wrapper
+    let actions = m.querySelector('.message-actions');
+    if (!actions) {
+      actions = document.createElement('div');
       actions.className = 'message-actions';
-      const btn = document.createElement("button");
-      btn.className = "dots-button";
-      btn.setAttribute("aria-label", "Options");
-      btn.innerHTML = "&#8942;";
+
+      // move existing badge/time into actions if present
+      const badge = m.querySelector('.badge');
+      const time = m.querySelector('.time');
+      if (badge) actions.appendChild(badge);
+      if (time) actions.appendChild(time);
+
+      // create dots button and append
+      const btn = document.createElement('button');
+      btn.className = 'dots-button';
+      btn.setAttribute('aria-label', 'Options');
+      btn.innerHTML = '&#8942;';
       actions.appendChild(btn);
+
       m.appendChild(actions);
+    } else {
+      // ensure dots-button exists inside actions
+      if (!actions.querySelector('.dots-button')) {
+        const btn = document.createElement('button');
+        btn.className = 'dots-button';
+        btn.setAttribute('aria-label', 'Options');
+        btn.innerHTML = '&#8942;';
+        actions.appendChild(btn);
+      }
+      // if badge/time are still direct siblings, move them into actions
+      const badgeSibling = m.querySelector('.badge');
+      const timeSibling = m.querySelector('.time');
+      if (badgeSibling && !actions.contains(badgeSibling)) actions.insertBefore(badgeSibling, actions.firstChild);
+      if (timeSibling && !actions.contains(timeSibling)) actions.insertBefore(timeSibling, actions.firstChild);
     }
   });
 }
-
 // === Position & open global menu for a given message id and button element ===
 function openMenuForMessage(chatId, buttonEl) {
   currentMenuTargetId = chatId;
@@ -580,4 +609,5 @@ window.addEventListener("DOMContentLoaded", () => {
   // Add dots buttons to existing static messages
   enhanceExistingMessages();
 });
+
 
