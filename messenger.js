@@ -1,14 +1,24 @@
+// messenger.js — fixed & improved
 let currentChatName = "User";
 
-// === New Chat Creation + Local Storage Integration ===
+// === Elements ===
 const fab = document.querySelector(".fab");
 const modal = document.getElementById("newChatModal");
 const createBtn = document.getElementById("createChatBtn");
 const cancelBtn = document.getElementById("cancelChatBtn");
 const nameInput = document.getElementById("newChatName");
-//pick random avatar for new generated chats 
+const messageList = document.querySelector(".message-list");
+const chatWindow = document.querySelector(".chat-window");
+const chatNameEl = document.getElementById("chat-name");
+const chatAvatarEl = document.querySelector(".chat-avatar");
+const chatMessagesEl = document.getElementById("chatMessages");
+const sendBtn = document.getElementById("sendBtn");
+const input = document.getElementById("messageInput");
+const imageInput = document.getElementById("imageInput");
+const likeBtn = document.querySelector(".like-btn");
+const searchInput = document.getElementById("searchInput");
 
-
+// avatar pool
 const avatarURLs = [
   "https://i.pravatar.cc/150?img=1", "https://i.pravatar.cc/150?img=2", "https://i.pravatar.cc/150?img=3", "https://i.pravatar.cc/150?img=4",
   "https://i.pravatar.cc/150?img=5", "https://i.pravatar.cc/150?img=6", "https://i.pravatar.cc/150?img=7", "https://i.pravatar.cc/150?img=8",
@@ -30,251 +40,276 @@ const avatarURLs = [
   "https://i.pravatar.cc/150?img=69", "https://i.pravatar.cc/150?img=70"
 ];
 
-
-//---------
-
+// saved chats & history
 let savedChats = JSON.parse(localStorage.getItem("chats")) || [];
+let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || {};
 
+// === Utilities ===
+function saveChatsToStorage() {
+  localStorage.setItem("chats", JSON.stringify(savedChats));
+}
+function saveHistoryToStorage() {
+  localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
+}
 
-fab.addEventListener("click", () => {
+// === Modal / FAB ===
+fab?.addEventListener("click", () => {
   modal.classList.remove("hidden");
   nameInput.value = "";
   nameInput.focus();
 });
+cancelBtn?.addEventListener("click", () => modal.classList.add("hidden"));
 
-cancelBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
-
-createBtn.addEventListener("click", () => {
+// Create chat
+createBtn?.addEventListener("click", () => {
   const name = nameInput.value.trim();
   if (!name) return alert("Please enter a name.");
-
-  if (savedChats.some(c => c.name === name)) {
-    return alert("Chat with this name already exists.");
-  }
+  if (savedChats.some(c => c.name === name)) return alert("Chat with this name already exists.");
 
   const avatar = avatarURLs[Math.floor(Math.random() * avatarURLs.length)];
   const newChat = { name, avatar };
   savedChats.push(newChat);
-  localStorage.setItem("chats", JSON.stringify(savedChats));
+  saveChatsToStorage();
 
   renderChatItem(newChat);
   modal.classList.add("hidden");
 });
 
+// === Render chat item (for message list) ===
 function renderChatItem({ name, avatar }) {
   const msg = document.createElement("div");
   msg.className = "message";
   msg.innerHTML = `
-    <img src="${avatar}" />
-    <div>
+    <img src="${avatar}" alt="${name}" />
+    <div class="message-content">
       <strong>${name}</strong><br/>
       <span>Start your conversation</span>
     </div>
+    <button class="dots-button" aria-label="Options">&#8942;</button>
   `;
-  msg.addEventListener("click", () => openChatWindow(name, avatar));
-  document.querySelector(".message-list").prepend(msg);
+
+  // prepend to list
+  messageList.prepend(msg);
+
+  // (No individual click listeners here — we use delegation below)
 }
 
-// === Load chats on page load ===
-window.addEventListener("DOMContentLoaded", () => {
-  savedChats.forEach(chat => renderChatItem(chat));
+// === Enhance existing static messages (append dots button if missing) ===
+function enhanceExistingMessages() {
+  const msgs = messageList.querySelectorAll(".message");
+  msgs.forEach(m => {
+    if (!m.querySelector(".dots-button")) {
+      const btn = document.createElement("button");
+      btn.className = "dots-button";
+      btn.setAttribute("aria-label", "Options");
+      btn.innerHTML = "&#8942;";
+      m.appendChild(btn);
+    }
+  });
+}
+
+// === Delegated click handling for message-list (handles static + dynamic) ===
+messageList?.addEventListener("click", (e) => {
+  const msgEl = e.target.closest(".message");
+  if (!msgEl) return;
+
+  // If dots button clicked
+  if (e.target.closest(".dots-button")) {
+    e.stopPropagation();
+    const name = msgEl.querySelector("strong")?.innerText || "Unknown";
+    // TODO: Replace alert with actual contextual menu
+    alert(`Options for ${name}\n(You can implement edit/delete/mark-as-read here)`);
+    return;
+  }
+
+  // Otherwise, open chat
+  const name = msgEl.querySelector("strong")?.innerText || "User";
+  const imgSrc = msgEl.querySelector("img")?.getAttribute("src") || "";
+  openChatWindow(name, imgSrc);
 });
 
-// === Function to open chat and load its messages ===
+// === Open chat window & load history ===
 function openChatWindow(name, avatar) {
   currentChatName = name;
-  document.getElementById("chat-name").textContent = name;
-  document.querySelector(".chat-avatar").src = avatar;
+  chatNameEl.textContent = name;
+  if (avatar && chatAvatarEl) chatAvatarEl.src = avatar;
 
-  const chatMessages = document.getElementById("chatMessages");
-  chatMessages.innerHTML = "";
+  chatMessagesEl.innerHTML = "";
 
-  const history = JSON.parse(localStorage.getItem("chatHistory")) || {};
-  const messages = history[name] || [];
-
+  const messages = chatHistory[name] || [];
   messages.forEach(msg => {
     const div = document.createElement("div");
     div.className = `message ${msg.type}`;
-    div.textContent = msg.text;
-    chatMessages.appendChild(div);
+    if (msg.type === "image") {
+      const img = document.createElement("img");
+      img.src = msg.text;
+      img.className = "sent-image";
+      div.appendChild(img);
+    } else {
+      div.textContent = msg.text;
+    }
+    chatMessagesEl.appendChild(div);
   });
 
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
-  document.querySelector(".chat-window").classList.remove("hidden");
-  document.querySelector(".message-list").style.display = "none";
+  chatWindow.classList.remove("hidden");
+  messageList.style.display = "none";
   fab.style.display = "none";
   document.querySelector(".nav-row")?.classList.add("hidden");
   document.querySelector(".info-row")?.classList.add("hidden");
   document.querySelector(".bottom-bar")?.classList.add("hidden");
 }
 
-  
-// === Search filter === 
-document.getElementById('searchInput').addEventListener('input', function () { 
-  const query = this.value.toLowerCase(); 
-  const messages = document.querySelectorAll('.message');
-
-  messages.forEach(msg => { 
-    const name = msg.querySelector('strong')?.innerText.toLowerCase() || ''; 
-    const preview = msg.querySelector('span')?.innerText.toLowerCase() || ''; 
-
-    if (name.includes(query) || preview.includes(query)) { 
-      msg.style.display = 'flex'; 
-    } else { 
-      msg.style.display = 'none'; 
-    } 
-  }); 
+// === Back / close chat (use existing forward-btn element as back) ===
+const backBtn = document.querySelector(".back-btn") || document.querySelector(".forward-btn");
+backBtn?.addEventListener("click", () => {
+  chatWindow.classList.add("hidden");
+  messageList.style.display = "block";
+  fab.style.display = "block";
+  document.querySelector(".nav-row")?.classList.remove("hidden");
+  document.querySelector(".info-row")?.classList.remove("hidden");
+  document.querySelector(".bottom-bar")?.classList.remove("hidden");
 });
 
-// === Open chat window on message click === 
+// === Search filter (limit to message-list only) ===
+searchInput?.addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  const messages = messageList.querySelectorAll('.message');
 
-document.querySelectorAll(".message").forEach(msg => {
-  msg.addEventListener("click", () => {
-    const chatWindow = document.querySelector(".chat-window");
-    const name = msg.querySelector("strong").textContent;
-    const imgSrc = msg.querySelector("img").getAttribute("src");
+  messages.forEach(msg => {
+    const name = msg.querySelector('strong')?.innerText.toLowerCase() || '';
+    const preview = msg.querySelector('span')?.innerText.toLowerCase() || '';
 
-    currentChatName = name;
-
-    document.getElementById("chat-name").textContent = name;
-    chatWindow.querySelector(".chat-avatar").src = imgSrc;
-
-
-    messages.innerHTML = "";
-
-    chatWindow.classList.remove("hidden");
-    document.querySelector(".message-list").style.display = "none";
-    document.querySelector(".fab").style.display = "none";
-    document.querySelector(".nav-row")?.classList.add("hidden");
-    document.querySelector(".info-row")?.classList.add("hidden");
-    document.querySelector(".bottom-bar")?.classList.add("hidden");
+    if (name.includes(query) || preview.includes(query)) {
+      msg.style.display = ''; // restore default
+    } else {
+      msg.style.display = 'none';
+    }
   });
 });
 
-// === Back button === 
-document.querySelector(".back-btn").addEventListener("click", () => { 
-  document.querySelector(".chat-window").classList.add("hidden"); 
-  document.querySelector(".message-list").style.display = "block"; 
-  document.querySelector(".fab").style.display = "block"; 
-  document.querySelector(".nav-row")?.classList.remove("hidden"); 
-  document.querySelector(".info-row")?.classList.remove("hidden"); 
-  document.querySelector(".bottom-bar")?.classList.remove("hidden"); 
-});
-
-const sendBtn = document.getElementById("sendBtn"); 
-const input = document.getElementById("messageInput"); 
-const messages = document.getElementById("chatMessages");
-
-function sendMessage() { 
-  const text = input.value.trim(); 
-  if (text === "") return;
-
-  const message = document.createElement("div"); 
-  message.className = "message outgoing"; 
-  message.textContent = text; 
-  messages.appendChild(message);
-
-  input.value = ""; 
-  messages.scrollTop = messages.scrollHeight;
-
-  setTimeout(sendFakeReply, 1500); // fake reply delay 
+// === Sending messages & persistence ===
+function appendMessageToChatUI(text, type = "outgoing") {
+  const message = document.createElement("div");
+  message.className = `message ${type}`;
+  message.textContent = text;
+  chatMessagesEl.appendChild(message);
+  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 }
 
-sendBtn.addEventListener("click", sendMessage); 
-input.addEventListener("keydown", (e) => { 
-  if (e.key === "Enter" && !e.shiftKey) { 
-    e.preventDefault(); 
-    sendMessage(); 
-  } 
+function saveMessageToHistory(name, text, type = "outgoing") {
+  if (!chatHistory[name]) chatHistory[name] = [];
+  chatHistory[name].push({ text, type });
+  saveHistoryToStorage();
+}
+
+function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
+  appendMessageToChatUI(text, "outgoing");
+  saveMessageToHistory(currentChatName, text, "outgoing");
+  input.value = "";
+  setTimeout(sendFakeReply, 1500);
+}
+
+sendBtn?.addEventListener("click", sendMessage);
+input?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
 });
 
-// === Image sending === 
-document.getElementById("imageInput").addEventListener("change", function () { 
-  const file = this.files[0]; 
-  if (file && file.type.startsWith("image/")) { 
-    const reader = new FileReader(); 
-    reader.onload = function (e) { 
-      const img = document.createElement("img"); 
-      img.src = e.target.result; 
-      img.className = "sent-image"; 
+// === Image sending (with persistence) ===
+imageInput?.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const dataUrl = e.target.result;
+      const img = document.createElement("img");
+      img.src = dataUrl;
+      img.className = "sent-image";
 
-      const msgDiv = document.createElement("div"); 
-      msgDiv.className = "message outgoing"; 
-      msgDiv.appendChild(img); 
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "message outgoing";
+      msgDiv.appendChild(img);
+      chatMessagesEl.appendChild(msgDiv);
+      chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
-      messages.appendChild(msgDiv); 
-      messages.scrollTop = messages.scrollHeight; 
-    }; 
-    reader.readAsDataURL(file); 
-  } 
+      // Save as image message
+      if (currentChatName) {
+        if (!chatHistory[currentChatName]) chatHistory[currentChatName] = [];
+        chatHistory[currentChatName].push({ text: dataUrl, type: "image" });
+        saveHistoryToStorage();
+      }
+    };
+    reader.readAsDataURL(file);
+  }
 });
 
-// === Like button === 
-document.querySelector(".like-btn").addEventListener("click", () => { 
-  const like = document.createElement("div"); 
-  like.className = "message outgoing"; 
-  like.textContent = "👍"; 
-  messages.appendChild(like); 
-  messages.scrollTop = messages.scrollHeight; 
+// === Like button (thumb) persisted ===
+likeBtn?.addEventListener("click", () => {
+  appendMessageToChatUI("👍", "outgoing");
+  saveMessageToHistory(currentChatName, "👍", "outgoing");
 });
 
-// === Scroll on input focus (mobile fix) === 
-const inputField = document.getElementById("messageInput"); 
-inputField.addEventListener("focus", () => { 
-  setTimeout(() => { 
-    messages.scrollTop = messages.scrollHeight; 
-  }, 300); 
+// === Mobile scroll fix on input focus ===
+input?.addEventListener("focus", () => {
+  setTimeout(() => {
+    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+  }, 300);
 });
 
-// === Fake reply texts === 
-const fakeReplies = [ 
-  "Haha okay 😄", "I'll check it and let you know.", "Busy right now, talk later!", 
-  "Sounds good to me!", "Can you send that again?", "😂😂😂", "Hmm, interesting...", 
-  "I agree!", "No way, really?", "Just saw it!", "That’s crazy!", "What do you mean?", 
-  "Let me think about it.", "Haha good one!", "I was just about to say that!", 
-  "Where are you now?", "I’m on my way.", "Let’s catch up later!", "Exactly!", 
-  "You're right!", "Wait what? 😳", "I didn’t expect that!", "Let me get back to you.", 
-  "Cool cool 😎", "Just woke up 💤", "I’m tired today 😩", "Same here!", 
-  "Oh really? Tell me more.", "Lol that’s wild 😂", "I knew it!", 
-  "This is getting interesting 🤔", "Brb", "I’m in a meeting right now.", 
-  "I’ll call you in a bit.", "Tell me everything!", "Okay let’s do it!", 
-  "What happened next?", "Omg 😱", "That made me laugh hard 😂", "Good luck!", 
-  "Hope you’re doing okay.", "Let’s plan something soon!", "Why not?", 
-  "Haha stop it 🤭", "You always say that 😂", "Nah, I don’t believe it!", 
-  "Send pic!", "Wait, you’re serious?", "Love it ❤️", "Don’t be shy lol" 
+// === Fake replies ===
+const fakeReplies = [
+  "Haha okay 😄", "I'll check it and let you know.", "Busy right now, talk later!",
+  "Sounds good to me!", "Can you send that again?", "😂😂😂", "Hmm, interesting...",
+  "I agree!", "No way, really?", "Just saw it!", "That’s crazy!", "What do you mean?",
+  "Let me think about it.", "Haha good one!", "I was just about to say that!",
+  "Where are you now?", "I’m on my way.", "Let’s catch up later!", "Exactly!",
+  "You're right!", "Wait what? 😳", "I didn’t expect that!", "Let me get back to you.",
+  "Cool cool 😎", "Just woke up 💤", "I’m tired today 😩", "Same here!",
+  "Oh really? Tell me more.", "Lol that’s wild 😂", "I knew it!",
+  "This is getting interesting 🤔", "Brb", "I’m in a meeting right now.",
+  "I’ll call you in a bit.", "Tell me everything!", "Okay let’s do it!",
+  "What happened next?", "Omg 😱", "That made me laugh hard 😂", "Good luck!",
+  "Hope you’re doing okay.", "Let’s plan something soon!", "Why not?",
+  "Haha stop it 🤭", "You always say that 😂", "Nah, I don’t believe it!",
+  "Send pic!", "Wait, you’re serious?", "Love it ❤️", "Don’t be shy lol"
 ];
 
-// === Generate a fake incoming reply === 
 function sendFakeReply() {
   const typingDiv = document.createElement("div");
   typingDiv.className = "typing-indicator";
-  typingDiv.textContent = `${currentChatName} is typing...`;  // 🔥 Dynamic name
-  messages.appendChild(typingDiv);
-  messages.scrollTop = messages.scrollHeight;
+  typingDiv.textContent = `${currentChatName} is typing...`;
+  chatMessagesEl.appendChild(typingDiv);
+  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
   setTimeout(() => {
     typingDiv.remove();
-
     const reply = fakeReplies[Math.floor(Math.random() * fakeReplies.length)];
     const replyDiv = document.createElement("div");
     replyDiv.className = "message incoming";
     replyDiv.textContent = reply;
+    chatMessagesEl.appendChild(replyDiv);
+    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
-    messages.appendChild(replyDiv);
-    messages.scrollTop = messages.scrollHeight;
+    // save incoming
+    if (currentChatName) {
+      if (!chatHistory[currentChatName]) chatHistory[currentChatName] = [];
+      chatHistory[currentChatName].push({ text: reply, type: "incoming" });
+      saveHistoryToStorage();
+    }
   }, 1500);
 }
 
+// === Initial load: render saved chats + enhance static messages ===
+window.addEventListener("DOMContentLoaded", () => {
+  // Render saved chats (they will appear at top)
+  savedChats.forEach(chat => renderChatItem(chat));
 
-
-
-
-
-
-
-
-
-
+  // Add dots buttons to existing static messages
+  enhanceExistingMessages();
+});
