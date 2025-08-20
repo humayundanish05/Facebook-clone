@@ -7,14 +7,14 @@
 
 body.login-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0d0d0d; /* Black theme background */
+  background: #0d0d0d;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   flex-direction: column;
   padding: 20px;
-  color: #e0e0e0; /* Light text for readability */
+  color: #e0e0e0;
 }
 
 /* === Fakebook Logo === */
@@ -31,12 +31,12 @@ body.login-page {
 /* === Login Container === */
 .login-container {
   margin-top: 20px;
-  background: #1a1a1a; /* Dark card */
+  background: #1a1a1a;
   padding: 35px 28px;
   border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   width: 100%;
-  max-width: 380px;
+  max-width: 380px;   /* mobile default */
   text-align: center;
   animation: fadeIn 0.8s ease;
 }
@@ -139,11 +139,23 @@ body.login-page {
 /* === Responsive Styling === */
 @media (min-width: 768px) {
   .login-container {
-    max-width: 420px;
-    padding: 40px 30px;
+    max-width: 600px;   /* wider on tablets/laptops */
+    padding: 50px 40px;
+    text-align: left;   /* PC pe left-aligned form */
   }
 
   .fb-logo {
-    font-size: 60px;
+    font-size: 64px;
+    text-align: left;
+  }
+
+  .login-box {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-container {
+    max-width: 800px;   /* even wider on desktops */
   }
 }
