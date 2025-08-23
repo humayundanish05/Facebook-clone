@@ -101,6 +101,65 @@ footer {
     color: white;
   }
 }
+
+  /* Hobbies Section Styling */
+#hobbies {
+  background: #f9f9f9; /* soft light background */
+  padding: 50px 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#hobbies h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+#hobbies h3::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #ff6b81;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}
+
+#hobbies ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#hobbies ul li {
+  background: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  cursor: default;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+#hobbies ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  background-color: #fffbf0;
+}
+
+#hobbies ul li::before {
+  content: '';
+}
 </Style>
 
 
@@ -186,3 +245,4 @@ function toggleMenu() {
 </body>
 
 </html>
+
