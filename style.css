@@ -63,7 +63,7 @@ body, html {
   right: -10px;
 }
 /* ✅ Status Box (Horizontal Layout: Profile Pic + Input + Button) */
-.create-post-top {
+.status-box {
   display: flex;
   align-items: center;
   background: white;
