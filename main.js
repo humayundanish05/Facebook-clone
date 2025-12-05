@@ -1,41 +1,7 @@
-/* main.js - Fixed full version (preserves all original features) */
+
 console.log("JS Loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* ---------------------- LOGIN (first block) ---------------------- */
-  const loginBtn = document.querySelector("button");
-  const inputs = document.querySelectorAll("input");
-  const loader = document.getElementById("loader");
-
-  if (loginBtn && inputs.length >= 2 && loader) {
-    loginBtn.addEventListener("click", () => {
-      const email = inputs[0].value.trim();
-      const password = inputs[1].value.trim();
-
-      if (email === "" || password === "") {
-        alert("Please fill in both fields.");
-        return;
-      }
-
-      loader.classList.remove("hidden");
-      loginBtn.disabled = true;
-      loginBtn.textContent = "Logging in...";
-
-      setTimeout(() => {
-        loader.classList.add("hidden");
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Log In";
-        alert("Login successful!");
-        window.location.href = "home.html";
-      }, 2000);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        loginBtn.click();
-      }
-    });
-  }
 
   /* ---------------------- POST / FEED (local storage posts) ---------------------- */
   const postBtn = document.getElementById("submitPost");
@@ -160,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function formatTime(isoString) {
-    // handle possible undefined/new posts that use local toLocaleString time
     try {
       const seconds = Math.floor((Date.now() - new Date(isoString)) / 1000);
       if (seconds < 60) return "Just now";
@@ -168,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
       return new Date(isoString).toLocaleDateString();
     } catch (e) {
-      // if isoString invalid (e.g., when using localized time) fallback
       return isoString || "";
     }
   }
@@ -223,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* ---------------------- THEME / TOGGLING ---------------------- */
-  // Initialize theme safely (was window.onload in original)
   (function initTheme() {
     const mode = localStorage.getItem("theme") || "light";
     document.body.classList.add(`${mode}-mode`);
@@ -243,108 +206,100 @@ document.addEventListener("DOMContentLoaded", () => {
     if (label) label.innerText = mode === "dark" ? "Dark Mode ✅" : "Light Mode 🌞";
   }
 
-  // if original had a toggle element with onclick="toggleTheme()", it still works
   const themeToggleBtn = document.getElementById("themeToggle");
   if (themeToggleBtn) themeToggleBtn.addEventListener("click", toggleTheme);
 
   /* ---------------------- External posts (DummyJSON + photos) ---------------------- */
-  // Use same id "dynamicPostFeed" for external posts to append
   const postFeed = document.getElementById("dynamicPostFeed");
 
-const photos = [
-  'https://picsum.photos/600/400?random=1',
-  'https://picsum.photos/600/400?random=2',
-  'https://picsum.photos/600/400?random=3',
-  'https://picsum.photos/600/400?random=4',
-  'https://picsum.photos/600/400?random=5',
-  'https://picsum.photos/600/400?random=6',
-  'https://picsum.photos/600/400?random=7',
-  'https://picsum.photos/600/400?random=8',
-  'https://picsum.photos/600/400?random=9',
-  'https://picsum.photos/600/400?random=10',
-];
+  const photos = [
+    'https://picsum.photos/600/400?random=1',
+    'https://picsum.photos/600/400?random=2',
+    'https://picsum.photos/600/400?random=3',
+    'https://picsum.photos/600/400?random=4',
+    'https://picsum.photos/600/400?random=5',
+    'https://picsum.photos/600/400?random=6',
+    'https://picsum.photos/600/400?random=7',
+    'https://picsum.photos/600/400?random=8',
+    'https://picsum.photos/600/400?random=9',
+    'https://picsum.photos/600/400?random=10',
+  ];
 
-let repeatCount = 0;  // tracks how many times posts have repeated
-let isLoading = false;
+  let repeatCount = 0;
+  let isLoading = false;
 
-async function loadRealPosts() {
-  if (!postFeed || isLoading) return;
-  isLoading = true;
+  async function loadRealPosts() {
+    if (!postFeed || isLoading) return;
+    isLoading = true;
 
-  try {
-    // Always fetch the same 150 posts
-    const [postsRes, usersRes] = await Promise.all([
-      fetch('https://dummyjson.com/posts?limit=150'),
-      fetch('https://dummyjson.com/users')
-    ]);
+    try {
+      const [postsRes, usersRes] = await Promise.all([
+        fetch('https://dummyjson.com/posts?limit=150'),
+        fetch('https://dummyjson.com/users')
+      ]);
 
-    const postsData = await postsRes.json();
-    const usersData = await usersRes.json();
+      const postsData = await postsRes.json();
+      const usersData = await usersRes.json();
 
-    const posts = postsData.posts;
-    const users = usersData.users;
+      const posts = postsData.posts;
+      const users = usersData.users;
 
-    posts.forEach((post, index) => {
-      const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-      // Offset photo index to vary images on each repeat
-      const photo = photos[(index + repeatCount * posts.length) % photos.length];
+      posts.forEach((post, index) => {
+        const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
+        const photo = photos[(index + repeatCount * posts.length) % photos.length];
 
-      const postElement = document.createElement('div');
-      postElement.className = 'post';
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
 
-      postElement.innerHTML = `
-        <div class="post-header">
-          <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
-          <div>
-            <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
-            <div class="time">Just now (Cycle ${repeatCount + 1})</div>
+        postElement.innerHTML = `
+          <div class="post-header">
+            <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
+            <div>
+              <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
+              <div class="time">Just now (Cycle ${repeatCount + 1})</div>
+            </div>
           </div>
-        </div>
-        <div class="post-content">
-          <img src="${photo}" alt="Post image" />
-          <h4>${escapeHtml(post.title)}</h4>
-          <p>${escapeHtml(post.body)}</p>
-        </div>
-        <div class="post-actions">
-          <span><i class="far fa-thumbs-up"></i> Like</span>
-          <span><i class="far fa-comment"></i> Comment</span>
-          <span><i class="fas fa-share"></i> Share</span>
-        </div>
-      `;
+          <div class="post-content">
+            <img src="${photo}" alt="Post image" />
+            <h4>${escapeHtml(post.title)}</h4>
+            <p>${escapeHtml(post.body)}</p>
+          </div>
+          <div class="post-actions">
+            <span><i class="far fa-thumbs-up"></i> Like</span>
+            <span><i class="far fa-comment"></i> Comment</span>
+            <span><i class="fas fa-share"></i> Share</span>
+          </div>
+        `;
 
-      postFeed.appendChild(postElement);
-    });
+        postFeed.appendChild(postElement);
+      });
 
-    repeatCount++;
-  } catch (error) {
-    console.error('Failed to load posts:', error);
+      repeatCount++;
+    } catch (error) {
+      console.error('Failed to load posts:', error);
+    }
+
+    isLoading = false;
   }
 
-  isLoading = false;
-}
+  loadRealPosts();
 
-// Initial load
-loadRealPosts();
+  window.addEventListener('scroll', () => {
+    if (isLoading) return;
 
-// Infinite scroll trigger near bottom of page
-window.addEventListener('scroll', () => {
-  if (isLoading) return; // prevent multiple simultaneous loads
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+      loadRealPosts();
+    }
+  });
 
-  // When near bottom (e.g. 100px from bottom)
-  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-    loadRealPosts();
+  function escapeHtml(text) {
+    if (!text) return '';
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
-});
 
-// Simple HTML helper to escape text (add if you don't have already)
-function escapeHtml(text) {
-  if (!text) return '';
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 }); // end DOMContentLoaded
-
