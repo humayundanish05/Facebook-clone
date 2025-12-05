@@ -1,388 +1,855 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Facebook Menu Clone</title>
+
+
 
  
 
+
+
       <style>
+
   body {
+
     margin: 0;
+
     font-family: 'Segoe UI', sans-serif;
+
     background-color: #f0f2f5;
+
     color: #050505;
+
   }
+
+
 
   .container {
+
     max-width: 450px;
+
     margin: auto;
+
     padding: 16px;
+
     background-color: #fff;
+
     min-height: 100vh;
+
     box-sizing: border-box;
+
   }
+
+
 
   .header {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     padding: 8px 0;
+
     font-size: 22px;
+
     font-weight: bold;
+
   }
+
+
 
   .header a {
+
     text-decoration: none;
+
     color: inherit;
+
   }
+
+
 
   .header-icons {
+
     display: flex;
+
     gap: 10px;
+
   }
+
+
 
   .profile-section {
+
     display: flex;
+
     align-items: center;
+
     background: #fff;
+
     padding: 12px;
+
     border-radius: 12px;
+
     margin-bottom: 8px;
+
   }
+
+
 
   .profile-info {
+
     display: flex;
+
     align-items: center;
+
     gap: 12px;
+
     width: 100%;
+
   }
+
+
 
   .profile-info img {
+
     width: 48px;
+
     height: 48px;
+
     border-radius: 50%;
+
   }
+
+
 
   .invite-box {
+
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
     font-weight: 500;
+
     font-size: 14px;
+
     padding: 12px;
+
     background: #fff;
+
     border-radius: 12px;
+
     margin-bottom: 12px;
+
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+
   }
+
+
 
   .invite-box img {
+
     width: 20px;
+
     height: 20px;
+
   }
+
+
 
   .toast {
+
   visibility: hidden;
+
   min-width: 240px;
+
   background-color: #1877f2;
+
   color: white;
+
   text-align: center;
+
   border-radius: 30px;
+
   padding: 12px 20px;
+
   position: fixed;
+
   bottom: 30px;
+
   left: 50%;
+
   transform: translateX(-50%);
+
   font-size: 14px;
+
   z-index: 9999;
+
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
   transition: visibility 0s, opacity 0.3s ease-in-out;
+
   opacity: 0;
+
 }
+
+
 
 .toast.show {
+
   visibility: visible;
+
   opacity: 1;
+
 }
+
+
 
   .menu-grid {
+
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 14px;
+
     width: 100%;
+
     box-sizing: border-box;
+
     margin-bottom: 20px;
+
   }
+
+
 
   .menu-item {
+
     display: flex;
+
     align-items: center;
+
     gap: 14px;
+
     font-size: 15px;
+
     font-weight: 500;
+
     padding: 14px;
+
     border-radius: 12px;
+
     background: #fff;
+
     box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+
     text-decoration: none;
+
     color: inherit;
+
   }
+
+
 
   .menu-item img {
+
     width: 28px;
+
     height: 28px;
+
   }
+
+
 
   .settings {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
     font-weight: 500;
+
     font-size: 15px;
+
     padding: 12px;
+
     background: #fff;
+
     border-top: 1px solid #ddd;
+
     cursor: pointer;
+
   }
+
+
 
   .settings img {
+
     width: 20px;
+
   }
+
+
 
   .logout-section {
+
     text-align: center;
+
     padding: 16px;
+
     background-color: #fff;
+
     font-weight: bold;
+
     color: #1877f2;
+
     cursor: pointer;
+
     border-radius: 12px;
+
   }
+
+
 
   .loader {
+
   display: inline-block;
+
   width: 14px;
+
   height: 14px;
+
   border: 2px solid #1877f2;
+
   border-top: 2px solid transparent;
+
   border-radius: 50%;
+
   animation: spin 0.6s linear infinite;
+
   vertical-align: middle;
+
 }
+
+
 
 @keyframes spin {
+
   to {
+
     transform: rotate(360deg);
+
   }
+
 }
+
+
 
         /* greetings message */
+
         .greeting-text {
+
   font-size: 18px;
+
   font-weight: 600;
+
   margin-bottom: 10px;
+
   color: #1877f2;
+
         }
-/* light dark mode*/
-        body.light-mode {
+
+/* Light / Dark Mode */
+
+body.light-mode {
+
   background-color: #f0f2f5;
+
   color: #050505;
+
 }
+
+
 
 body.dark-mode {
+
   background-color: #18191a;
+
   color: #e4e6eb;
+
 }
 
-.container, .menu-item, .settings, .logout-section, .invite-box, .profile-section {
+
+
+/* Common container and components */
+
+.container, 
+
+.menu-item, 
+
+.logout-section, 
+
+.invite-box, 
+
+.profile-section {
+
   background-color: inherit;
+
   color: inherit;
+
   transition: background 0.3s, color 0.3s;
+
 }
+
+
+
+/* Settings and Mode Toggle buttons */
+
+.settings,
+
+.mode-toggle {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-weight: 500;
+
+  font-size: 15px;
+
+  padding: 12px;
+
+  background: #fff;
+
+  border-radius: 12px;
+
+  margin-top: 8px;
+
+  cursor: pointer;
+
+  transition: background 0.3s;
+
+}
+
+
+
+body.dark-mode .settings,
+
+body.dark-mode .mode-toggle {
+
+  background-color: #242526 !important;
+
+}
+
+
+
+.settings img,
+
+.mode-toggle img {
+
+  width: 20px;
+
+}
+
         
+
    </style>
+
   
+
 </head>
+
 <body>
+
   <div class="container">
+
+
 
     <div id="greeting" class="greeting-text"></div>
 
+
+
     <!-- Header -->
+
 <div class="header">
+
   <a href="home.html" style="text-decoration: none; color: inherit;">
+
     <div>&larr; Menu</div>
+
   </a>
+
   <div class="header-icons">
+
     <span>&#x21C5;</span>
+
     <button id="toggle-search" style="background: none; border: none; font-size: 20px; cursor: pointer;">
+
       &#x1F50D;
+
     </button>
+
   </div>
+
 </div>
+
+
 
 <!-- Hidden Search Bar -->
+
 <input
+
   type="text"
+
   id="menu-search"
+
   placeholder="Search menu..."
+
   style="width: 100%; padding: 10px; margin: 12px 0; border-radius: 8px; border: 1px solid #ccc; display: none;"
+
 >
 
+
+
     
+
     <!-- Profile Section -->
+
     <div class="profile-section">
+
       <div class="profile-info">
+
         <img src="user.jpg" alt="Profile">
+
         <a href="profile.html" style="text-decoration: none; color: inherit;">
+
           <div>
+
             <strong>Humayun Danish</strong><br>
+
             <small>View your profile</small>
+
           </div>
+
         </a>
+
       </div>
+
     </div>
+
+
 
     <!-- Invite Friends Section -->
+
 <div class="invite-box" onclick="copyInviteLink()">
+
   <img src="https://img.icons8.com/emoji/48/heart-suit.png" />
+
   Invite friends
+
 </div>
 
+
+
 <!-- Toast Message -->
+
 <div id="toast" class="toast">🔗 Link copied! Share it with your friends 🎉</div>
+
     
 
+
+
     <!-- Menu Grid -->
+
     <div class="menu-grid">
+
       <a href="dashboard.html" class="menu-item"><img src="https://img.icons8.com/color/48/combo-chart.png">Professional dash...</a>
+
       <a href="messenger.html" class="menu-item"><img src="https://img.icons8.com/color/48/facebook-messenger--v1.png">Messages</a>
+
       <a href="groups.html" class="menu-item"><img src="https://img.icons8.com/color/48/groups.png">Groups</a>
+
       <a href="watch.html" class="menu-item"><img src="https://img.icons8.com/color/48/instagram-reel.png">Reels</a>
+
       <a href="live.html" class="menu-item"><img src="https://img.icons8.com/color/48/000000/youtube-live.png">Live videos</a>
+
       <a href="pages.html" class="menu-item"><img src="https://img.icons8.com/color/48/000000/filled-flag.png">Pages</a>
+
       <a href="saved.html" class="menu-item"><img src="https://img.icons8.com/color/48/bookmark-ribbon.png">Saved</a>
+
       <a href="birthdays.html" class="menu-item"><img src="https://img.icons8.com/color/48/gift--v1.png">Birthdays</a>
+
       <a href="events.html" class="menu-item"><img src="https://img.icons8.com/color/48/calendar--v1.png">Events</a>
+
       <a href="verified.html" class="menu-item"><img src="https://img.icons8.com/color/48/ok--v1.png">Meta Verified</a>
+
       <a href="feeds.html" class="menu-item"><img src="https://img.icons8.com/color/48/news.png">Feeds</a>
+
       <a href="memories.html" class="menu-item"><img src="https://img.icons8.com/color/48/clock--v1.png">Memories</a>
+
     </div>
 
-    <!-- Settings & Logout -->
-    <div class="settings" onclick="toggleTheme()">
+
+
+    <!-- Settings Button -->
+
+<div class="settings">
+
   <img src="https://img.icons8.com/ios-filled/50/settings.png" alt="Settings" />
-  Settings & privacy
-  <span id="themeLabel" style="margin-left:auto; font-size: 14px;"></span>
-    </div>
 
-        <!-- Logout -->
-    <div class="logout-section" onclick="handleLogout()">
-  Log out
-    </div>
+  <a href="setting.html" style="text-decoration:none; color:inherit;">Settings & privacy</a>
+
+</div>
+
+
+
+<!-- Dark/Light Mode Button -->
+
+<div class="mode-toggle" onclick="toggleTheme()">
+
+  <img src="https://img.icons8.com/ios-filled/50/moon-symbol.png" alt="Theme" />
+
+  <span id="themeLabel" style="margin-left:auto; font-size: 14px;">
+
+    Light Mode 🌞
+
+  </span>
+
+</div>
+
+
 
   </div>
+
+  
+
+  <!-- Logout -->
+
+    <div class="logout-section" onclick="handleLogout()">
+
+  Log out
+
+    </div>
+
+
 
   <script>
 
+
+
     //search 
+
   const searchInput = document.getElementById('menu-search');
+
   const menuItems = document.querySelectorAll('.menu-item');
+
   const toggleBtn = document.getElementById('toggle-search');
 
+
+
   toggleBtn.addEventListener('click', () => {
+
     const isVisible = searchInput.style.display === 'block';
+
     searchInput.style.display = isVisible ? 'none' : 'block';
+
     if (!isVisible) searchInput.focus();
+
   });
+
+
 
   searchInput.addEventListener('input', function () {
+
     const query = this.value.toLowerCase();
+
     menuItems.forEach(item => {
+
       const text = item.textContent.toLowerCase();
+
       item.style.display = text.includes(query) ? 'flex' : 'none';
+
     });
+
   });
 
+
+
     // logout loader 
+
   function handleLogout() {
+
     const logoutDiv = document.querySelector('.logout-section');
+
     logoutDiv.innerHTML = '<span style="margin-right:8px;" class="loader"></span> Logging out...';
+
     logoutDiv.style.pointerEvents = 'none'; // prevent multiple clicks
+
     setTimeout(() => {
+
       window.location.href = "index.html";
+
     }, 2000);
+
   } 
+
+
 
     //copy link with invite friend section to share 
 
+
+
     function copyInviteLink() {
+
     const link = "https://humayundanish05.github.io/Facebook-clone/";
 
+
+
     navigator.clipboard.writeText(link).then(() => {
+
       const toast = document.getElementById("toast");
+
       toast.classList.add("show");
 
+
+
       setTimeout(() => {
+
         toast.classList.remove("show");
+
       }, 3000);
+
     }).catch(err => {
+
       alert("❌ Failed to copy link. Try again.");
+
     });
+
     }
 
+
+
     // greetings message 
+
     
+
   
+
   const hour = new Date().getHours();
+
   let greeting = "";
 
+
+
   if (hour >= 5 && hour < 9) {
+
     greeting = "🌅 Good early morning";
+
   } else if (hour >= 9 && hour < 12) {
+
     greeting = "☀️ Good morning";
+
   } else if (hour >= 12 && hour < 14) {
+
     greeting = "🍽️ Good noon";
+
   } else if (hour >= 14 && hour < 17) {
+
     greeting = "🌤️ Good afternoon";
+
   } else if (hour >= 17 && hour < 20) {
+
     greeting = "🌇 Good evening";
+
   } else if (hour >= 20 && hour < 24) {
+
     greeting = "🌙 Good night";
+
   } else {
+
     greeting = "🛌 Late night coding?";
+
   }
+
+
 
   document.getElementById("greeting").innerText = `${greeting}, Humayun 👋`;
+
     
+
   // Apply stored theme on load
+
   window.onload = () => {
+
     const mode = localStorage.getItem("theme") || "light";
+
     document.body.classList.add(`${mode}-mode`);
+
     updateLabel(mode);
+
   };
 
+
+
   function toggleTheme() {
+
     const isDark = document.body.classList.contains("dark-mode");
+
     document.body.classList.toggle("dark-mode", !isDark);
+
     document.body.classList.toggle("light-mode", isDark);
+
     localStorage.setItem("theme", isDark ? "light" : "dark");
+
     updateLabel(isDark ? "light" : "dark");
+
   }
+
+
 
   function updateLabel(mode) {
+
     const label = document.getElementById("themeLabel");
+
     label.innerText = mode === "dark" ? "Dark Mode ✅" : "Light Mode 🌞";
+
   }
 
+
+
 </script>
+
     
+
   
+
   
+
 </body>
+
 </html>
+
+
+
+
+
+
+
 
 
 
