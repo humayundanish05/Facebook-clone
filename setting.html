@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facebook Settings</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f2f5;
+  color: #050505;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 15px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Search Bar Container */
+.fb-search {
+  width: 140px;
+  height: 36px;
+  background: #f0f2f5;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+  margin-left: 10px;
+  transition: 0.3s ease;
+}
+
+.fb-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+.fb-search .search-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dark Mode */
+body.dark-mode .fb-search {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+}
+}
+
+body.dark-mode .search-icon {
+  border-color: #e4e6eb;
+}
+
+body.dark-mode .search-icon::after {
+  background: #e4e6eb;
+}
+
+/* Expand animation */
+.fb-search:focus-within {
+  width: 190px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+/* DARK MODE HEADER */
+body.dark-mode .header {
+  background: rgba(36,37,38,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* BACK BUTTON (Facebook style) */
+.fb-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: 0.2s;
+  transform: translateX(-3px);
+}
+
+.fb-arrow:hover {
+  background: rgba(0,0,0,0.12);
+}
+
+/* DARK MODE BUTTON */
+body.dark-mode .fb-arrow {
+  background: rgba(255,255,255,0.09);
+}
+
+body.dark-mode .fb-arrow:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+/* ARROW ICON (CSS shape) */
+.fb-arrow::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-left: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* HEADER TITLE */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: inherit;
+}
+
+/* BALANCE RIGHT SIDE */
+.header .right-space {
+  width: 38px;
+}
+
+/* SECTION TITLE (Facebook style) */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #65676b;
+  margin: 18px 15px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* SETTINGS LIST */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 12px;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px;
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.18s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.settings-item:hover {
+  background: #e7e9ec;
+}
+
+.settings-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-item img {
+  width: 30px;
+  height: 30px;
+}
+
+.settings-item span {
+  font-size: 15px;
+}
+
+/* LIGHT ARROW > */
+.settings-item .arrow {
+  font-size: 20px;
+  opacity: 0.4;
+}
+
+/* LOGOUT */
+.logout-section {
+  text-align: center;
+  padding: 15px;
+  margin: 22px 12px;
+  border-radius: 12px;
+  background: #fff;
+  color: #1877f2;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.18s;
+}
+
+.logout-section:hover {
+  background: #e7e9ec;
+}
+
+/* LOADER */
+.loader {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #1877f2;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+
+  <!-- Back Button -->
+  <a href="menu.html" class="fb-arrow"></a>
+
+  <!-- Title -->
+  <h1>Settings</h1>
+
+  <!-- Search Bar -->
+<div class="fb-search">
+    <img src="https://img.icons8.com/ios-glyphs/30/search--v1.png" alt="Search" class="search-icon">
+    <input type="text" placeholder="Search settings..." id="searchBox">
+</div>
+
+</div>
+  <!-- ACCOUNT -->
+  <div class="section-title">Account</div>
+  <div class="settings-list">
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/user.png">
+        <span>Personal Information</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/lock.png">
+        <span>Security and Login</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/bell.png">
+        <span>Notifications</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="section-title">Privacy</div>
+  <div class="settings-list">
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/privacy.png">
+        <span>Privacy Shortcuts</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/group.png">
+        <span>Timeline and Tagging</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/search.png">
+        <span>Public Posts</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- YOUR INFORMATION -->
+  <div class="section-title">Your Information</div>
+  <div class="settings-list">
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/download.png">
+        <span>Download Your Information</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="settings-item">
+      <div class="settings-item-left">
+        <img src="https://img.icons8.com/ios-filled/50/delete.png">
+        <span>Deactivation and Deletion</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+
+  <!-- LOGOUT -->
+  <div class="logout-section" onclick="handleLogout()">
+    Log Out
+  </div>
+
+</div>
+
+<script>
+function handleLogout() {
+  const logoutDiv = document.querySelector('.logout-section');
+  logoutDiv.innerHTML = '<span class="loader"></span> Logging out...';
+  logoutDiv.style.pointerEvents = 'none';
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 1800);
+}
+
+// Search Filtering
+document.getElementById("searchBox").addEventListener("input", function () {
+  let query = this.value.toLowerCase();
+  let items = document.querySelectorAll(".settings-item");
+
+  items.forEach(item => {
+    let text = item.innerText.toLowerCase();
+    item.style.display = text.includes(query) ? "flex" : "none";
+  });
+});
+</script>
+
+</body>
+</html>
