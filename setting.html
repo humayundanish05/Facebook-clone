@@ -333,6 +333,19 @@ body.dark-mode .fb-arrow:hover {
     </a>
   </div>
 
+  <!-- Project Download Section -->
+<div class="section-title">Project</div>
+<div class="settings-list">
+  <div class="settings-item" id="download-btn">
+    <div class="settings-item-left">
+      <img src="https://img.icons8.com/ios-filled/50/download.png" alt="Download">
+      <span>Download Full Project</span>
+    </div>
+    <span>&#x276F;</span>
+  </div>
+</div>
+
+
   <!-- LOGOUT -->
   <div class="logout-section" onclick="handleLogout()">
     Log Out
@@ -360,6 +373,13 @@ document.getElementById("searchBox").addEventListener("input", function () {
     item.style.display = text.includes(query) ? "flex" : "none";
   });
 });
+
+  document.getElementById('download-btn').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = 'project.zip'; // Tumhari ZIP file ka path
+    a.download = 'FacebookSettingsProject.zip'; // Downloaded file ka naam
+    a.click();
+  });
 </script>
 
 </body>
