@@ -18,10 +18,9 @@
   <p><b><i>Login using the email and password you created</i></b></p>
 
   <div class="login-box">
-    <input type="text" placeholder="Email" id="email" />
+    <input type="text" placeholder="Email or Phone" id="email" />
     <input type="password" placeholder="Password" id="password" />
     <button id="loginBtn">Log In</button>
-
     <div class="loader-3d hidden" id="loader"></div>
 
     <a href="#">Forgotten password?</a>
@@ -53,22 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
     loginBtn.textContent = "Logging in...";
 
     setTimeout(() => {
+      loader.classList.add("hidden");
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Log In";
+
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
       const user = users.find(
         u => u.email === email && u.password === password
       );
 
-      loader.classList.add("hidden");
-      loginBtn.disabled = false;
-      loginBtn.textContent = "Log In";
-
       if (user) {
-        // ✅ save full user for homepage
-        localStorage.setItem("currentUser", JSON.stringify(user));
+        alert("Login successful ✅");
+        localStorage.setItem("loggedInUser", email);
         window.location.href = "home.html";
       } else {
-        alert("Invalid email or password. If you don't have an account, please create one.");
+        alert("Invalid email or password. If you don't have an account, create a new one.");
       }
     }, 1000);
   });
