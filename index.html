@@ -4,76 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fakebook - Log in</title>
-  <link rel="stylesheet" href="Loginpage.css"/>
+<link rel="stylesheet" href="Loginpage.css" />
+
+
 </head>
+
 <body class="login-page">
 
-  <p style="background: #111; color: #fff; padding: 10px; text-align: center; font-size: 14px;">
-    <strong>DISCLAIMER:</strong> THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT. This is NOT the official site of the company or brand identified on the page. The creator of this page is NOT affiliated with the company or brand in any way. This page is a personal project made in connection with an educational exercise.
-  </p>
+<p style="background:#111;color:#fff;padding:10px;text-align:center;font-size:14px;">
+  <strong>DISCLAIMER:</strong> THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT.
+</p>
 
-  <div class="login-container">
-    <h1 class="fb-logo">fakebook</h1>
-    <p><b> <i> type anything inside the input boxes to login </i> </b></p> 
-    <div class="login-box">
-      <input type="text" placeholder="Email or Phone" />
-      <input type="password" placeholder="Password" />
-      <button>Log In</button>
- <div class="loader-3d hidden" id="loader"></div>
-      <a href="#">Forgotten password?</a>
-      <hr />
-      <button class="create-btn">Create New Account</button>
-    </div>
-    <p><a href="#">Create a Page</a> for a celebrity, brand or business.</p>
+<div class="login-container">
+  <h1 class="fb-logo">fakebook</h1>
+  <p><b><i>type anything inside the input boxes to login</i></b></p>
+
+  <div class="login-box">
+    <input type="text" placeholder="Email or Phone" />
+    <input type="password" placeholder="Password" />
+    <button id="loginBtn">Log In</button>
+    <div class="loader-3d hidden" id="loader"></div>
+
+    <a href="#">Forgotten password?</a>
+    <hr />
+    <button class="create-btn" id="signupBtn">Create New Account</button>
   </div>
+</div>
 
-  <script>
-  /* main.js - Login Page Only */
+<p><a href="#">Create a Page</a> for a celebrity, brand or business.</p>
+
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Login JS Loaded");
 
-  // Select elements from login page
-  const loginBtn = document.querySelector("button"); // Log In button
-  const inputs = document.querySelectorAll("input");  // Email and Password inputs
-  const loader = document.getElementById("loader");   // Loader animation
+  const loginBtn = document.getElementById("loginBtn");
+  const inputs = document.querySelectorAll(".login-box input");
+  const loader = document.getElementById("loader");
+  const signupBtn = document.getElementById("signupBtn");
 
-  if (loginBtn && inputs.length >= 2 && loader) {
-    // Click event for login
-    loginBtn.addEventListener("click", () => {
-      const email = inputs[0].value.trim();
-      const password = inputs[1].value.trim();
+  loginBtn.addEventListener("click", () => {
+    const email = inputs[0].value.trim();
+    const password = inputs[1].value.trim();
 
-      if (email === "" || password === "") {
-        alert("Please fill in both fields.");
-        return;
-      }
+    if (!email || !password) {
+      alert("Please fill in both fields.");
+      return;
+    }
 
-      // Show loader & disable button
-      loader.classList.remove("hidden");
-      loginBtn.disabled = true;
-      loginBtn.textContent = "Logging in...";
+    loader.classList.remove("hidden");
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
 
-      // Fake login delay
-      setTimeout(() => {
-        loader.classList.add("hidden");
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Log In";
-        alert("Login successful!");
-        // Redirect to home/feed page
+    setTimeout(() => {
+      loader.classList.add("hidden");
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Log In";
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (user) {
+        alert(`Welcome ${user.firstName}!`);
+        localStorage.setItem("currentUser", JSON.stringify(user));
         window.location.href = "home.html";
-      }, 2000);
-    });
-
-    // Press Enter to submit
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        loginBtn.click();
+      } else {
+        alert("Invalid email or password. if you don't have account, create new one");
       }
-    });
-  }
+    }, 1000);
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter") loginBtn.click();
+  });
+
+  signupBtn.addEventListener("click", () => {
+    window.location.href = "signup.html";
+  });
 });
-    
-    
-  </script>
+</script>
+
 </body>
 </html>
