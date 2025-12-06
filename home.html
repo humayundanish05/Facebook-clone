@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🚨 Block direct access without login
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
     return;
   }
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ✅ Logout
   document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("currentUser");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   });
 
 });
