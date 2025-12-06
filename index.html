@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fakebook - Log in</title>
-<link rel="stylesheet" href="Loginpage.css" />
-
-
+  <link rel="stylesheet" href="Loginpage.css" />
 </head>
 
 <body class="login-page">
@@ -17,11 +15,11 @@
 
 <div class="login-container">
   <h1 class="fb-logo">fakebook</h1>
-  <p><b><i>type anything inside the input boxes to login</i></b></p>
+  <p><b><i>Login using the email and password you created</i></b></p>
 
   <div class="login-box">
-    <input type="text" placeholder="Email or Phone" />
-    <input type="password" placeholder="Password" />
+    <input type="text" placeholder="Email or Phone" id="email" />
+    <input type="password" placeholder="Password" id="password" />
     <button id="loginBtn">Log In</button>
     <div class="loader-3d hidden" id="loader"></div>
 
@@ -37,13 +35,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const loginBtn = document.getElementById("loginBtn");
-  const inputs = document.querySelectorAll(".login-box input");
   const loader = document.getElementById("loader");
   const signupBtn = document.getElementById("signupBtn");
 
   loginBtn.addEventListener("click", () => {
-    const email = inputs[0].value.trim();
-    const password = inputs[1].value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
     if (!email || !password) {
       alert("Please fill in both fields.");
@@ -60,14 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
       loginBtn.textContent = "Log In";
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
-      const user = users.find(u => u.email === email && u.password === password);
+
+      const user = users.find(
+        u => u.email === email && u.password === password
+      );
 
       if (user) {
-        alert(`Welcome ${user.firstName}!`);
-        localStorage.setItem("currentUser", JSON.stringify(user));
+        alert("Login successful ✅");
+        localStorage.setItem("loggedInUser", email);
         window.location.href = "home.html";
       } else {
-        alert("Invalid email or password. if you don't have account, create new one");
+        alert("Invalid email or password. If you don't have an account, create a new one.");
       }
     }, 1000);
   });
