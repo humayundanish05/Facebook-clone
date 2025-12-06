@@ -3,189 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Facebook Lite UI</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="style.css" />
+  <title>Fakebook – Home</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f0f2f5;
+    }
+
+    .top-bar{
+      background:#1877f2;
+      color:#fff;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .top-bar h1{
+      font-size:22px;
+      margin:0;
+    }
+
+    .logout-btn{
+      background:#fff;
+      color:#1877f2;
+      border:none;
+      padding:8px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    .container{
+      max-width:800px;
+      margin:30px auto;
+      padding:20px;
+    }
+
+    .welcome-card{
+      background:#fff;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .welcome-card h2{
+      margin-top:0;
+    }
+
+    .email{
+      color:#555;
+      font-size:14px;
+    }
+  </style>
 </head>
+
 <body>
-<p style="background: #111; color: #fff; padding: 10px; text-align: center; font-size: 14px;">
-  <strong>DISCLAIMER:</strong> THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT. This is NOT the official site of the company or brand identified on the page. The creator of this page is NOT affiliated with the company or brand in any way. This page is a personal project made in connection with an educational exercise.
-</p>
 
-  <!-- gretting message-->
-  <div id="greeting" class="greeting-text"></div>
-  
-<!-- Top Navigation Bar -->
-<div class="top-nav">
-  <span class="logo">facebook</span>
-  <div class="top-icons">
-    <button class="top-btn">➕</button>
-  <button class="top-btn search">🔍</button>
-    <a href="manu.html">
-  <button class="top-btn">☰</button>
-    </a>
+<div class="top-bar">
+  <h1>fakebook</h1>
+  <button class="logout-btn" id="logoutBtn">Log Out</button>
+</div>
+
+<div class="container">
+  <div class="welcome-card">
+    <h2 id="welcomeName">Welcome 👋</h2>
+    <p class="email" id="userEmail"></p>
+
+    <hr>
+
+    <p><b>This is your homepage.</b></p>
+    <p>Your name is coming directly from the account you created on the sign-up page.</p>
   </div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
 
-<!-- Facebook header icons -->
-  <div class="fb-header">
-    <a href="home.html" title="Home"><i class="fas fa-home"></i></a>
-    <a href="Friends.html" title="Friends"><i class="fas fa-user-friends"></i></a>
-    <a href="messenger.html" class="active" title="Messenger"><i class="fas fa-comment-dots"></i></a>
-    <a href="watch.html" title="Watch"><i class="fas fa-tv"></i></a>
-    <a href="notifications.html" title="Notifications"><i class="fas fa-bell"></i></a>
-  </div>
-  
+  // 🚨 Block direct access without login
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-  <!-- Status Box (Post Creator) -->
-<div class="status-box">
-  <a href="profile.html">
-    <img src="user.jpg" alt="Profile" class="avatar" />
-  </a>
-  <div class="input-wrapper">
-    <input type="text" placeholder="want to posts some lines?" id="postText" />
-    <button id="submitPost">Post</button>
-  </div>
-</div>
+  // ✅ Show name from signup
+  document.getElementById("welcomeName").textContent =
+    `Welcome, ${user.firstName} ${user.lastName} 👋`;
 
-  
-<!-- Stories Section -->
-<div class="stories">
-  <div class="story create-story">
-    <div class="create-icon">+</div>
-    <p>Create</p>
-  </div>
+  document.getElementById("userEmail").textContent =
+    `Email: ${user.email}`;
 
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=1" alt="Ayesha">
-    <p>Ayesha</p>
-  </div>
+  // ✅ Logout
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+  });
 
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=2" alt="Bilal">
-    <p>Bilal</p>
-  </div>
+});
+</script>
 
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=3" alt="Hina">
-    <p>Hina</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=4" alt="Usman">
-    <p>Usman</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=5" alt="Sana">
-    <p>Sana</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=6" alt="Zain">
-    <p>Zain</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=7" alt="Mariam">
-    <p>Mariam</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=8" alt="Ali">
-    <p>Ali</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=9" alt="Iqra">
-    <p>Iqra</p>
-  </div>
-
-  <div class="story">
-    <img src="https://picsum.photos/200/300?random=10" alt="Hamza">
-    <p>Hamza</p>
-  </div>
-</div>
-<!-- Post Feed -->
-<div id="postFeed">
-
-  <!-- Post 1 -->
-  <div class="post">
-    <div class="post-header">
-      <a href="profile.html">
-        <img src="user.jpg" alt="Profile">
-      </a>
-      <div>
-        <div class="name">Humayun Danish</div>
-        <div class="time">1h ago</div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <p>Profile updated 🙈!</p>
-      <img src="user.jpg" alt="Sample Photo">
-    </div>
-
-    <div class="like-count">0 likes</div>
-
-    <div class="post-actions">
-      <span><i class="far fa-thumbs-up"></i> Like</span>
-      <span><i class="far fa-comment"></i> Comment</span>
-      <span><i class="fas fa-share"></i> Share</span>
-      
-    </div>
-
-    <div class="comment-section hidden">
-      <div class="comment-input">
-        <input type="text" placeholder="Write a comment...">
-        <button class="add-comment">Post</button>
-      </div>
-      <div class="comments"></div>
-    </div>
-  </div>
-
-  <!-- Post 2 -->
-  <div class="post">
-    <div class="post-header">
-      <a href="profile.html">
-        <img src="user.jpg" alt="Profile">
-      </a>
-      <div>
-        <div class="name">Humayun Danish</div>
-        <div class="time">2h ago</div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <p>We crossed paths like rivers, mixing stories and flowing toward something new.!</p>
-      <img src="Post3.jpg" alt="Sample Photo">
-    </div>
-
-    <div class="like-count">0 likes</div>
-
-    <div class="post-actions">
-      <span><i class="far fa-thumbs-up"></i> Like</span>
-    <span><i class="far fa-comment"></i> Comment</span>
-   <span><i class="fas fa-share"></i> Share</span>
-      
-    </div>
-
-    <div class="comment-section hidden">
-      <div class="comment-input">
-        <input type="text" placeholder="Write a comment...">
-        <button class="add-comment">Post</button>
-      </div>
-      <div class="comments"></div>
-    </div>
-  </div>
-</div>
-
-  <main class="feed" id="dynamicPostFeed">
-    <!-- Yaha tumhare JS se posts load honge -->
-  </main>
-
-  <script src="main.js"></script>
 </body>
 </html>
