@@ -59,14 +59,13 @@
       border: 1px solid #333;
       border-radius: 8px;
       color: #e0e0e0;
-      transition: border-color 0.3s, background 0.3s;
     }
 
     .login-box input:focus {
       outline: none;
       border-color: #1877f2;
       background: #1f1f1f;
-      box-shadow: 0 0 6px rgba(24, 119, 242, 0.4);
+      box-shadow: 0 0 6px rgba(24,119,242,.4);
     }
 
     /* === Buttons === */
@@ -81,12 +80,10 @@
       margin: 12px 0;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.3s ease, transform 0.2s;
     }
 
     .login-box button:hover {
       background: #2B66BD;
-      transform: translateY(-2px);
     }
 
     /* === Links === */
@@ -96,81 +93,77 @@
       margin-top: 12px;
       text-decoration: none;
       font-size: 14px;
-      transition: color 0.3s ease;
     }
+
     .login-box a:hover {
       text-decoration: underline;
       color: #ffffff;
     }
 
-    /* === Loader 3D === */
+    /* === Loader === */
     .loader-3d {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       margin: 20px auto;
+      border: 5px solid transparent;
+      border-top: 5px solid #1877f2;
       border-radius: 50%;
-      border: 6px solid transparent;
-      border-top: 6px solid #1877f2;
-      border-right: 6px solid #42b72a;
-      border-bottom: 6px solid #f02849;
-      animation: rotate3D 1s linear infinite;
-      box-shadow: 0 0 12px #1877f2, 0 0 20px #42b72a, 0 0 28px #f02849;
+      animation: spin 1s linear infinite;
       display: none;
     }
+
     .loader-3d.visible { display: block; }
 
-    @keyframes rotate3D {
-      0%   { transform: rotate(0deg); }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === Responsive === */
-    @media (min-width: 768px) {
-      .login-container { max-width: 600px; padding: 50px 40px; }
-      .fb-logo { font-size: 64px; text-align: left; }
-    }
-
-    @media (min-width: 1200px) {
-      .login-container { max-width: 800px; }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
+
 <body class="login-page">
+
   <div class="login-container">
     <h1 class="fb-logo">fakebook</h1>
     <p class="subtitle">It's quick and easy.</p>
 
-    <!-- Instruction box -->
-    <div class="signup-instruction" style="background:#1a1a1a; color:#e0e0e0; padding:10px; border-radius:8px; margin-bottom:15px; font-size:14px; text-align:center;">
-      Your account will be saved in localStorage. You can then use the same email and password to log in on the login page.
+    <div style="font-size:14px;background:#111;padding:10px;border-radius:8px;margin-bottom:15px;">
+      Your account will be saved in localStorage.  
+      You can use the same details to log in.
     </div>
 
     <div class="login-box">
-      <input type="text" placeholder="Email" id="email"/>
-      <input type="password" placeholder="Password" id="password"/>
+      <input type="text" id="firstName" placeholder="First Name">
+      <input type="text" id="lastName" placeholder="Last Name">
+      <input type="text" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
 
-      <button class="btn" id="createBtn">Create Account</button>
+      <button id="createBtn">Create Account</button>
       <div class="loader-3d" id="loader"></div>
 
-      <a href="index.html">Already have an account?</a>
+      <a href="login.html">Already have an account?</a>
     </div>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+
       const createBtn = document.getElementById("createBtn");
       const loader = document.getElementById("loader");
 
       createBtn.addEventListener("click", () => {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
 
-        if (!email || !password) {
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName  = document.getElementById("lastName").value.trim();
+        const email     = document.getElementById("email").value.trim();
+        const password  = document.getElementById("password").value.trim();
+
+        if (!firstName || !lastName || !email || !password) {
           alert("Please fill in all fields.");
           return;
         }
@@ -180,26 +173,28 @@
         createBtn.textContent = "Creating...";
 
         setTimeout(() => {
-          loader.classList.remove("visible");
-          createBtn.disabled = false;
-          createBtn.textContent = "Create Account";
 
-          // Save account in localStorage
           let users = JSON.parse(localStorage.getItem("users")) || [];
-          const existingUser = users.find(u => u.email === email);
-          if (existingUser) {
-            alert("Account with this email already exists!");
+          const exists = users.find(u => u.email === email);
+
+          if (exists) {
+            alert("Account already exists with this email!");
+            loader.classList.remove("visible");
+            createBtn.disabled = false;
+            createBtn.textContent = "Create Account";
             return;
           }
 
-          users.push({ email, password });
+          users.push({ firstName, lastName, email, password });
           localStorage.setItem("users", JSON.stringify(users));
 
           alert("Account created successfully!");
-          window.location.href = "Login.html"; // redirect to login
-        }, 1500);
+          window.location.href = "login.html";
+
+        }, 1000);
       });
     });
   </script>
+
 </body>
 </html>
