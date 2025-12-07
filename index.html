@@ -1,86 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fakebook - Log in</title>
-  <link rel="stylesheet" href="Loginpage.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Background Remover</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+  <main id="app">
+    <!-- Top Bar -->
+    <header id="topbar">
+      <h1>AI Background Remover</h1>
+    </header>
 
-<body class="login-page">
+    <!-- Controls Panel -->
+    <section id="controls-panel">
+      <!-- Upload Main Image -->
+      <label id="uploadBox">
+        <input type="file" id="fileInput" accept="image/*">
+        <span>Select Image</span>
+      </label>
 
-<p style="background:#111;color:#fff;padding:10px;text-align:center;font-size:14px;">
-  <strong>DISCLAIMER:</strong> THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT.
-</p>
+      <!-- Background Options -->
+      <div id="bg-controls" class="hidden">
+        <h3 style="margin-bottom:8px; font-size:16px; font-weight:600;">Background Options</h3>
 
-<div class="login-container">
-  <h1 class="fb-logo">fakebook</h1>
-  <p><b><i>Login using the email and password you created</i></b></p>
+        <button id="bgColorBtn">Choose Solid Color</button>
+        <input type="color" id="colorPicker" class="hidden">
 
-  <div class="login-box">
-    <input type="text" placeholder="Email or Phone" id="email" />
-    <input type="password" placeholder="Password" id="password" />
-    <button id="loginBtn">Log In</button>
-    <div class="loader-3d hidden" id="loader"></div>
+        <button id="bgImageBtn">Upload Background Image</button>
+        <input type="file" id="bgImageInput" accept="image/*" class="hidden">
 
-    <a href="#">Forgotten password?</a>
-    <hr />
-    <button class="create-btn" id="signupBtn">Create New Account</button>
-  </div>
-</div>
+        <!-- Zoom & Position Controls -->
+        <div id="bg-adjust-controls" style="margin-top:10px;">
+          <label style="display:block; font-size:14px; margin-bottom:4px;">Zoom</label>
+          <input type="range" id="bgZoom" min="0.5" max="3" step="0.01" value="1" style="width:100%; margin-bottom:8px;">
 
-<p><a href="#">Create a Page</a> for a celebrity, brand or business.</p>
+          <label style="display:block; font-size:14px; margin-bottom:4px;">Position X</label>
+          <input type="range" id="bgPosX" min="-500" max="500" step="1" value="0" style="width:100%; margin-bottom:8px;">
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+          <label style="display:block; font-size:14px; margin-bottom:4px;">Position Y</label>
+          <input type="range" id="bgPosY" min="-500" max="500" step="1" value="0" style="width:100%;">
+        </div>
+      </div>
 
-  const loginBtn = document.getElementById("loginBtn");
-  const loader = document.getElementById("loader");
-  const signupBtn = document.getElementById("signupBtn");
+      <!-- Action Buttons -->
+      <button id="downloadBtn" disabled>Download PNG</button>
+      <button id="clearBtn" disabled>Clear Canvas</button>
+    </section>
 
-  loginBtn.addEventListener("click", () => {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+    <!-- Canvas Area -->
+    <section id="canvas-area">
+      <canvas id="mainCanvas"></canvas>
+    </section>
 
-    if (!email || !password) {
-      alert("Please fill in both fields.");
-      return;
+    <!-- Loading Overlay -->
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <span>Processing...</span>
+    </div>
+
+    <!-- Fullscreen Before/After Slider -->
+    <div id="sliderFullscreen" class="hidden">
+      <div id="sliderContainer">
+        <img id="beforeImg" alt="Before" />
+        <img id="afterImg" alt="After" />
+        <div id="sliderHandle"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
     }
-
-    loader.classList.remove("hidden");
-    loginBtn.disabled = true;
-    loginBtn.textContent = "Logging in...";
-
-    setTimeout(() => {
-      loader.classList.add("hidden");
-      loginBtn.disabled = false;
-      loginBtn.textContent = "Log In";
-
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      const user = users.find(
-        u => u.email === email && u.password === password
-      );
-
-      if (user) {
-        alert("Login successful ✅");
-        localStorage.setItem("loggedInUser", email);
-        window.location.href = "home.html";
-      } else {
-        alert("Invalid email or password. If you don't have an account, create a new one.");
-      }
-    }, 1000);
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Enter") loginBtn.click();
-  });
-
-  signupBtn.addEventListener("click", () => {
-    window.location.href = "signup.html";
-  });
-});
-</script>
-
+  </script>
 </body>
 </html>
