@@ -1,305 +1,279 @@
-
 console.log("JS Loaded");
 
+// ==================== UTILITY FUNCTIONS ====================
+
+/**
+ * Escapes HTML special characters to prevent XSS attacks
+ * @param {string} text - The text to escape
+ * @returns {string} - Escaped HTML text
+ */
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+/**
+ * Formats ISO timestamp to readable format
+ * @param {string} isoTime - ISO formatted time string
+ * @returns {string} - Formatted time string
+ */
+function formatTime(isoTime) {
+  try {
+    const date = new Date(isoTime);
+    if (isNaN(date.getTime())) return 'Just now';
+    
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return date.toLocaleDateString();
+  } catch (error) {
+    console.error('Error formatting time:', error);
+    return 'Unknown time';
+  }
+}
+
+/**
+ * Safely retrieves data from localStorage
+ * @param {string} key - The storage key
+ * @param {*} defaultValue - Default value if not found
+ * @returns {*} - Retrieved or default value
+ */
+function getFromStorage(key, defaultValue = null) {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : defaultValue;
+  } catch (error) {
+    console.error(`Error retrieving from storage (${key}):`, error);
+    return defaultValue;
+  }
+}
+
+/**
+ * Safely saves data to localStorage
+ * @param {string} key - The storage key
+ * @param {*} value - The value to store
+ * @returns {boolean} - Success status
+ */
+function saveToStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    console.error(`Error saving to storage (${key}):`, error);
+    return false;
+  }
+}
+
+// ==================== DOM ELEMENTS ====================
+
+const postBtn = document.getElementById("submitPost");
+const statusInput = document.getElementById("postText");
+const feed = document.getElementById("dynamicPostFeed");
+
+// ==================== INITIALIZATION ====================
+
 document.addEventListener("DOMContentLoaded", () => {
+  try {
+    initializeFeedFeature();
+  } catch (error) {
+    console.error('Error initializing feed feature:', error);
+  }
+});
 
-  /* ---------------------- POST / FEED (local storage posts) ---------------------- */
-  const postBtn = document.getElementById("submitPost");
-  const statusInput = document.getElementById("postText");
-  // IMPORTANT: HTML was changed to use id="dynamicPostFeed"
-  const feed = document.getElementById("dynamicPostFeed");
+// ==================== POST/FEED FUNCTIONALITY ====================
 
+function initializeFeedFeature() {
   // Load saved posts (if feed exists)
-  const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
-  if (feed && savedPosts.length > 0) {
+  if (!feed) {
+    console.warn('Feed container not found. Post feature disabled.');
+    return;
+  }
+
+  const savedPosts = getFromStorage("posts", []);
+  if (savedPosts.length > 0) {
     savedPosts.forEach(post => renderPost(post));
   }
 
   // Post button behaviour
   if (postBtn && statusInput) {
-    postBtn.addEventListener("click", () => {
-      const text = statusInput.value.trim();
-      if (!text) return;
+    postBtn.addEventListener("click", handlePostSubmit);
+    statusInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.ctrlKey) {
+        handlePostSubmit();
+      }
+    });
+  }
+}
 
-      const newPost = {
-        id: Date.now(),
-        text,
-        time: new Date().toISOString(),
-        likes: 0,
-        comments: []
-      };
+function handlePostSubmit() {
+  const text = statusInput.value.trim();
+  if (!text) {
+    alert("Please write something before posting!");
+    return;
+  }
 
-      const posts = JSON.parse(localStorage.getItem("posts")) || [];
-      posts.unshift(newPost);
-      localStorage.setItem("posts", JSON.stringify(posts));
-      renderPost(newPost, true);
-      statusInput.value = "";
+  const newPost = {
+    id: Date.now(),
+    text,
+    time: new Date().toISOString(),
+    likes: 0,
+    comments: []
+  };
+
+  const posts = getFromStorage("posts", []);
+  posts.unshift(newPost);
+  
+  if (saveToStorage("posts", posts)) {
+    renderPost(newPost, true);
+    statusInput.value = "";
+    statusInput.focus();
+  } else {
+    alert("Error saving post. Please try again.");
+  }
+}
+
+/**
+ * Renders a single post to the feed
+ * @param {Object} postData - Post data object
+ * @param {boolean} prepend - Whether to add to top of feed
+ */
+function renderPost(postData, prepend = false) {
+  if (!feed) return;
+  
+  postData.likes = postData.likes || 0;
+  postData.comments = postData.comments || [];
+
+  const post = document.createElement("div");
+  post.className = "post";
+  post.setAttribute("data-id", postData.id);
+
+  post.innerHTML = `
+    <div class="post-header">
+      <a href="profile.html"><img src="user.jpg" alt="Profile"></a>
+      <div>
+        <div class="name">Humayun Danish</div>
+        <div class="time">${formatTime(postData.time)}</div>
+      </div>
+    </div>
+    <div class="post-content">
+      ${postData.text ? `<p>${escapeHtml(postData.text)}</p>` : ""}
+    </div>
+    <div class="like-count">${postData.likes} likes</div>
+    <div class="post-actions">
+      <span class="like-btn"><i class="far fa-thumbs-up"></i> Like</span>
+      <span class="comment-toggle"><i class="far fa-comment"></i> Comment</span>
+      <span><i class="fas fa-share"></i> Share</span>
+    </div>
+    <div class="comment-section hidden">
+      <div class="comment-input">
+        <input type="text" placeholder="Write a comment...">
+        <button class="add-comment">Post</button>
+      </div>
+      <div class="comments">
+        ${postData.comments.map(c => `<p>${escapeHtml(c)}</p>`).join("")}
+      </div>
+    </div>
+  `;
+
+  // Like button handler
+  const likeBtn = post.querySelector(".like-btn");
+  if (likeBtn) {
+    likeBtn.addEventListener("click", () => {
+      postData.likes++;
+      updatePost(postData);
+      const lc = post.querySelector(".like-count");
+      if (lc) lc.textContent = `${postData.likes} likes`;
     });
   }
 
-  /* ---------------------- renderPost / updatePost / helpers ---------------------- */
-  function renderPost(postData, prepend = false) {
-    postData.likes = postData.likes || 0;
-    postData.comments = postData.comments || [];
-
-    const post = document.createElement("div");
-    post.className = "post";
-    post.setAttribute("data-id", postData.id);
-
-    post.innerHTML = `
-      <div class="post-header">
-        <a href="profile.html"><img src="user.jpg" alt="Profile"></a>
-        <div>
-          <div class="name">Humayun Danish</div>
-          <div class="time">${formatTime(postData.time)}</div>
-        </div>
-      </div>
-      <div class="post-content">
-        ${postData.text ? `<p>${escapeHtml(postData.text)}</p>` : ""}
-      </div>
-      <div class="like-count">${postData.likes} likes</div>
-      <div class="post-actions">
-        <span class="like-btn"><i class="far fa-thumbs-up"></i> Like</span>
-        <span class="comment-toggle"><i class="far fa-comment"></i> Comment</span>
-        <span><i class="fas fa-share"></i> Share</span>
-      </div>
-      <div class="comment-section hidden">
-        <div class="comment-input">
-          <input type="text" placeholder="Write a comment...">
-          <button class="add-comment">Post</button>
-        </div>
-        <div class="comments">
-          ${postData.comments.map(c => `<p>${escapeHtml(c)}</p>`).join("")}
-        </div>
-      </div>
-    `;
-
-    // Like button
-    const likeBtn = post.querySelector(".like-btn");
-    if (likeBtn) {
-      likeBtn.addEventListener("click", () => {
-        postData.likes++;
-        updatePost(postData);
-        const lc = post.querySelector(".like-count");
-        if (lc) lc.textContent = `${postData.likes} likes`;
-      });
-    }
-
-    // Toggle comments
-    const commentToggle = post.querySelector(".comment-toggle");
-    if (commentToggle) {
-      commentToggle.addEventListener("click", () => {
-        const cs = post.querySelector(".comment-section");
-        if (cs) cs.classList.toggle("hidden");
-      });
-    }
-
-    // Add comment
-    const addCommentBtn = post.querySelector(".add-comment");
-    if (addCommentBtn) {
-      addCommentBtn.addEventListener("click", () => {
-        const input = post.querySelector(".comment-input input");
-        const comment = input ? input.value.trim() : "";
-        if (comment) {
-          postData.comments.push(comment);
-          updatePost(postData);
-          const commentsContainer = post.querySelector(".comments");
-          if (commentsContainer) commentsContainer.innerHTML += `<p>${escapeHtml(comment)}</p>`;
-          if (input) input.value = "";
-        }
-      });
-    }
-
-    // Insert into DOM if feed exists
-    if (feed) {
-      prepend ? feed.prepend(post) : feed.appendChild(post);
-    }
+  // Toggle comments section
+  const commentToggle = post.querySelector(".comment-toggle");
+  if (commentToggle) {
+    commentToggle.addEventListener("click", () => {
+      const cs = post.querySelector(".comment-section");
+      if (cs) cs.classList.toggle("hidden");
+    });
   }
 
-  function updatePost(updatedPost) {
-    const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    const index = posts.findIndex(p => p.id === updatedPost.id);
-    if (index !== -1) {
-      posts[index] = updatedPost;
-      localStorage.setItem("posts", JSON.stringify(posts));
-    }
+  // Add comment handler
+  const addCommentBtn = post.querySelector(".add-comment");
+  if (addCommentBtn) {
+    addCommentBtn.addEventListener("click", () => {
+      const input = post.querySelector(".comment-input input");
+      const commentText = input?.value.trim();
+      
+      if (!commentText) {
+        alert("Please write a comment!");
+        return;
+      }
+
+      postData.comments.push(commentText);
+      updatePost(postData);
+      
+      const commentsDiv = post.querySelector(".comments");
+      if (commentsDiv) {
+        const newComment = document.createElement("p");
+        newComment.textContent = escapeHtml(commentText);
+        commentsDiv.appendChild(newComment);
+      }
+      
+      if (input) input.value = "";
+    });
   }
 
-  function formatTime(isoString) {
-    try {
-      const seconds = Math.floor((Date.now() - new Date(isoString)) / 1000);
-      if (seconds < 60) return "Just now";
-      if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
-      if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-      return new Date(isoString).toLocaleDateString();
-    } catch (e) {
-      return isoString || "";
-    }
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  /* ---------------------- GREETING MESSAGES ---------------------- */
-  (function showGreeting() {
-    const greetingEl = document.getElementById("greeting");
-    if (!greetingEl) return;
-
-    const hour = new Date().getHours();
-    let greeting = "";
-    let message = "";
-
-    if (hour >= 5 && hour < 9) {
-      greeting = "Good early morning";
-      message = "Hope you woke up refreshed ☕";
-    } else if (hour >= 9 && hour < 12) {
-      greeting = "Good morning";
-      message = "Let’s make today awesome!";
-    } else if (hour >= 12 && hour < 14) {
-      greeting = "Good noon";
-      message = "Perfect time for a little break 🍽️";
-    } else if (hour >= 14 && hour < 17) {
-      greeting = "Good afternoon";
-      message = "Keep crushing your goals 🔥";
-    } else if (hour >= 17 && hour < 20) {
-      greeting = "Good evening";
-      message = "Hope you had a productive day 💻";
-    } else if (hour >= 20 && hour < 24) {
-      greeting = "Good night";
-      message = "Time to relax and unwind 🌙";
-    } else {
-      greeting = "Still up?";
-      message = "Burning the midnight oil? 🕯️";
-    }
-
-    greetingEl.innerHTML = `
-      <div>
-        <strong>${escapeHtml(greeting)}, Humayun!</strong><br />
-        <small>${escapeHtml(message)}</small>
-      </div>
-    `;
-  })();
-
-  /* ---------------------- THEME / TOGGLING ---------------------- */
-  (function initTheme() {
-    const mode = localStorage.getItem("theme") || "light";
-    document.body.classList.add(`${mode}-mode`);
-    updateLabel(mode);
-  })();
-
-  function toggleTheme() {
-    const isDark = document.body.classList.contains("dark-mode");
-    document.body.classList.toggle("dark-mode", !isDark);
-    document.body.classList.toggle("light-mode", isDark);
-    localStorage.setItem("theme", isDark ? "light" : "dark");
-    updateLabel(isDark ? "light" : "dark");
-  }
-
-  function updateLabel(mode) {
-    const label = document.getElementById("themeLabel");
-    if (label) label.innerText = mode === "dark" ? "Dark Mode ✅" : "Light Mode 🌞";
-  }
-
-  const themeToggleBtn = document.getElementById("themeToggle");
-  if (themeToggleBtn) themeToggleBtn.addEventListener("click", toggleTheme);
-
-  /* ---------------------- External posts (DummyJSON + photos) ---------------------- */
-  const postFeed = document.getElementById("dynamicPostFeed");
-
-  const photos = [
-    'https://picsum.photos/600/400?random=1',
-    'https://picsum.photos/600/400?random=2',
-    'https://picsum.photos/600/400?random=3',
-    'https://picsum.photos/600/400?random=4',
-    'https://picsum.photos/600/400?random=5',
-    'https://picsum.photos/600/400?random=6',
-    'https://picsum.photos/600/400?random=7',
-    'https://picsum.photos/600/400?random=8',
-    'https://picsum.photos/600/400?random=9',
-    'https://picsum.photos/600/400?random=10',
-  ];
-
-  let repeatCount = 0;
-  let isLoading = false;
-
-  async function loadRealPosts() {
-    if (!postFeed || isLoading) return;
-    isLoading = true;
-
-    try {
-      const [postsRes, usersRes] = await Promise.all([
-        fetch('https://dummyjson.com/posts?limit=150'),
-        fetch('https://dummyjson.com/users')
-      ]);
-
-      const postsData = await postsRes.json();
-      const usersData = await usersRes.json();
-
-      const posts = postsData.posts;
-      const users = usersData.users;
-
-      posts.forEach((post, index) => {
-        const user = users.find(u => u.id === post.userId) || { id: 1, firstName: "User", lastName: "" };
-        const photo = photos[(index + repeatCount * posts.length) % photos.length];
-
-        const postElement = document.createElement('div');
-        postElement.className = 'post';
-
-        postElement.innerHTML = `
-          <div class="post-header">
-            <img src="https://i.pravatar.cc/40?img=${user.id}" alt="${escapeHtml(user.firstName)}">
-            <div>
-              <div class="name">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName || "")}</div>
-              <div class="time">Just now (Cycle ${repeatCount + 1})</div>
-            </div>
-          </div>
-          <div class="post-content">
-            <img src="${photo}" alt="Post image" />
-            <h4>${escapeHtml(post.title)}</h4>
-            <p>${escapeHtml(post.body)}</p>
-          </div>
-          <div class="post-actions">
-            <span><i class="far fa-thumbs-up"></i> Like</span>
-            <span><i class="far fa-comment"></i> Comment</span>
-            <span><i class="fas fa-share"></i> Share</span>
-          </div>
-        `;
-
-        postFeed.appendChild(postElement);
-      });
-
-      repeatCount++;
-    } catch (error) {
-      console.error('Failed to load posts:', error);
-    }
-
-    isLoading = false;
-  }
-
-  loadRealPosts();
-
-  window.addEventListener('scroll', () => {
-    if (isLoading) return;
-
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-      loadRealPosts();
+  // Add delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "delete-post";
+  deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  deleteBtn.title = "Delete post";
+  deleteBtn.addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete this post?")) {
+      deletePost(postData.id);
+      post.remove();
     }
   });
+  
+  const postHeader = post.querySelector(".post-header");
+  if (postHeader) postHeader.appendChild(deleteBtn);
 
-  function escapeHtml(text) {
-    if (!text) return '';
-    return text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+  // Add to feed
+  if (prepend && feed.firstChild) {
+    feed.insertBefore(post, feed.firstChild);
+  } else {
+    feed.appendChild(post);
   }
+}
 
-}); // end DOMContentLoaded
+/**
+ * Updates a post in storage
+ * @param {Object} postData - Updated post data
+ */
+function updatePost(postData) {
+  const posts = getFromStorage("posts", []);
+  const index = posts.findIndex(p => p.id === postData.id);
+  
+  if (index !== -1) {
+    posts[index] = postData;
+    saveToStorage("posts", posts);
+  }
+}
+
+/**
+ * Deletes a post from storage
+ * @param {number} postId - ID of post to delete
+ */
+function deletePost(postId) {
+  const posts = getFromStorage("posts", []);
+  const filtered = posts.filter(p => p.id !== postId);
+  saveToStorage("posts", filtered);
+}
