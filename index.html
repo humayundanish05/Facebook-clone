@@ -3,28 +3,369 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fakebook - Log in</title>
+  <title>Fakebook - Social Network</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="Loginpage.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #f0f2f5;
+      color: #050505;
+    }
+
+    .navbar {
+      background-color: #fff;
+      padding: 8px 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1877f2;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      text-decoration: none;
+      color: #65676b;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .navbar-links a:hover {
+      color: #1877f2;
+    }
+
+    .main-container {
+      max-width: 600px;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .post-creation {
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-creation-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .post-creation-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .post-creation-input {
+      flex: 1;
+      background-color: #f0f2f5;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #65676b;
+    }
+
+    .post-creation-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #e7f3ff;
+    }
+
+    .post-creation-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .post-creation-buttons button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background-color: #f0f2f5;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #65676b;
+      transition: background-color 0.2s;
+    }
+
+    .post-creation-buttons button:hover {
+      background-color: #e4e6eb;
+    }
+
+    #submitPost {
+      background-color: #1877f2;
+      color: white;
+      font-weight: 600;
+    }
+
+    #submitPost:hover {
+      background-color: #0a66c2;
+    }
+
+    .post {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .post:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .post-header {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: relative;
+    }
+
+    .post-header > div:first-child {
+      display: flex;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .post-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .post-header a {
+      text-decoration: none;
+    }
+
+    .post-header .name {
+      font-weight: 600;
+      color: #050505;
+    }
+
+    .post-header .time {
+      font-size: 13px;
+      color: #65676b;
+    }
+
+    .delete-post {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #65676b;
+      font-size: 18px;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .delete-post:hover {
+      color: #f02849;
+    }
+
+    .post-content {
+      padding: 12px 16px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #050505;
+    }
+
+    .like-count {
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #65676b;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .post-actions {
+      display: flex;
+      padding: 8px 0;
+      margin: 0 16px;
+      gap: 8px;
+    }
+
+    .post-actions span {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+      color: #65676b;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      font-size: 14px;
+    }
+
+    .post-actions span:hover {
+      background-color: #f0f2f5;
+    }
+
+    .post-actions .like-btn.liked {
+      color: #1877f2;
+    }
+
+    .comment-section {
+      padding: 12px 16px;
+      border-top: 1px solid #e5e7eb;
+      background-color: #f8f9fa;
+    }
+
+    .comment-section.hidden {
+      display: none;
+    }
+
+    .comment-input {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .comment-input input {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .comment-input input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #e7f3ff;
+    }
+
+    .add-comment {
+      padding: 6px 16px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .add-comment:hover {
+      background-color: #0a66c2;
+    }
+
+    .comments {
+      margin-top: 12px;
+    }
+
+    .comments p {
+      padding: 8px 0;
+      font-size: 14px;
+      color: #050505;
+      background-color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .login-page {
+      background: #fff;
+    }
+
+    .login-page .navbar {
+      display: none;
+    }
+
+    .login-page .main-container {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .main-container {
+        max-width: 100%;
+        margin: 10px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-<body class="login-page">
+<body>
 
-  <p style="background: #111; color: #fff; padding: 10px; text-align: center; font-size: 14px;">
-    <strong>DISCLAIMER:</strong> THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT. This is NOT the official site of the company or brand identified on the page. The creator of this page is NOT affiliated with the company or brand in any way. This page is a personal project made in connection with an educational exercise.
-  </p>
-
-  <div class="login-container">
-    <h1 class="fb-logo">fakebook</h1>
-    <p><b> <i> type anything inside the input boxes to login </i> </b></p> 
-    <div class="login-box">
-      <input type="text" placeholder="Email or Phone" />
-      <input type="password" placeholder="Password" />
-      <button>Log In</button>
- <div class="loader-3d hidden" id="loader"></div>
-      <a href="#">Forgotten password?</a>
-      <hr />
-      <button class="create-btn">Create New Account</button>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">
+      <i class="fab fa-facebook"></i> Fakebook
     </div>
-    <p><a href="#">Create a Page</a> for a celebrity, brand or business.</p>
+    <ul class="navbar-links">
+      <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="Friends.html"><i class="fas fa-users"></i> Friends</a></li>
+      <li><a href="messenger.html"><i class="fas fa-comments"></i> Messenger</a></li>
+      <li><a href="watch.html"><i class="fas fa-video"></i> Watch</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Feed Container -->
+  <div class="main-container">
+    
+    <!-- Post Creation Box -->
+    <div class="post-creation">
+      <div class="post-creation-header">
+        <img src="user.jpg" alt="Your Profile">
+        <input 
+          type="text" 
+          id="postText"
+          class="post-creation-input" 
+          placeholder="What's on your mind?"
+        >
+      </div>
+      <div class="post-creation-buttons">
+        <button><i class="fas fa-image"></i> Photo/Video</button>
+        <button><i class="fas fa-smile"></i> Feeling/Activity</button>
+        <button><i class="fas fa-map-marker-alt"></i> Check In</button>
+        <button id="submitPost"><i class="fas fa-paper-plane"></i> Post</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Feed -->
+    <div id="dynamicPostFeed">
+      <!-- Posts will be rendered here -->
+    </div>
+
   </div>
 
   <script src="main.js"></script>
